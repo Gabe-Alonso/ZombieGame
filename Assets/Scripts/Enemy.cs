@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.Experimental.GlobalIllumination;
 
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     Transform target;
     Vector3 Direction;
     Vector3 angularDirection;
+    NavMeshAgent enemy;
 
     public HealthBar healthBar;
 
@@ -26,7 +28,8 @@ public class Enemy : MonoBehaviour
         target = GameObject.Find("Player").transform;
         health = 3f;
         maxHealth = health;
-       // Debug.Log("health = " + health);
+        // Debug.Log("health = " + health);
+        enemy = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -34,18 +37,19 @@ public class Enemy : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            angularDirection = new Vector3(0, angle, 0);
-            Direction = new Vector3(direction.x, 0, direction.z);
+            //Vector3 direction = (target.position - transform.position).normalized;
+            //float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            //angularDirection = new Vector3(0, angle, 0);
+            //Direction = new Vector3(direction.x, 0, direction.z);
         }
     }
 
     private void FixedUpdate()
     {
         if (target != null) { 
-            _rb.linearVelocity = Direction*enemySpeed;
-            _rb.rotation = Quaternion.Euler(angularDirection);
+            //_rb.linearVelocity = Direction*enemySpeed;
+           // _rb.rotation = Quaternion.Euler(angularDirection);
+           enemy.destination = target.position;
             
         }
     }
