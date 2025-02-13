@@ -57,12 +57,7 @@ public class PlayerHealth : MonoBehaviour
                 gameObject.GetComponent<Renderer>().material = damagedMaterial;
                 healthBar.UpdateHealthBar(health, maxHealth);
             }
-           // Destroy(collision.gameObject);
-
-           // if (health <= 0)
-            //{
-              //  Destroy(this.gameObject);
-            //}
+           
         }
 
 
