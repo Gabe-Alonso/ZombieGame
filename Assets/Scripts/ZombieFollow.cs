@@ -11,7 +11,7 @@ public class ZombieFollow : MonoBehaviour
 
     public GameObject player;
     public float health = 3;
-    private float maxHealth = 3;
+    private float maxHealth;
     public float timeBetweenHits = 0.5f;
 
     public Material damagedMaterial;
