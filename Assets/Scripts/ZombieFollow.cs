@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,7 @@ public class ZombieFollow : MonoBehaviour
 
     public GameObject player;
     public float health = 3;
+    private float maxHealth = 3;
     public float timeBetweenHits = 0.5f;
 
     public Material damagedMaterial;
@@ -23,6 +25,9 @@ public class ZombieFollow : MonoBehaviour
 
     private NavMeshAgent _agent;
 
+    //This is the enemies health bar
+    private HealthBar healthBar;
+
     private void Start()
     {
         //To save the original Material Type
@@ -30,7 +35,10 @@ public class ZombieFollow : MonoBehaviour
 
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
-    }
+        maxHealth = health;
+        healthBar = GetComponentInChildren<HealthBar>();
+        
+}
 
     private void Update()
     {
@@ -60,6 +68,7 @@ public class ZombieFollow : MonoBehaviour
                 _damageBool = false;
                 _damageTimer = 0;
                 gameObject.GetComponent<Renderer>().material = damagedMaterial;
+                healthBar.UpdateHealthBar(health, maxHealth);
             }
             Destroy(collision.gameObject);
 
