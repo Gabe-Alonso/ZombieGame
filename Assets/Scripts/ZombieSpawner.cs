@@ -9,9 +9,11 @@ public class ZombieSpawner : MonoBehaviour
     //zombie counter on screen
     private TextMeshProUGUI _zombieCounter;
     [SerializeField] int numberOfZombies;
+
+    //initial boundary arrays 
     private int[] xBoundary = new int[2];
     private int[] zBoundary = new int[2];
-    public NavMeshSurface ground;
+ 
 
     private void Awake()
     {
@@ -45,24 +47,28 @@ public class ZombieSpawner : MonoBehaviour
         while (i < numberOfZombies)
         {
             // Random spawn position for zombies within x, z bounds (can change later) 
-            // Still need to figure out how to avoid obstacles 
 
             Vector3 spawnPosition = new Vector3(Random.Range(xBoundary[0], xBoundary[1]), 2.5f, Random.Range(zBoundary[0], zBoundary[1]));
-            
-            Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
-            i++;                  
-                
+                    
+             // Check if this point is inside a NavMeshObstacle
+             if (!IsInsideNavMeshObstacle(spawnPosition))
+             {
+                 Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
+                 i++;
+                                      
+             }
+           
         }
     }
 
-   // bool IsInsideNavMeshObstacle(Vector3 position)
-    //{
-        //NavMeshHit hit;
+    bool IsInsideNavMeshObstacle(Vector3 position)
+    {
+        NavMeshHit hit;
 
         // will need to be changed if we ever have floating NavMesh Obstacle
-       // bool isBlocked = NavMesh.Raycast(position + Vector3.up * 2f, position - Vector3.up * 2f, out hit, NavMesh.AllAreas);
-        //return isBlocked;
-    //}
+        bool isBlocked = NavMesh.Raycast(position, position +Vector3.up * 2f, out hit, NavMesh.AllAreas);
+        return isBlocked;
+    }
 
     public void zombieCounterDecrement()
     {
