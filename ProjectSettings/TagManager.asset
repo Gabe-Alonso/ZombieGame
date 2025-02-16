@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Zombie
+  - Spawner
   layers:
   - Default
   - TransparentFX

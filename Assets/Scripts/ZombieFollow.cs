@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class ZombieFollow : MonoBehaviour
 {
 
-    public GameObject player;
+    private GameObject player;
     public float health = 3;
     private float maxHealth;
     public float timeBetweenHits = 0.5f;
@@ -28,6 +28,9 @@ public class ZombieFollow : MonoBehaviour
     //This is the enemies health bar
     private HealthBar healthBar;
 
+    //Zombie counter script
+    public GameObject _spawner;
+
     private void Start()
     {
         //To save the original Material Type
@@ -37,8 +40,11 @@ public class ZombieFollow : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBar>();
-        
-}
+        player = GameObject.FindWithTag("Player");
+        _spawner = GameObject.FindWithTag("Spawner");
+
+
+    }
 
     private void Update()
     {
@@ -75,6 +81,8 @@ public class ZombieFollow : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(this.gameObject);
+                _spawner.GetComponent<ZombieSpawner>().zombieCounterDecrement();
+                
             }
         }
 
