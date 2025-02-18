@@ -35,19 +35,24 @@ public class PlayerMovementScript : MonoBehaviour
         RotatePlayer();
         MovePlayer();
         if(swapP.IsPressed()){
-            foreach (Transform child in transform)
-                child.gameObject.SetActive(false);
+            KillChildren();
             transform.Find("Pistol").gameObject.SetActive(true);
         } else if(swapS.IsPressed()){
-            foreach (Transform child in transform)
-                child.gameObject.SetActive(false);
+            KillChildren();
             transform.Find("Shotgun").gameObject.SetActive(true);
         } else if(swapAR.IsPressed()){
-            foreach (Transform child in transform)
-                child.gameObject.SetActive(false);
+            KillChildren();
             transform.Find("AR").gameObject.SetActive(true);
         }
 
+    }
+
+    private void KillChildren(){
+        foreach (Transform child in transform){
+            if(child.gameObject.transform.CompareTag("Gun")){
+                child.gameObject.SetActive(false);
+            }
+        }           
     }
 
     private void RotatePlayer(){

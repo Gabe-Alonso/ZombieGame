@@ -28,8 +28,7 @@ public class BulletScript : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision){
-        
-        if (!collision.transform.CompareTag("Bullet") && !collision.transform.CompareTag("Player")){
+        if (!collision.transform.CompareTag("Bullet") && !collision.transform.CompareTag("Gun") && !collision.transform.CompareTag("Player")){
             Destroy(gameObject);
         }
     }
