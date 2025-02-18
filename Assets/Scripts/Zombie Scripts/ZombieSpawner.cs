@@ -81,4 +81,27 @@ public class ZombieSpawner : MonoBehaviour
             
         }
     }
+
+    w5_Boss initW5Boss(w5_Boss boss)
+    {
+        boss.GetComponent<w5_Boss>().speed = 7.5f;
+        boss.GetComponent<w5_Boss>().acceleration = 10f;
+        boss.GetComponent<w5_Boss>().health = 30f;
+        boss.GetComponent<w5_Boss>().preChargeTime = 1.5f;
+        boss.GetComponent<w5_Boss>().chargeTime = 1.5f;
+
+        return boss;
+    }
+
+    w10_Boss initW10Boss(w10_Boss boss)
+    {
+        boss.GetComponent<w10_Boss>().speed = 3f;
+        boss.GetComponent<w10_Boss>().acceleration = 8f;
+        boss.GetComponent<w10_Boss>().health = 40f;
+        boss.GetComponent<w10_Boss>().throwTime = 5f;
+        boss.GetComponent<w10_Boss>().throwCooldown = 2f;
+        boss.GetComponent<w10_Boss>().barrelSpeed = 15f;
+
+        return boss;
+    }
 }

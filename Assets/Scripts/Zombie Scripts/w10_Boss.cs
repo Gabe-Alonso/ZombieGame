@@ -12,8 +12,6 @@ public class w10_Boss : MonoBehaviour
     public float throwCooldown;
     public float barrelSpeed;
 
-    public float chargeTime;
-
     NavMeshAgent _agent;
     ZombieFollow _zomFollow;
     ZombieBarrel _zomBarrel;
@@ -51,20 +49,6 @@ public class w10_Boss : MonoBehaviour
     {
         if(_throwTime >= throwCooldown + throwTime + .25f) //For the Buffer add .25
         {
-            /*_currBarrel = Instantiate(zomBarrel);
-            _zomBarrel = _currBarrel.GetComponent<ZombieBarrel>();
-
-            _zomBarrel.throwTimer = throwTime;
-            _zomBarrel.transform.parent = transform;
-
-
-            _currBarrel.transform.rotation = new Quaternion(0, 0f, 90f, 0);
-            _currBarrel.transform.position = new Vector3(transform.position.x, transform.position.y + .35f, transform.position.z + 1f);
-            
-            Rigidbody rb = _currBarrel.GetComponent<Rigidbody>();
-            rb.freezeRotation = true;
-           
-            */
             _currBarrel = Instantiate(zomBarrel, transform.position + new Vector3(0,1,0), Quaternion.identity);
             _currBarrel.transform.LookAt(_player.transform);
 
