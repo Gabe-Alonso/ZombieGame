@@ -11,11 +11,14 @@ public class ZombieBarrel : MonoBehaviour
 
     private float _damageTimer;
     private float _time;
-    private Rigidbody _rb;
-    private float _damage = 0;
+
     private bool _damageBool;
     private HealthBar healthBar;
     private float maxHealth;
+
+
+    //Zombie counter script
+    private GameObject _spawner;
 
     public Material damagedMaterial;
     private Material _normalMaterial;
@@ -23,14 +26,13 @@ public class ZombieBarrel : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
-        _rb = GetComponent<Rigidbody>();
         _damageTimer = 0;
         _damageBool = false;
 
         maxHealth = barrelHealth;
         healthBar = GetComponentInChildren<HealthBar>();
 
+        _spawner = GameObject.FindWithTag("Spawner");
 
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
     }
@@ -89,6 +91,8 @@ public class ZombieBarrel : MonoBehaviour
             var zom1 = Instantiate(_zomPrefab, transform.position + new Vector3(.5f, 0, -1.5f), Quaternion.identity);
             var zom2 = Instantiate(_zomPrefab, transform.position + new Vector3(-.5f, 0, -1.5f), Quaternion.identity);
             var zom3 = Instantiate(_zomPrefab, transform.position + new Vector3(0, 0, .5f), Quaternion.identity);
+
+            _spawner.GetComponent<ZombieSpawner>().zombieCounter(3);
             Destroy(gameObject);
         }
 

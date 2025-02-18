@@ -8,6 +8,9 @@ public class PlayerHealth : MonoBehaviour
     public float timeBetweenHits = 0.5f;
 
     public Material damagedMaterial;
+    private AudioSource audioSource;
+    public AudioClip zombieBite;
+
 
     private Material _normalMaterial;
 
@@ -24,8 +27,9 @@ public class PlayerHealth : MonoBehaviour
         //To save the original Material Type
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
 
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         //To get the NavMeshAgent Component
-        
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBar>();
     }
@@ -56,6 +60,8 @@ public class PlayerHealth : MonoBehaviour
                 _damageTimer = 0;
                 gameObject.GetComponent<Renderer>().material = damagedMaterial;
                 healthBar.UpdateHealthBar(health, maxHealth);
+
+                audioSource.PlayOneShot(zombieBite, 1);
             }
            
         }

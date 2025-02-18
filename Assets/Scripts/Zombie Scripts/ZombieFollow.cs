@@ -14,12 +14,20 @@ public class ZombieFollow : MonoBehaviour
     private float maxHealth;
     public float timeBetweenHits = 0.5f;
 
+    private AudioSource audioSource;
+    public AudioClip growl1;
+    public AudioClip growl2;
+    public AudioClip growl3;
+    public AudioClip moan1;
+    public AudioClip moan2;
+
     public Material damagedMaterial;
 
     private Material _normalMaterial;
 
     //To keep track of the time since the enemy was last damaged
     private float _damageTimer = 0;
+    private float _time = 0;
     //This is the variable determining if the enemy CAN take damage again
     private bool _damageBool = true;
 
@@ -42,8 +50,26 @@ public class ZombieFollow : MonoBehaviour
         healthBar = GetComponentInChildren<HealthBar>();
         player = GameObject.FindWithTag("Player");
         _spawner = GameObject.FindWithTag("Spawner");
+    }
 
-
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if(UnityEngine.Random.Range(0, 3) == 0) {
+            switch (UnityEngine.Random.Range(0, 3))
+            {
+                case 0:
+                    audioSource.PlayOneShot(growl1, 1);
+                    break;
+                case 1:
+                    audioSource.PlayOneShot(growl2, 1);
+                    break;
+                case 2:
+                    audioSource.PlayOneShot(growl3, 1);
+                    break;
+            }
+        }
+        
     }
 
     private void Update()
@@ -61,6 +87,36 @@ public class ZombieFollow : MonoBehaviour
         {
             _damageTimer += Time.deltaTime;
         }
+
+        _time += Time.deltaTime;
+
+        if (_time >= 1.5)
+        {
+            if (UnityEngine.Random.Range(0, 10) == 0)
+            {
+                switch (UnityEngine.Random.Range(0, 5))
+                {
+                    case 0:
+                        audioSource.PlayOneShot(growl1, 1);
+                        break;
+                    case 1:
+                        audioSource.PlayOneShot(growl2, 1);
+                        break;
+                    case 2:
+                        audioSource.PlayOneShot(growl3, 1);
+                        break;
+                    case 3:
+                        audioSource.PlayOneShot(moan1, 1);
+                        break;
+                    case 4:
+                        audioSource.PlayOneShot(moan2, 1);
+                        break;
+                }
+            }
+
+            _time = 0;
+        }
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -81,7 +137,7 @@ public class ZombieFollow : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(this.gameObject);
-                _spawner.GetComponent<ZombieSpawner>().zombieCounterDecrement();
+                _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
                 
             }
         }

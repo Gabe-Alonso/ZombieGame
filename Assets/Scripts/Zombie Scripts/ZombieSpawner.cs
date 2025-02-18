@@ -70,9 +70,9 @@ public class ZombieSpawner : MonoBehaviour
         return isBlocked;
     }
 
-    public void zombieCounterDecrement()
+    public void zombieCounter(int num)
     {
-        numberOfZombies--;
+        numberOfZombies += num;
         _zombieCounter.text = "Zombies Left: " + numberOfZombies.ToString();
         Debug.Log("There are " + numberOfZombies + " zombies left.");
         if (numberOfZombies == 0)

@@ -18,10 +18,8 @@ public class w10_Boss : MonoBehaviour
     ZombieFollow _zomFollow;
     ZombieBarrel _zomBarrel;
 
-    private float _time = 0;
     private float _throwTime = 0;
 
-    private bool _hold = false;
     private GameObject _currBarrel;
 
     private GameObject _player;
@@ -74,7 +72,6 @@ public class w10_Boss : MonoBehaviour
             _zomBarrel = _currBarrel.GetComponent<ZombieBarrel>();
             _zomBarrel.speed = barrelSpeed;
             _throwTime = 0;
-            _hold = true;
         }
     }
 
