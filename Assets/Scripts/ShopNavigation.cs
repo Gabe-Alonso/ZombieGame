@@ -12,55 +12,8 @@ public class ShopNavigation : MonoBehaviour
     public GameObject Page3;
 
     public float page = 0;
-
-
-    public void Start()
-    {
         
-    }
 
-    public void Update()
-    {
-        switch (page)
-        {
-            case 0:
-                if (Page1.activeSelf == true)
-                {
-                    break;
-                }
-                else
-                {
-                    Page1.SetActive(!Page1.activeSelf);
-                    Page2.SetActive(!Page2.activeSelf);
-                }
-                break;
-
-            case 1:
-                if (Page1.activeSelf == true){
-                    Page2.SetActive(!Page2.activeSelf);
-                    Page1.SetActive(!Page1.activeSelf);
-                } else if(Page3.activeSelf == true)
-                {
-                    Page3.SetActive(!Page3.activeSelf);
-                    Page2.SetActive(!Page2.activeSelf);
-                }
-
-                break;
-            case 2:
-                if (Page2.activeSelf == true)
-                {
-                    Page2.SetActive(!Page2.activeSelf);
-                    Page1.SetActive(!Page1.activeSelf);
-                }
-                else if (Page3.activeSelf == true)
-                {
-                    break;
-                }
-
-                
-                break;
-        }
-    }
 
 
     public void OnReturnButton()
@@ -82,6 +35,28 @@ public class ShopNavigation : MonoBehaviour
 
             page += 1;
         }
+
+
+        switch (page)
+        {
+            case 0:
+
+                break;
+
+            case 1:
+
+                Page1.SetActive(!Page1.activeSelf);//off
+                Page2.SetActive(!Page2.activeSelf);//on
+                
+                break;
+
+            case 2:
+
+                Page2.SetActive(!Page2.activeSelf); //off
+                Page3.SetActive(!Page3.activeSelf); //on
+
+                break;
+        }
     }
 
     public void OnPreviousButton() 
@@ -93,7 +68,28 @@ public class ShopNavigation : MonoBehaviour
         {
             page -= 1;
         }
+
+        switch (page)
+        {
+            case 0:
+
+                Page1.SetActive(!Page1.activeSelf);//on
+                Page2.SetActive(!Page2.activeSelf);//off
+
+                break;
+
+            case 1:
+
+                Page2.SetActive(!Page2.activeSelf); //on
+                Page3.SetActive(!Page3.activeSelf); //off
+                
+                break;
+            case 2:
+
+                break;
+        }
     }
 
     
 }
+
