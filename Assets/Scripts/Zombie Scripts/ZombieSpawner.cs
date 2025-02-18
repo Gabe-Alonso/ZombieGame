@@ -82,6 +82,14 @@ public class ZombieSpawner : MonoBehaviour
         }
     }
 
+
+
+    //To use this, Instatiate a Zombie Boss, then set it equal to this like so
+    /*
+     * var boss = Instantiate(w5_Boss); 
+     * boss = initW5Boss(boss);
+    */
+    //This will then Instantiate the boss with all the correct number necessarry.
     w5_Boss initW5Boss(w5_Boss boss)
     {
         boss.GetComponent<w5_Boss>().speed = 7.5f;
@@ -93,6 +101,13 @@ public class ZombieSpawner : MonoBehaviour
         return boss;
     }
 
+
+    //To use this, Instatiate a Zombie Boss, then set it equal to this like so
+    /*
+     * var boss = Instantiate(w10_Boss); 
+     * boss = initW10Boss(boss);
+    */
+    //This will then Instantiate the boss with all the correct number necessarry.
     w10_Boss initW10Boss(w10_Boss boss)
     {
         boss.GetComponent<w10_Boss>().speed = 3f;
