@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 82205399}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,7 +435,9 @@ MonoBehaviour:
   speed: 10
   acceleration: 7.5
   health: 50
-  preChargeTime: 1
+  throwTime: 0
+  throwCooldown: 0
+  barrelSpeed: 0
   chargeTime: 1
 --- !u!1001 &224266866
 PrefabInstance:
