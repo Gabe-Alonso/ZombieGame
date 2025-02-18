@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -20,7 +21,10 @@ public class GunScript : MonoBehaviour
     RaycastHit hit;
     public Camera cam;
     Collider planeCollider;
-    int totalAmmo;
+    public int totalAmmo;
+    public bool isShotgun;
+    public int shotgunShots;
+    public float despawnDist;
 
     void Start()
     {
@@ -28,13 +32,14 @@ public class GunScript : MonoBehaviour
         shootAction = InputSystem.actions.FindAction("Shoot");
         reloadAction = InputSystem.actions.FindAction("Reload");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
-        reloadTime = 2;
+        //reloadTime = 2;
         isReloading = false;
-        bulletInterval = 0.2f;
+        //bulletInterval = 0.2f;
         intervalTimer = 0;
-        totalAmmo = 100;
-        maxAmmo = 20;
+        //totalAmmo = 100;
+        //maxAmmo = 20;
         ammo = maxAmmo;
+        shotgunShots = 5;
     }
 
     // Update is called once per frame
@@ -76,8 +81,19 @@ public class GunScript : MonoBehaviour
 
 
     private void shoot(){
-        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+        if (isShotgun){
+            for(int i = 0; i < shotgunShots; i++){
+                GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                newBullet.GetComponent<BulletScript>().despawnDist = despawnDist;
+                newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            }
+        }else{
+            GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            newBullet.GetComponent<BulletScript>().despawnDist = despawnDist;
+            newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            
+        }
+        
         intervalTimer = 0;
         ammo--;
     }

@@ -11,7 +11,7 @@ public class ZombieFollow : MonoBehaviour
 
     private GameObject player;
     public float health = 3;
-    private float maxHealth = 3;
+    private float maxHealth;
     public float timeBetweenHits = 0.5f;
 
     public Material damagedMaterial;
@@ -29,7 +29,7 @@ public class ZombieFollow : MonoBehaviour
     private HealthBar healthBar;
 
     //Zombie counter script
-    public GameObject _spawner;
+    private GameObject _spawner;
 
     private void Start()
     {
@@ -93,6 +93,11 @@ public class ZombieFollow : MonoBehaviour
             //Access the Player's Health here some how
             //collision.gameObject.health--;
         }
+    }
+
+    public void Slow()
+    {
+
     }
 
 }
