@@ -7,7 +7,7 @@ public class ZombieSpawner : MonoBehaviour
 {
     public GameObject zombiePrefab;
     //zombie counter on screen
-    private TextMeshProUGUI _zombieCounter;
+    public TextMeshProUGUI _zombieCounter;
     [SerializeField] int numberOfZombies;
 
     //initial boundary arrays 
@@ -17,7 +17,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
+        //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
     }
     public void spawnZombies(int wave)
     {
