@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 843483806823459641}
   m_Layer: 0
   m_Name: w10 Boss
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,12 +231,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2457a37d2f6bf143ac803889e745d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zomBarrel: {fileID: 0}
-  speed: 0
-  acceleration: 0
-  health: 0
-  preChargeTime: 0
-  chargeTime: 0
+  zomBarrel: {fileID: 7869582423525216345, guid: e42a6cadac79db647a87cd40a952e582, type: 3}
+  speed: 3
+  acceleration: 8
+  health: 30
+  throwTime: 5
+  throwCooldown: 2
+  barrelSpeed: 15
+  chargeTime: 10
 --- !u!114 &7107548803979978481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +254,6 @@ MonoBehaviour:
   health: 30
   timeBetweenHits: 0.5
   damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
-  _spawner: {fileID: 0}
 --- !u!195 &843483806823459641
 NavMeshAgent:
   m_ObjectHideFlags: 0
