@@ -10,6 +10,9 @@ public class PlayerMovementScript : MonoBehaviour
     public Camera cam;
     InputAction moveAction;
     InputAction shootAction;
+    InputAction swapP;
+    InputAction swapS;
+    InputAction swapAR;
     private AudioSource audioSource;
     private Rigidbody rb;
     [SerializeField] float speed;
@@ -20,6 +23,9 @@ public class PlayerMovementScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
+        swapP = InputSystem.actions.FindAction("SelectPistol");
+        swapS = InputSystem.actions.FindAction("SelectShotgun");
+        swapAR = InputSystem.actions.FindAction("SelectAR");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
         audioSource = GetComponent<AudioSource>();
         health = 3;
@@ -28,6 +34,25 @@ public class PlayerMovementScript : MonoBehaviour
     {
         RotatePlayer();
         MovePlayer();
+        if(swapP.IsPressed()){
+            KillChildren();
+            transform.Find("Pistol").gameObject.SetActive(true);
+        } else if(swapS.IsPressed()){
+            KillChildren();
+            transform.Find("Shotgun").gameObject.SetActive(true);
+        } else if(swapAR.IsPressed()){
+            KillChildren();
+            transform.Find("AR").gameObject.SetActive(true);
+        }
+
+    }
+
+    private void KillChildren(){
+        foreach (Transform child in transform){
+            if(child.gameObject.transform.CompareTag("Gun")){
+                child.gameObject.SetActive(false);
+            }
+        }           
     }
 
     private void RotatePlayer(){
