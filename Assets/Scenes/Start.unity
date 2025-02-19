@@ -1043,6 +1043,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823550a3dcad3e94a967490921276b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1401584012}
+  startWaveButton: {fileID: 1545604345}
+  startBossButton: {fileID: 1266466822}
   _spawner: {fileID: 1078208566}
 --- !u!4 &1057336573
 Transform:
@@ -1092,6 +1095,7 @@ MonoBehaviour:
   zombiePrefab: {fileID: 591814025790196497, guid: 81af1cd2191ff0a449c9dd368678fdfd, type: 3}
   _zombieCounter: {fileID: 1285545303}
   numberOfZombies: 0
+  waveManager: {fileID: 1057336572}
 --- !u!4 &1078208567
 Transform:
   m_ObjectHideFlags: 0
@@ -1452,7 +1456,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1266466823}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1057336572}
+        m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
+        m_MethodName: BossStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1266466823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,7 +2333,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1545604346}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1057336572}
+        m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
+        m_MethodName: nextWaveStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1545604346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2711,6 +2739,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1646122026}
+    - target: {fileID: 5662314784985389284, guid: 01e88ab309dd67249b9eebff17e89ec9, type: 3}
+      propertyPath: _ammoCount
+      value: 
+      objectReference: {fileID: 1250503786}
     - target: {fileID: 8153118978948359636, guid: 01e88ab309dd67249b9eebff17e89ec9, type: 3}
       propertyPath: m_Enabled
       value: 0
