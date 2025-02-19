@@ -90,15 +90,16 @@ public class ZombieSpawner : MonoBehaviour
      * boss = initW5Boss(boss);
     */
     //This will then Instantiate the boss with all the correct number necessarry.
-    w5_Boss initW5Boss(w5_Boss boss)
+    void spawnW5Boss()
     {
+        var boss = Instantiate(w5_Boss);
+
         boss.GetComponent<w5_Boss>().speed = 7.5f;
         boss.GetComponent<w5_Boss>().acceleration = 10f;
         boss.GetComponent<w5_Boss>().health = 30f;
         boss.GetComponent<w5_Boss>().preChargeTime = 1.5f;
         boss.GetComponent<w5_Boss>().chargeTime = 1.5f;
 
-        return boss;
     }
 
 
