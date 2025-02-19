@@ -88,11 +88,15 @@ public class ZombieBarrel : MonoBehaviour
         }
         else if (!(collision.transform.CompareTag("Ground") || collision.transform.CompareTag("Zombie")))
         {
-            var zom1 = Instantiate(_zomPrefab, transform.position + new Vector3(.5f, 0, -1.5f), Quaternion.identity);
-            var zom2 = Instantiate(_zomPrefab, transform.position + new Vector3(-.5f, 0, -1.5f), Quaternion.identity);
-            var zom3 = Instantiate(_zomPrefab, transform.position + new Vector3(0, 0, .5f), Quaternion.identity);
+            if(collision.transform.CompareTag("Player"))
+            {
+                var zom1 = Instantiate(_zomPrefab, transform.position + new Vector3(.5f, 0, -1.5f), Quaternion.identity);
+                var zom2 = Instantiate(_zomPrefab, transform.position + new Vector3(-.5f, 0, -1.5f), Quaternion.identity);
+                var zom3 = Instantiate(_zomPrefab, transform.position + new Vector3(0, 0, .5f), Quaternion.identity);
+                _spawner.GetComponent<ZombieSpawner>().zombieCounter(3);
+            }
 
-            _spawner.GetComponent<ZombieSpawner>().zombieCounter(3);
+
             Destroy(gameObject);
         }
 

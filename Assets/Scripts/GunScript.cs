@@ -38,7 +38,7 @@ public class GunScript : MonoBehaviour
         isReloading = false;
         //bulletInterval = 0.2f;
         intervalTimer = 0;
-        //totalAmmo = 100;
+        totalAmmo = 10000; //comment out with 100
         //maxAmmo = 20;
         ammo = maxAmmo;
         shotgunShots = 5;
@@ -82,7 +82,7 @@ public class GunScript : MonoBehaviour
         intervalTimer += Time.fixedDeltaTime;
         if (intervalTimer > reloadTime){
             isReloading = false;
-            _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString(); ;
+            _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
         }
     }
 

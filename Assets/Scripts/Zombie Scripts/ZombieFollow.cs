@@ -13,6 +13,7 @@ public class ZombieFollow : MonoBehaviour
     public float health = 3;
     private float maxHealth;
     public float timeBetweenHits = 0.5f;
+    public bool noDamageCooldown = true;
 
     private AudioSource audioSource;
     public AudioClip growl1;
@@ -20,6 +21,7 @@ public class ZombieFollow : MonoBehaviour
     public AudioClip growl3;
     public AudioClip moan1;
     public AudioClip moan2;
+    
 
     public Material damagedMaterial;
 
@@ -50,12 +52,10 @@ public class ZombieFollow : MonoBehaviour
         healthBar = GetComponentInChildren<HealthBar>();
         player = GameObject.FindWithTag("Player");
         _spawner = GameObject.FindWithTag("Spawner");
-    }
 
-    private void Awake()
-    {
         audioSource = GetComponent<AudioSource>();
-        if(UnityEngine.Random.Range(0, 3) == 0) {
+        if (UnityEngine.Random.Range(0, 3) == 0)
+        {
             switch (UnityEngine.Random.Range(0, 3))
             {
                 case 0:
@@ -69,6 +69,11 @@ public class ZombieFollow : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void Awake()
+    {
+       
         
     }
 
@@ -124,7 +129,7 @@ public class ZombieFollow : MonoBehaviour
         //IF collision is from a BULLET
         if (collision.gameObject.tag == "Bullet")
         {
-            if (_damageBool)
+            if (_damageBool || noDamageCooldown)
             {
                 health--;
                 _damageBool = false;

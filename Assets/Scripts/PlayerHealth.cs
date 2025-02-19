@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip zombieBite;
 
+    public GameObject gameOverScreen;
+
 
     private Material _normalMaterial;
 
@@ -46,6 +48,11 @@ public class PlayerHealth : MonoBehaviour
         {
             _damageTimer += Time.deltaTime;
         }
+
+        if(health == 0)
+        {
+            GameOver();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -65,8 +72,11 @@ public class PlayerHealth : MonoBehaviour
             }
            
         }
+    }
 
-
-       
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        gameOverScreen.SetActive(true);
     }
 }

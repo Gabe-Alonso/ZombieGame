@@ -14,6 +14,9 @@ public class ZombieSpawner : MonoBehaviour
     private int[] xBoundary = new int[2];
     private int[] zBoundary = new int[2];
     public WaveManager waveManager;
+
+    public GameObject w5Boss;
+    public GameObject w10Boss;
  
 
     private void Awake()
@@ -23,9 +26,9 @@ public class ZombieSpawner : MonoBehaviour
     public void spawnZombies(int wave)
     {
         // Number of zombies increases by 5 per wave
-        numberOfZombies = wave * 5; 
-        _zombieCounter.text = "Zombies Left: " + numberOfZombies.ToString();
-        
+        numberOfZombies = wave * 5;
+        updateZombieCounter();
+
         // Zombie spawn region for wave (will change/expand when we have more waves) 
         if (wave == 1)
         {
@@ -74,7 +77,8 @@ public class ZombieSpawner : MonoBehaviour
     public void zombieCounter(int num)
     {
         numberOfZombies += num;
-        _zombieCounter.text = "Zombies Left: " + numberOfZombies.ToString();
+        updateZombieCounter();
+
         Debug.Log("There are " + numberOfZombies + " zombies left.");
         if (numberOfZombies == 0)
         {
@@ -84,7 +88,33 @@ public class ZombieSpawner : MonoBehaviour
         }
     }
 
+    public void updateZombieCounter()
+    {
+        _zombieCounter.text = "Zombies Left: " + numberOfZombies.ToString();
+    }
 
+    public void spawnBossW5()
+    {
+        bool spawned = false; 
+
+        while (!spawned)
+        {
+            // Random spawn position for zombies within x, z bounds (can change later) 
+
+            Vector3 spawnPosition = new Vector3(Random.Range(-20, 20), 2.5f, Random.Range(-20, 20));
+
+            // Check if this point is inside a NavMeshObstacle
+            if (!IsInsideNavMeshObstacle(spawnPosition))
+            {
+                spawnW10Boss(spawnPosition);
+                numberOfZombies = 1;
+                updateZombieCounter();
+                spawned = true;
+
+            }
+
+        }
+    }
 
     //To use this, Instatiate a Zombie Boss, then set it equal to this like so
     /*
@@ -92,9 +122,9 @@ public class ZombieSpawner : MonoBehaviour
      * boss = initW5Boss(boss);
     */
     //This will then Instantiate the boss with all the correct number necessarry.
-    void spawnW5Boss()
+    void spawnW5Boss(Vector3 spawn)
     {
-        var boss = Instantiate(w5_Boss);
+        var boss = Instantiate(w5Boss, spawn, Quaternion.identity);
 
         boss.GetComponent<w5_Boss>().speed = 7.5f;
         boss.GetComponent<w5_Boss>().acceleration = 10f;
@@ -111,15 +141,16 @@ public class ZombieSpawner : MonoBehaviour
      * boss = initW10Boss(boss);
     */
     //This will then Instantiate the boss with all the correct number necessarry.
-    w10_Boss initW10Boss(w10_Boss boss)
+    void spawnW10Boss(Vector3 spawn)
     {
+        var boss = Instantiate(w10Boss, spawn, Quaternion.identity);
+
         boss.GetComponent<w10_Boss>().speed = 3f;
         boss.GetComponent<w10_Boss>().acceleration = 8f;
         boss.GetComponent<w10_Boss>().health = 40f;
         boss.GetComponent<w10_Boss>().throwTime = 5f;
         boss.GetComponent<w10_Boss>().throwCooldown = 2f;
         boss.GetComponent<w10_Boss>().barrelSpeed = 15f;
-
-        return boss;
+        
     }
 }

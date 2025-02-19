@@ -157,7 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  timeBetweenHits: 0.5
+  timeBetweenHits: 0.25
+  noDamageCooldown: 1
   growl1: {fileID: 8300000, guid: 4ffaf3132acae5b499dd7e26c3037092, type: 3}
   growl2: {fileID: 8300000, guid: 14ccd5fc0afb120498dea4afd889bf13, type: 3}
   growl3: {fileID: 8300000, guid: d889bc5defae8ce4badf160161e3bfc6, type: 3}

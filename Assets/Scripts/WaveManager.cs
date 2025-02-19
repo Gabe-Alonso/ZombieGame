@@ -35,6 +35,7 @@ public class WaveManager : MonoBehaviour
         canvas.SetActive(false);
         Time.timeScale = 1;
         wave++;
-        
+        _spawner.spawnBossW5();
+
     }
 }
