@@ -9,6 +9,7 @@ TagManager:
   - Spawner
   - Ground
   - Gun
+  - 'Post-Wave Screen '
   layers:
   - Default
   - TransparentFX
