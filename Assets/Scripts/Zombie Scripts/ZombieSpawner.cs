@@ -106,7 +106,14 @@ public class ZombieSpawner : MonoBehaviour
             // Check if this point is inside a NavMeshObstacle
             if (!IsInsideNavMeshObstacle(spawnPosition))
             {
-                spawnW10Boss(spawnPosition);
+                if(Random.Range(0,2) < 1)
+                {
+                    spawnW10Boss(spawnPosition);
+                }
+                else
+                {
+                    spawnW5Boss(spawnPosition);
+                }
                 numberOfZombies = 1;
                 updateZombieCounter();
                 spawned = true;
