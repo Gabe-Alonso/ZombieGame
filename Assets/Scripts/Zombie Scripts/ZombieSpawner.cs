@@ -13,6 +13,7 @@ public class ZombieSpawner : MonoBehaviour
     //initial boundary arrays 
     private int[] xBoundary = new int[2];
     private int[] zBoundary = new int[2];
+    public WaveManager waveManager;
  
 
     private void Awake()
@@ -78,6 +79,7 @@ public class ZombieSpawner : MonoBehaviour
         if (numberOfZombies == 0)
         {
             Time.timeScale = 0;
+            waveManager.PostWaveUI();
             
         }
     }

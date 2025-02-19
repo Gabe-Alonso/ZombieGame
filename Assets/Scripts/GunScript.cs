@@ -42,6 +42,7 @@ public class GunScript : MonoBehaviour
         //maxAmmo = 20;
         ammo = maxAmmo;
         shotgunShots = 5;
+        _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
     }
 
     // Update is called once per frame
