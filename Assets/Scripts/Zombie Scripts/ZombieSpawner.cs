@@ -7,17 +7,18 @@ public class ZombieSpawner : MonoBehaviour
 {
     public GameObject zombiePrefab;
     //zombie counter on screen
-    private TextMeshProUGUI _zombieCounter;
+    public TextMeshProUGUI _zombieCounter;
     [SerializeField] int numberOfZombies;
 
     //initial boundary arrays 
     private int[] xBoundary = new int[2];
     private int[] zBoundary = new int[2];
+    public WaveManager waveManager;
  
 
     private void Awake()
     {
-        _zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
+        //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
     }
     public void spawnZombies(int wave)
     {
@@ -78,6 +79,7 @@ public class ZombieSpawner : MonoBehaviour
         if (numberOfZombies == 0)
         {
             Time.timeScale = 0;
+            waveManager.PostWaveUI();
             
         }
     }
