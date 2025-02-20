@@ -14,6 +14,8 @@ public class ZombieFollow : MonoBehaviour
     private float maxHealth;
     public float timeBetweenHits = 0.5f;
     public bool noDamageCooldown = true;
+    public bool isBoss = false;
+
 
     private AudioSource audioSource;
     public AudioClip growl1;
@@ -40,6 +42,8 @@ public class ZombieFollow : MonoBehaviour
 
     //Zombie counter script
     private GameObject _spawner;
+    public GameObject BossHealthBar;
+
 
     private void Start()
     {
@@ -49,7 +53,22 @@ public class ZombieFollow : MonoBehaviour
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
         maxHealth = health;
-        healthBar = GetComponentInChildren<HealthBar>();
+
+        //For Boss Health Bar to be a Global Component
+        if (isBoss)
+        {
+            //Set Boss UI to be True
+            BossHealthBar.SetActive(true);
+
+            healthBar = BossHealthBar.GetComponentInChildren<HealthBar>();
+        }
+        else
+        {
+            healthBar = GetComponentInChildren<HealthBar>();
+        }
+
+        healthBar.UpdateHealthBar(health, maxHealth);
+
         player = GameObject.FindWithTag("Player");
         _spawner = GameObject.FindWithTag("Spawner");
 
@@ -142,6 +161,10 @@ public class ZombieFollow : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(this.gameObject);
+                if(isBoss)
+                {
+                    BossHealthBar.SetActive(false);
+                }
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
                 
             }

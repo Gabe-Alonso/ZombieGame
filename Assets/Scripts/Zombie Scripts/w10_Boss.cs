@@ -26,6 +26,8 @@ public class w10_Boss : MonoBehaviour
     void Start()
     {
         _zomFollow = GetComponent<ZombieFollow>();
+        _zomFollow.isBoss = true;
+
         _agent = GetComponent<NavMeshAgent>();
 
         _zomFollow.health = health;

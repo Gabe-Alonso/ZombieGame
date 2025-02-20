@@ -16,10 +16,13 @@ public class w5_Boss : MonoBehaviour
     private float _time = 0;
     private float _chargeTime = 0;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _zomFollow = GetComponent<ZombieFollow>();
+        _zomFollow.isBoss = true;
+
         _agent = GetComponent<NavMeshAgent>();
 
         _zomFollow.health = health;

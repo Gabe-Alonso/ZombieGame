@@ -17,6 +17,7 @@ public class ZombieSpawner : MonoBehaviour
 
     public GameObject w5Boss;
     public GameObject w10Boss;
+    public GameObject BossHealthBar;
  
 
     private void Awake()
@@ -133,6 +134,8 @@ public class ZombieSpawner : MonoBehaviour
     {
         var boss = Instantiate(w5Boss, spawn, Quaternion.identity);
 
+        boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
+
         boss.GetComponent<w5_Boss>().speed = 7.5f;
         boss.GetComponent<w5_Boss>().acceleration = 10f;
         boss.GetComponent<w5_Boss>().health = 30f;
@@ -151,6 +154,8 @@ public class ZombieSpawner : MonoBehaviour
     void spawnW10Boss(Vector3 spawn)
     {
         var boss = Instantiate(w10Boss, spawn, Quaternion.identity);
+
+        boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
 
         boss.GetComponent<w10_Boss>().speed = 3f;
         boss.GetComponent<w10_Boss>().acceleration = 8f;
