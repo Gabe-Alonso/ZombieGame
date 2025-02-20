@@ -92,6 +92,7 @@ public class GunScript : MonoBehaviour
             for(int i = 0; i < shotgunShots; i++){
                 GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 newBullet.GetComponent<BulletScript>().despawnDist = despawnDist;
+                newBullet.GetComponent<BulletScript>().isPiercing = true;
                 newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
             }
         }else{
