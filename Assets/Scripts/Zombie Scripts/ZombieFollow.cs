@@ -15,7 +15,7 @@ public class ZombieFollow : MonoBehaviour
     public float timeBetweenHits = 0.5f;
     public bool noDamageCooldown = true;
     public bool isBoss = false;
-
+    private float speed;
 
     private AudioSource audioSource;
     public AudioClip growl1;
@@ -50,8 +50,14 @@ public class ZombieFollow : MonoBehaviour
         //To save the original Material Type
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
 
+        //Set zombies speed
+        
+        //Debug.Log("speed is " + _agent.speed);
+
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
+        speed = Random.Range(3f, 13f);
+        _agent.speed = speed;
         maxHealth = health;
 
         //For Boss Health Bar to be a Global Component
@@ -100,6 +106,7 @@ public class ZombieFollow : MonoBehaviour
     {
         //To start the movement of the Agent towards the player
         _agent.destination = player.transform.position;
+        
 
         //Damage Timer, for Time Between Hits
         if (_damageTimer > timeBetweenHits)

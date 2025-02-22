@@ -1,4 +1,5 @@
 using System.Threading;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +20,10 @@ public class PlayerMovementScript : MonoBehaviour
     public int health;
     RaycastHit hit;
     Collider planeCollider;
+
+    public TextMeshProUGUI _PName;
+    public TextMeshProUGUI _SName;
+    public TextMeshProUGUI _ARName;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,20 +34,32 @@ public class PlayerMovementScript : MonoBehaviour
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
         audioSource = GetComponent<AudioSource>();
         health = 3;
+        _ARName.enabled = false;
+        _SName.enabled = false;
+        _PName.enabled = true;
     }
     void FixedUpdate()
     {
         RotatePlayer();
         MovePlayer();
         if(swapP.IsPressed()){
+            _ARName.enabled = false;
+            _SName.enabled = false;
+            _PName.enabled = true;
             KillChildren();
             transform.Find("Pistol").gameObject.SetActive(true);
         } else if(swapS.IsPressed()){
+            _ARName.enabled = false;
+            _SName.enabled = true;
+            _PName.enabled = false;
             KillChildren();
-            transform.Find("Shotgun").gameObject.SetActive(true);
+            transform.Find("Shotgun").gameObject.SetActive(true);           
         } else if(swapAR.IsPressed()){
+            _ARName.enabled = true;
+            _SName.enabled = false;
+            _PName.enabled = false;
             KillChildren();
-            transform.Find("AR").gameObject.SetActive(true);
+            transform.Find("AR").gameObject.SetActive(true); 
         }
 
     }
