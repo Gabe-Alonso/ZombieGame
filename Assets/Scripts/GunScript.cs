@@ -27,6 +27,7 @@ public class GunScript : MonoBehaviour
     public int shotgunShots;
     public float despawnDist;
     public TextMeshProUGUI _ammoCount;
+    
 
     void Start()
     {
@@ -42,8 +43,11 @@ public class GunScript : MonoBehaviour
         //maxAmmo = 20;
         ammo = maxAmmo;
         shotgunShots = 5;
-        _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
+        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
+        
     }
+
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -56,11 +60,12 @@ public class GunScript : MonoBehaviour
         if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
             shoot();
             Debug.Log("Current Clip: " + ammo);
-            _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
+            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
         }
         if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo)){
             Debug.Log("Reloading...");
             _ammoCount.text = "Reloading...";
+            
             isReloading = true;
             if (maxAmmo > totalAmmo) {
                 
@@ -82,7 +87,7 @@ public class GunScript : MonoBehaviour
         intervalTimer += Time.fixedDeltaTime;
         if (intervalTimer > reloadTime){
             isReloading = false;
-            _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
+            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
         }
     }
 
