@@ -13,7 +13,7 @@ public class BulletScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
-        //despawnDist = 30;
+        despawnDist = 30;
         // rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
@@ -28,7 +28,8 @@ public class BulletScript : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision){
-        if (!collision.transform.CompareTag("Bullet") && !collision.transform.CompareTag("Gun") && !collision.transform.CompareTag("Player")){
+        
+        if (!collision.transform.CompareTag("Player")){
             Destroy(gameObject);
         }
     }

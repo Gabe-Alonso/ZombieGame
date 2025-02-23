@@ -9,21 +9,10 @@ using UnityEngine.AI;
 public class ZombieFollow : MonoBehaviour
 {
 
-    private GameObject player;
+    public GameObject player;
     public float health = 3;
     private float maxHealth;
     public float timeBetweenHits = 0.5f;
-    public bool noDamageCooldown = true;
-    public bool isBoss = false;
-    private float speed;
-
-    private AudioSource audioSource;
-    public AudioClip growl1;
-    public AudioClip growl2;
-    public AudioClip growl3;
-    public AudioClip moan1;
-    public AudioClip moan2;
-    
 
     public Material damagedMaterial;
 
@@ -31,7 +20,6 @@ public class ZombieFollow : MonoBehaviour
 
     //To keep track of the time since the enemy was last damaged
     private float _damageTimer = 0;
-    private float _time = 0;
     //This is the variable determining if the enemy CAN take damage again
     private bool _damageBool = true;
 
@@ -40,73 +28,22 @@ public class ZombieFollow : MonoBehaviour
     //This is the enemies health bar
     private HealthBar healthBar;
 
-    //Zombie counter script
-    private GameObject _spawner;
-    public GameObject BossHealthBar;
-
-
     private void Start()
     {
         //To save the original Material Type
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
 
-        //Set zombies speed
-        
-        //Debug.Log("speed is " + _agent.speed);
-
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
-        speed = Random.Range(3f, 13f);
-        _agent.speed = speed;
         maxHealth = health;
-
-        //For Boss Health Bar to be a Global Component
-        if (isBoss)
-        {
-            //Set Boss UI to be True
-            BossHealthBar.SetActive(true);
-
-            healthBar = BossHealthBar.GetComponentInChildren<HealthBar>();
-        }
-        else
-        {
-            healthBar = GetComponentInChildren<HealthBar>();
-        }
-
-        healthBar.UpdateHealthBar(health, maxHealth);
-
-        player = GameObject.FindWithTag("Player");
-        _spawner = GameObject.FindWithTag("Spawner");
-
-        audioSource = GetComponent<AudioSource>();
-        if (UnityEngine.Random.Range(0, 3) == 0)
-        {
-            switch (UnityEngine.Random.Range(0, 3))
-            {
-                case 0:
-                    audioSource.PlayOneShot(growl1, 1);
-                    break;
-                case 1:
-                    audioSource.PlayOneShot(growl2, 1);
-                    break;
-                case 2:
-                    audioSource.PlayOneShot(growl3, 1);
-                    break;
-            }
-        }
-    }
-
-    private void Awake()
-    {
-       
+        healthBar = GetComponentInChildren<HealthBar>();
         
-    }
+}
 
     private void Update()
     {
         //To start the movement of the Agent towards the player
         _agent.destination = player.transform.position;
-        
 
         //Damage Timer, for Time Between Hits
         if (_damageTimer > timeBetweenHits)
@@ -118,36 +55,6 @@ public class ZombieFollow : MonoBehaviour
         {
             _damageTimer += Time.deltaTime;
         }
-
-        _time += Time.deltaTime;
-
-        if (_time >= 1.5)
-        {
-            if (UnityEngine.Random.Range(0, 10) == 0)
-            {
-                switch (UnityEngine.Random.Range(0, 5))
-                {
-                    case 0:
-                        audioSource.PlayOneShot(growl1, 1);
-                        break;
-                    case 1:
-                        audioSource.PlayOneShot(growl2, 1);
-                        break;
-                    case 2:
-                        audioSource.PlayOneShot(growl3, 1);
-                        break;
-                    case 3:
-                        audioSource.PlayOneShot(moan1, 1);
-                        break;
-                    case 4:
-                        audioSource.PlayOneShot(moan2, 1);
-                        break;
-                }
-            }
-
-            _time = 0;
-        }
-       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -155,7 +62,7 @@ public class ZombieFollow : MonoBehaviour
         //IF collision is from a BULLET
         if (collision.gameObject.tag == "Bullet")
         {
-            if (_damageBool || noDamageCooldown)
+            if (_damageBool)
             {
                 health--;
                 _damageBool = false;
@@ -168,12 +75,6 @@ public class ZombieFollow : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(this.gameObject);
-                if(isBoss)
-                {
-                    BossHealthBar.SetActive(false);
-                }
-                _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
-                
             }
         }
 
@@ -184,11 +85,6 @@ public class ZombieFollow : MonoBehaviour
             //Access the Player's Health here some how
             //collision.gameObject.health--;
         }
-    }
-
-    public void Slow()
-    {
-
     }
 
 }

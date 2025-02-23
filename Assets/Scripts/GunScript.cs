@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -22,12 +20,7 @@ public class GunScript : MonoBehaviour
     RaycastHit hit;
     public Camera cam;
     Collider planeCollider;
-    public int totalAmmo;
-    public bool isShotgun;
-    public int shotgunShots;
-    public float despawnDist;
-    public TextMeshProUGUI _ammoCount;
-    
+    int totalAmmo;
 
     void Start()
     {
@@ -35,19 +28,14 @@ public class GunScript : MonoBehaviour
         shootAction = InputSystem.actions.FindAction("Shoot");
         reloadAction = InputSystem.actions.FindAction("Reload");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
-        //reloadTime = 2;
+        reloadTime = 2;
         isReloading = false;
-        //bulletInterval = 0.2f;
+        bulletInterval = 0.2f;
         intervalTimer = 0;
-        totalAmmo = 10000; //comment out with 100
-        //maxAmmo = 20;
+        totalAmmo = 100;
+        maxAmmo = 20;
         ammo = maxAmmo;
-        shotgunShots = 5;
-        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
-        
     }
-
-
 
     // Update is called once per frame
     void FixedUpdate()
@@ -60,19 +48,15 @@ public class GunScript : MonoBehaviour
         if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
             shoot();
             Debug.Log("Current Clip: " + ammo);
-            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
         }
         if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo)){
             Debug.Log("Reloading...");
-            _ammoCount.text = "Reloading...";
-            
             isReloading = true;
             if (maxAmmo > totalAmmo) {
                 
                 ammo = totalAmmo;
             } else if (totalAmmo == 0) {
                 Debug.Log("Cant Reload, out of ammo");
-                
             } else if (ammo > 0) {
                 totalAmmo -= maxAmmo - ammo;
                 ammo = maxAmmo;
@@ -87,25 +71,13 @@ public class GunScript : MonoBehaviour
         intervalTimer += Time.fixedDeltaTime;
         if (intervalTimer > reloadTime){
             isReloading = false;
-            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
         }
     }
 
 
     private void shoot(){
-        if (isShotgun){
-            for(int i = 0; i < shotgunShots; i++){
-                GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                newBullet.GetComponent<BulletScript>().despawnDist = despawnDist;
-                newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-            }
-        }else{
-            GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            newBullet.GetComponent<BulletScript>().despawnDist = despawnDist;
-            newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-            
-        }
-        
+        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+        newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         intervalTimer = 0;
         ammo--;
     }
