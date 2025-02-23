@@ -43,6 +43,8 @@ public class ZombieFollow : MonoBehaviour
     //Zombie counter script
     private GameObject _spawner;
     public GameObject BossHealthBar;
+    private GameObject _waveManager;
+    public int _wave;
 
 
     private void Start()
@@ -50,15 +52,18 @@ public class ZombieFollow : MonoBehaviour
         //To save the original Material Type
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
 
-        //Set zombies speed
-        
+        //get wave number
+        _waveManager = GameObject.FindWithTag("WaveManager");
+        _wave = _waveManager.GetComponent<WaveManager>().wave;
+
         //Debug.Log("speed is " + _agent.speed);
 
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
-        speed = Random.Range(3f, 13f);
+        speed = Random.Range(3f, 10f + 2*_wave);
         _agent.speed = speed;
         maxHealth = health;
+       
 
         //For Boss Health Bar to be a Global Component
         if (isBoss)
