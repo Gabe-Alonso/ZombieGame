@@ -2169,7 +2169,7 @@ GameObject:
   - component: {fileID: 624995011}
   m_Layer: 0
   m_Name: Manage
-  m_TagString: Untagged
+  m_TagString: WaveManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2186,6 +2186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823550a3dcad3e94a967490921276b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wave: 0
   canvas: {fileID: 1197509591}
   startWaveButton: {fileID: 963550896}
   startBossButton: {fileID: 1618092062}

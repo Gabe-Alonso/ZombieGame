@@ -5,6 +5,7 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
 AssetOrigin:
   serializedVersion: 1
   productId: 187052
@@ -12,3 +13,5 @@ AssetOrigin:
   packageVersion: 1.1.1
   assetPath: Assets/Polytope Studio/Lowpoly_Environments/URP/PT_Nature_Free_URP_17.unitypackage
   uploadId: 721141
+=======
+>>>>>>> main
