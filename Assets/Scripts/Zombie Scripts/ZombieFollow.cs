@@ -16,7 +16,7 @@ public class ZombieFollow : MonoBehaviour
     public bool noDamageCooldown = true;
     public bool isBoss = false;
     public bool runAway = false;
-
+    private float speed;
 
 
     private AudioSource audioSource;
@@ -45,16 +45,27 @@ public class ZombieFollow : MonoBehaviour
     //Zombie counter script
     private GameObject _spawner;
     public GameObject BossHealthBar;
-
+    private GameObject _waveManager;
+    public int _wave;
+    public bool isDead = false;
 
     private void Start()
     {
         //To save the original Material Type
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
 
+        //get wave number
+        _waveManager = GameObject.FindWithTag("WaveManager");
+        _wave = _waveManager.GetComponent<WaveManager>().wave;
+
+        //Debug.Log("speed is " + _agent.speed);
+
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
+        speed = Random.Range(5f, 10f + 2*_wave);
+        _agent.speed = speed;
         maxHealth = health;
+       
 
         //For Boss Health Bar to be a Global Component
         if (isBoss)
@@ -159,16 +170,18 @@ public class ZombieFollow : MonoBehaviour
                 gameObject.GetComponent<Renderer>().material = damagedMaterial;
                 healthBar.UpdateHealthBar(health, maxHealth);
             }
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
 
-            if (health <= 0)
+            if (health <= 0 && !isDead)
             {
-                Destroy(this.gameObject);
+                isDead = true;
+                gameObject.GetComponent<Collider>().enabled = false;
                 if(isBoss)
                 {
                     BossHealthBar.SetActive(false);
                 }
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
+                Destroy(this.gameObject);
                 
             }
         }

@@ -159,12 +159,15 @@ MonoBehaviour:
   health: 3
   timeBetweenHits: 0.25
   noDamageCooldown: 1
+  isBoss: 0
   growl1: {fileID: 8300000, guid: 4ffaf3132acae5b499dd7e26c3037092, type: 3}
   growl2: {fileID: 8300000, guid: 14ccd5fc0afb120498dea4afd889bf13, type: 3}
   growl3: {fileID: 8300000, guid: d889bc5defae8ce4badf160161e3bfc6, type: 3}
   moan1: {fileID: 8300000, guid: b3ab953229979ed4aacb2951da70ea1e, type: 3}
   moan2: {fileID: 8300000, guid: 58a868ac4f18e2f428ef3f845d8bfaef, type: 3}
   damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
+  BossHealthBar: {fileID: 0}
+  _wave: 0
 --- !u!195 &972731143308674557
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -175,7 +178,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -298,7 +301,7 @@ GameObject:
   - component: {fileID: 3112653427784388408}
   m_Layer: 0
   m_Name: nose (1)
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -407,7 +410,7 @@ GameObject:
   - component: {fileID: 7953597240223296198}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +485,7 @@ GameObject:
   - component: {fileID: 170823335591725514}
   m_Layer: 5
   m_Name: Health Bar
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,7 +586,7 @@ GameObject:
   - component: {fileID: 5109406655384280841}
   m_Layer: 5
   m_Name: Fill Area
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -621,7 +624,7 @@ GameObject:
   - component: {fileID: 2711735193683033973}
   m_Layer: 5
   m_Name: Fill
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,7 +700,7 @@ GameObject:
   - component: {fileID: 763691155000929091}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -799,7 +802,7 @@ GameObject:
   - component: {fileID: 128156960633044211}
   m_Layer: 0
   m_Name: nose
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

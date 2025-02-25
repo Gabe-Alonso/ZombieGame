@@ -27,6 +27,7 @@ public class GunScript : MonoBehaviour
     public int shotgunShots;
     public float despawnDist;
     public TextMeshProUGUI _ammoCount;
+    
 
     void Start()
     {
@@ -38,12 +39,15 @@ public class GunScript : MonoBehaviour
         isReloading = false;
         //bulletInterval = 0.2f;
         intervalTimer = 0;
-        totalAmmo = 10000; //comment out with 100
+        //totalAmmo = 10000; //comment out with 100
         //maxAmmo = 20;
         ammo = maxAmmo;
         shotgunShots = 5;
-        _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
+        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
+        
     }
+
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -56,11 +60,12 @@ public class GunScript : MonoBehaviour
         if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
             shoot();
             Debug.Log("Current Clip: " + ammo);
-            _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
+            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
         }
         if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo)){
             Debug.Log("Reloading...");
             _ammoCount.text = "Reloading...";
+            
             isReloading = true;
             if (maxAmmo > totalAmmo) {
                 
@@ -82,7 +87,7 @@ public class GunScript : MonoBehaviour
         intervalTimer += Time.fixedDeltaTime;
         if (intervalTimer > reloadTime){
             isReloading = false;
-            _ammoCount.text = "Ammo Left: " + ammo.ToString() + "/" + maxAmmo.ToString();
+            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
         }
     }
 
@@ -92,6 +97,7 @@ public class GunScript : MonoBehaviour
             for(int i = 0; i < shotgunShots; i++){
                 GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 newBullet.GetComponent<BulletScript>().despawnDist = despawnDist;
+                newBullet.GetComponent<BulletScript>().isPiercing = true;
                 newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
             }
         }else{

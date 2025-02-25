@@ -7,6 +7,7 @@ public class BulletScript : MonoBehaviour
     Rigidbody rb;
     Vector3 initialPosition;
     public float despawnDist;
+    public bool isPiercing;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,7 +30,9 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision){
         if (!collision.transform.CompareTag("Bullet") && !collision.transform.CompareTag("Gun") && !collision.transform.CompareTag("Player")){
-            Destroy(gameObject);
+            if(!(isPiercing && collision.transform.CompareTag("Zombie"))){
+               Destroy(gameObject); 
+            }
         }
     }
 }

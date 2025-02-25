@@ -93,7 +93,7 @@ public class ZombieSpawner : MonoBehaviour
 
     public void updateZombieCounter()
     {
-        _zombieCounter.text = "Zombies Left: " + numberOfZombies.ToString();
+        _zombieCounter.text = ":" + numberOfZombies.ToString();
     }
 
     public void spawnBossW5()
