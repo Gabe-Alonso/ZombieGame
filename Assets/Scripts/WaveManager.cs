@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
-    private int wave;
+    public int wave;
     public GameObject canvas;
     public Button startWaveButton;
     public Button startBossButton;

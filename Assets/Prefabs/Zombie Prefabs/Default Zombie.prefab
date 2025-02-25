@@ -159,12 +159,15 @@ MonoBehaviour:
   health: 3
   timeBetweenHits: 0.25
   noDamageCooldown: 1
+  isBoss: 0
+  speed: 5
   growl1: {fileID: 8300000, guid: 4ffaf3132acae5b499dd7e26c3037092, type: 3}
   growl2: {fileID: 8300000, guid: 14ccd5fc0afb120498dea4afd889bf13, type: 3}
   growl3: {fileID: 8300000, guid: d889bc5defae8ce4badf160161e3bfc6, type: 3}
   moan1: {fileID: 8300000, guid: b3ab953229979ed4aacb2951da70ea1e, type: 3}
   moan2: {fileID: 8300000, guid: 58a868ac4f18e2f428ef3f845d8bfaef, type: 3}
   damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
+  BossHealthBar: {fileID: 0}
 --- !u!195 &972731143308674557
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -175,7 +178,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

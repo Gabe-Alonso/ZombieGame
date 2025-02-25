@@ -14,6 +14,8 @@ public class ZombieFollow : MonoBehaviour
     private float maxHealth;
     public float timeBetweenHits = 0.5f;
     public bool noDamageCooldown = true;
+    public bool isBoss = false;
+    private float speed;
 
     private AudioSource audioSource;
     public AudioClip growl1;
@@ -40,16 +42,44 @@ public class ZombieFollow : MonoBehaviour
 
     //Zombie counter script
     private GameObject _spawner;
+    public GameObject BossHealthBar;
+    private GameObject _waveManager;
+    public int _wave;
+
 
     private void Start()
     {
         //To save the original Material Type
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
 
+        //get wave number
+        _waveManager = GameObject.FindWithTag("WaveManager");
+        _wave = _waveManager.GetComponent<WaveManager>().wave;
+
+        //Debug.Log("speed is " + _agent.speed);
+
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
+        speed = Random.Range(3f, 10f + 2*_wave);
+        _agent.speed = speed;
         maxHealth = health;
-        healthBar = GetComponentInChildren<HealthBar>();
+       
+
+        //For Boss Health Bar to be a Global Component
+        if (isBoss)
+        {
+            //Set Boss UI to be True
+            BossHealthBar.SetActive(true);
+
+            healthBar = BossHealthBar.GetComponentInChildren<HealthBar>();
+        }
+        else
+        {
+            healthBar = GetComponentInChildren<HealthBar>();
+        }
+
+        healthBar.UpdateHealthBar(health, maxHealth);
+
         player = GameObject.FindWithTag("Player");
         _spawner = GameObject.FindWithTag("Spawner");
 
@@ -81,6 +111,7 @@ public class ZombieFollow : MonoBehaviour
     {
         //To start the movement of the Agent towards the player
         _agent.destination = player.transform.position;
+        
 
         //Damage Timer, for Time Between Hits
         if (_damageTimer > timeBetweenHits)
@@ -142,6 +173,10 @@ public class ZombieFollow : MonoBehaviour
             if (health <= 0)
             {
                 Destroy(this.gameObject);
+                if(isBoss)
+                {
+                    BossHealthBar.SetActive(false);
+                }
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
                 
             }
