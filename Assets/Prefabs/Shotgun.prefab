@@ -122,11 +122,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletInterval: 1
-  reloadTime: 5
+  reloadTime: 2.5
   bullet: {fileID: 7212640120619087704, guid: a52a12446cc0c4f49ac6da9a3cce2786, type: 3}
   maxAmmo: 2
   cam: {fileID: 0}
-  totalAmmo: 6
+  totalAmmo: 10
   isShotgun: 1
-  shotgunShots: 5
+  shotgunShots: 8
   despawnDist: 10
+  _ammoCount: {fileID: 0}

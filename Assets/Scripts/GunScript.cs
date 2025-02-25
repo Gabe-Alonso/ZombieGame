@@ -39,11 +39,11 @@ public class GunScript : MonoBehaviour
         isReloading = false;
         //bulletInterval = 0.2f;
         intervalTimer = 0;
-        totalAmmo = 10000; //comment out with 100
+        //totalAmmo = 10000; //comment out with 100
         //maxAmmo = 20;
         ammo = maxAmmo;
         shotgunShots = 5;
-        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
+        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
         
     }
 
@@ -60,7 +60,7 @@ public class GunScript : MonoBehaviour
         if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
             shoot();
             Debug.Log("Current Clip: " + ammo);
-            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
+            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
         }
         if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo)){
             Debug.Log("Reloading...");
@@ -87,7 +87,7 @@ public class GunScript : MonoBehaviour
         intervalTimer += Time.fixedDeltaTime;
         if (intervalTimer > reloadTime){
             isReloading = false;
-            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString();
+            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
         }
     }
 
