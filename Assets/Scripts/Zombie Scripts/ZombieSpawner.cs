@@ -21,7 +21,10 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject BossHealthBar;
     public GameObject TwinHealthBar;
 
-
+    //coin counter
+    public TextMeshProUGUI coins;
+    public TextMeshProUGUI coins2;
+    public int numberOfCoins = 0;
     private void Awake()
     {
         //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
@@ -81,6 +84,7 @@ public class ZombieSpawner : MonoBehaviour
     {
         numberOfZombies += num;
         updateZombieCounter();
+        coinCounter(Random.Range(3, 8));
 
         Debug.Log("There are " + numberOfZombies + " zombies left.");
         if (numberOfZombies == 0)
@@ -89,6 +93,22 @@ public class ZombieSpawner : MonoBehaviour
             waveManager.PostWaveUI();
             
         }
+    }
+
+
+    public void coinCounterUpdate()
+    {
+        coins.text = "Coins: $" + numberOfCoins.ToString();
+        coins2.text = "Coins: $" + numberOfCoins.ToString();
+    }
+
+
+    public void coinCounter(int num)
+    {
+        numberOfCoins += num;
+        coinCounterUpdate();
+
+
     }
 
     public void updateZombieCounter()

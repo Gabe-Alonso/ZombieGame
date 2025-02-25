@@ -12,16 +12,8 @@ public class ShopNavigation : MonoBehaviour
     public GameObject Page3;
 
     public float page = 0;
-        
 
 
-
-    public void OnReturnButton()
-    {
-        click.Play();
-        SceneManager.LoadScene(1);
-
-    }
 
     public void OnNextButton()
     {
@@ -47,24 +39,25 @@ public class ShopNavigation : MonoBehaviour
 
                 Page1.SetActive(!Page1.activeSelf);//off
                 Page2.SetActive(!Page2.activeSelf);//on
-                
+                click.Play();
                 break;
 
             case 2:
 
                 Page2.SetActive(!Page2.activeSelf); //off
                 Page3.SetActive(!Page3.activeSelf); //on
-
+                click.Play();
                 break;
         }
     }
 
-    public void OnPreviousButton() 
+    public void OnPreviousButton()
     {
         if (page == 0)
         {
             page = 0;
-        } else
+        }
+        else
         {
             page -= 1;
         }
@@ -75,14 +68,14 @@ public class ShopNavigation : MonoBehaviour
 
                 Page1.SetActive(!Page1.activeSelf);//on
                 Page2.SetActive(!Page2.activeSelf);//off
-
+                click.Play();
                 break;
 
             case 1:
 
                 Page2.SetActive(!Page2.activeSelf); //on
                 Page3.SetActive(!Page3.activeSelf); //off
-                
+                click.Play();
                 break;
             case 2:
 
@@ -90,6 +83,5 @@ public class ShopNavigation : MonoBehaviour
         }
     }
 
-    
-}
 
+}
