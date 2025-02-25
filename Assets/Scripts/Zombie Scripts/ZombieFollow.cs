@@ -25,6 +25,7 @@ public class ZombieFollow : MonoBehaviour
     public AudioClip growl3;
     public AudioClip moan1;
     public AudioClip moan2;
+    public AudioClip death;
     
 
     public Material damagedMaterial;
@@ -34,6 +35,7 @@ public class ZombieFollow : MonoBehaviour
     //To keep track of the time since the enemy was last damaged
     private float _damageTimer = 0;
     private float _time = 0;
+
     //This is the variable determining if the enemy CAN take damage again
     private bool _damageBool = true;
 
@@ -48,6 +50,9 @@ public class ZombieFollow : MonoBehaviour
     private GameObject _waveManager;
     public int _wave;
     public bool isDead = false;
+
+    // distance for audio volume
+    private float distanceToPlayer;
 
     private void Start()
     {
@@ -85,19 +90,51 @@ public class ZombieFollow : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         _spawner = GameObject.FindWithTag("Spawner");
 
+        // calculate distance to play sound at volume 
+        distanceToPlayer = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(player.transform.position.x - _agent.transform.position.x), 2) + Mathf.Pow(Mathf.Abs(player.transform.position.z - _agent.transform.position.z), 2));
+        Debug.Log("distance: " + distanceToPlayer);
+        // normalize distance using max audio distance
+        distanceToPlayer = distanceToPlayer / 300;
+       
+
         audioSource = GetComponent<AudioSource>();
         if (UnityEngine.Random.Range(0, 3) == 0)
+        
         {
             switch (UnityEngine.Random.Range(0, 3))
             {
                 case 0:
                     audioSource.PlayOneShot(growl1, 1);
+                    if (distanceToPlayer < 1)
+                    {
+                        audioSource.volume = 1 - distanceToPlayer;
+                    }
+                    else
+                    {
+                        audioSource.volume = 0;
+                    }
                     break;
                 case 1:
                     audioSource.PlayOneShot(growl2, 1);
+                    if (distanceToPlayer < 1)
+                    {
+                        audioSource.volume = 1 - distanceToPlayer;
+                    }
+                    else
+                    {
+                        audioSource.volume = 0;
+                    }
                     break;
                 case 2:
                     audioSource.PlayOneShot(growl3, 1);
+                    if (distanceToPlayer < 1)
+                    {
+                        audioSource.volume = 1 - distanceToPlayer;
+                    }
+                    else
+                    {
+                        audioSource.volume = 0;
+                    }
                     break;
             }
         }
@@ -126,7 +163,15 @@ public class ZombieFollow : MonoBehaviour
             _damageTimer += Time.deltaTime;
         }
 
+
         _time += Time.deltaTime;
+
+        // calculate distance to play sound at volume 
+        distanceToPlayer = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(player.transform.position.x - _agent.transform.position.x), 2) + Mathf.Pow(Mathf.Abs(player.transform.position.z - _agent.transform.position.z), 2));
+        
+        // normalize distance using max audio distance
+        distanceToPlayer = distanceToPlayer / 300;
+        
 
         if (_time >= 1.5)
         {
@@ -136,18 +181,58 @@ public class ZombieFollow : MonoBehaviour
                 {
                     case 0:
                         audioSource.PlayOneShot(growl1, 1);
+                        if (distanceToPlayer < 1) {
+                            audioSource.volume = 1 - distanceToPlayer;
+                        }
+                        else
+                        {
+                            audioSource.volume = 0;
+                        }
+                        
                         break;
                     case 1:
                         audioSource.PlayOneShot(growl2, 1);
+                        if (distanceToPlayer < 1)
+                        {
+                            audioSource.volume = 1 - distanceToPlayer;
+                        }
+                        else
+                        {
+                            audioSource.volume = 0;
+                        }
                         break;
                     case 2:
                         audioSource.PlayOneShot(growl3, 1);
+                        if (distanceToPlayer < 1)
+                        {
+                            audioSource.volume = 1 - distanceToPlayer;
+                        }
+                        else
+                        {
+                            audioSource.volume = 0;
+                        }
                         break;
                     case 3:
                         audioSource.PlayOneShot(moan1, 1);
+                        if (distanceToPlayer < 1)
+                        {
+                            audioSource.volume = 1 - distanceToPlayer;
+                        }
+                        else
+                        {
+                            audioSource.volume = 0;
+                        }
                         break;
                     case 4:
                         audioSource.PlayOneShot(moan2, 1);
+                        if (distanceToPlayer < 1)
+                        {
+                            audioSource.volume = 1 - distanceToPlayer;
+                        }
+                        else
+                        {
+                            audioSource.volume = 0;
+                        }
                         break;
                 }
             }
@@ -175,6 +260,7 @@ public class ZombieFollow : MonoBehaviour
             if (health <= 0 && !isDead)
             {
                 isDead = true;
+                audioSource.PlayOneShot(death);
                 gameObject.GetComponent<Collider>().enabled = false;
                 if(isBoss)
                 {

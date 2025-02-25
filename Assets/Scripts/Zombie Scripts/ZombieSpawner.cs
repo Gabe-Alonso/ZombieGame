@@ -41,13 +41,27 @@ public class ZombieSpawner : MonoBehaviour
             zBoundary[1] = 20;
 
         }
+        else if (wave == 2)
+        {
+            xBoundary[0] = -200;
+            xBoundary[1] = -160;
+            zBoundary[0] = 120;
+            zBoundary[1] = 160;
+
+        } 
+        else if(wave == 3)
+        {
+            xBoundary[0] = 250;
+            xBoundary[1] = 310;
+            zBoundary[0] = -320;
+            zBoundary[1] = -270;
+        }
         else
         {
-            xBoundary[0] = -20;
-            xBoundary[1] = 20;
-            zBoundary[0] = -20;
-            zBoundary[1] = 20;
-
+            xBoundary[0] = -200;
+            xBoundary[1] = -160;
+            zBoundary[0] = 120;
+            zBoundary[1] = 160;
         }
 
         int i = 0;
