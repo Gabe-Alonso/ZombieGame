@@ -64,6 +64,12 @@ public class PlayerMovementScript : MonoBehaviour
 
     }
 
+    public void addAmmo(int pistolAmmo, int shotgunAmmo, int arAmmo){
+        transform.Find("Pistol").gameObject.GetComponent<GunScript>().totalAmmo += pistolAmmo;
+        transform.Find("Shotgun").gameObject.GetComponent<GunScript>().totalAmmo += shotgunAmmo;
+        transform.Find("AR").gameObject.GetComponent<GunScript>().totalAmmo += arAmmo;
+    }
+
     private void KillChildren(){
         foreach (Transform child in transform){
             if(child.gameObject.transform.CompareTag("Gun")){
