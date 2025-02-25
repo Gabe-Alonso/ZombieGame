@@ -46,7 +46,7 @@ public class Airdrop : MonoBehaviour
     //Air Drop HERE
     void openAirDrop()
     {
-        //_player.AddCAmmo();
+       _player.GetComponent<PlayerMovementScript>().AddAmmo(12, 2, 24);
     }
 
     private void OnDestroy()

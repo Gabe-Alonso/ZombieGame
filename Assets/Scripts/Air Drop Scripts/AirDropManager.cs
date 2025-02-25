@@ -11,12 +11,6 @@ public class AirDropManager : MonoBehaviour
     //Play Test Spawn Points
     public Vector3[] spawnArray = { new Vector3(45, 1.25f, -45), new Vector3(37.5f, 1.25f, 20), new Vector3(-42.5f, 1.25f, 42.5f) };
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {

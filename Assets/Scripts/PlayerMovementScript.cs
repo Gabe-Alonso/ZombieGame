@@ -64,7 +64,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     }
 
-    public void addAmmo(int pistolAmmo, int shotgunAmmo, int arAmmo){
+    public void AddAmmo(int pistolAmmo, int shotgunAmmo, int arAmmo){
         transform.Find("Pistol").gameObject.GetComponent<GunScript>().totalAmmo += pistolAmmo;
         transform.Find("Shotgun").gameObject.GetComponent<GunScript>().totalAmmo += shotgunAmmo;
         transform.Find("AR").gameObject.GetComponent<GunScript>().totalAmmo += arAmmo;
