@@ -176,7 +176,8 @@ public class ZombieFollow : MonoBehaviour
             {
                 isDead = true;
                 gameObject.GetComponent<Collider>().enabled = false;
-                if(isBoss)
+
+                if (isBoss)
                 {
                     BossHealthBar.SetActive(false);
                 }
