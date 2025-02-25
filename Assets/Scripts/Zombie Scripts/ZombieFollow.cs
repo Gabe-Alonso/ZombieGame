@@ -268,8 +268,10 @@ public class ZombieFollow : MonoBehaviour
                     BossHealthBar.SetActive(false);
                 }
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
+                                
                 Destroy(this.gameObject);
-                
+                              
+
             }
         }
 
