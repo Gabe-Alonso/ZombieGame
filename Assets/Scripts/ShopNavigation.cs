@@ -15,14 +15,6 @@ public class ShopNavigation : MonoBehaviour
         
 
 
-
-    public void OnReturnButton()
-    {
-        click.Play();
-        SceneManager.LoadScene(1);
-
-    }
-
     public void OnNextButton()
     {
         if (page >= 2)
@@ -47,14 +39,14 @@ public class ShopNavigation : MonoBehaviour
 
                 Page1.SetActive(!Page1.activeSelf);//off
                 Page2.SetActive(!Page2.activeSelf);//on
-                
+                click.Play();
                 break;
 
             case 2:
 
                 Page2.SetActive(!Page2.activeSelf); //off
                 Page3.SetActive(!Page3.activeSelf); //on
-
+                click.Play();
                 break;
         }
     }
@@ -75,14 +67,14 @@ public class ShopNavigation : MonoBehaviour
 
                 Page1.SetActive(!Page1.activeSelf);//on
                 Page2.SetActive(!Page2.activeSelf);//off
-
+                click.Play();
                 break;
 
             case 1:
 
                 Page2.SetActive(!Page2.activeSelf); //on
                 Page3.SetActive(!Page3.activeSelf); //off
-                
+                click.Play();
                 break;
             case 2:
 
