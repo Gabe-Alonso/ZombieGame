@@ -43,8 +43,8 @@ public class w5_Boss : MonoBehaviour
         _agent.acceleration = acceleration * 2;
         _enraged = true;
 
-        preChargeTime = .5f;
-        chargeTime = 2f;
+        chargeTime = 1f;
+        preChargeTime = .25f;
     }
 
 
@@ -66,7 +66,12 @@ public class w5_Boss : MonoBehaviour
     {
         _chargeTime += Time.deltaTime;
 
-        if (_chargeTime >= chargeTime + preChargeTime + .25f) //For the Buffer add .25
+        if (_chargeTime >= chargeTime + preChargeTime + .25f && !_enraged) //For the Buffer add .25
+        {
+            _time += Time.deltaTime;
+            Charge();
+        }
+        else if (_enraged && _chargeTime >= .25f)
         {
             _time += Time.deltaTime;
             Charge();
@@ -92,6 +97,11 @@ public class w5_Boss : MonoBehaviour
             //Set the speed and Acceleration back
             _agent.speed = speed;
             _agent.acceleration = acceleration;
+
+            if (_enraged)
+            {
+                chargeTime = Random.Range(.25f, 1.5f);
+            }
 
             _chargeTime = 0;
             _time = 0;
