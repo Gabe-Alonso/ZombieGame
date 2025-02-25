@@ -65,6 +65,10 @@ public class GunScript : MonoBehaviour
         if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo)){
             Debug.Log("Reloading...");
             _ammoCount.text = "Reloading...";
+            if (totalAmmo <= 0)
+            {
+                _ammoCount.text = "0";
+            }
             
             isReloading = true;
             if (maxAmmo > totalAmmo) {
