@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3394816973174402508}
   - component: {fileID: 972731143308674557}
   - component: {fileID: -5509081324156873133}
+  - component: {fileID: 883993013637431021}
   m_Layer: 0
   m_Name: Default Zombie
   m_TagString: Zombie
@@ -165,6 +166,7 @@ MonoBehaviour:
   moan1: {fileID: 8300000, guid: b3ab953229979ed4aacb2951da70ea1e, type: 3}
   moan2: {fileID: 8300000, guid: 58a868ac4f18e2f428ef3f845d8bfaef, type: 3}
   damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
+  coins: {fileID: 0}
 --- !u!195 &972731143308674557
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -284,6 +286,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &883993013637431021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591814025790196497}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03e84afab0459743b89ff1e8ec3d72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: {fileID: 0}
+  numberOfCoins: 0
 --- !u!1 &1160877174409436321
 GameObject:
   m_ObjectHideFlags: 0

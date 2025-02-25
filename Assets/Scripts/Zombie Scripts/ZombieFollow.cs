@@ -1,6 +1,8 @@
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+
 
 //This code will ONLY work with a NavMeshAgent attached to the Enemy.
 //This code will ONLY work with a NavMesh Surfave in Place.
@@ -14,6 +16,8 @@ public class ZombieFollow : MonoBehaviour
     private float maxHealth;
     public float timeBetweenHits = 0.5f;
     public bool noDamageCooldown = true;
+    
+
 
     private AudioSource audioSource;
     public AudioClip growl1;
@@ -40,6 +44,9 @@ public class ZombieFollow : MonoBehaviour
 
     //Zombie counter script
     private GameObject _spawner;
+
+    //coint system
+    public Coins coins;
 
     private void Start()
     {
@@ -121,7 +128,7 @@ public class ZombieFollow : MonoBehaviour
 
             _time = 0;
         }
-       
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -143,9 +150,10 @@ public class ZombieFollow : MonoBehaviour
             {
                 Destroy(this.gameObject);
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
-                
+                //coins.coinCounter(Random.Range(3, 8));
             }
         }
+
 
 
         //IF Collision is from the PLAYER
@@ -155,6 +163,8 @@ public class ZombieFollow : MonoBehaviour
             //collision.gameObject.health--;
         }
     }
+
+
 
     public void Slow()
     {
