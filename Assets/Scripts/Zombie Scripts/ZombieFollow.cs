@@ -28,15 +28,80 @@ public class ZombieFollow : MonoBehaviour
     //This is the enemies health bar
     private HealthBar healthBar;
 
+<<<<<<< HEAD
+=======
+    //Zombie counter script
+    private GameObject _spawner;
+    public GameObject BossHealthBar;
+    private GameObject _waveManager;
+    public int _wave;
+
+
+>>>>>>> main
     private void Start()
     {
         //To save the original Material Type
         _normalMaterial = gameObject.GetComponent<Renderer>().material;
 
+<<<<<<< HEAD
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBar>();
+=======
+        //get wave number
+        _waveManager = GameObject.FindWithTag("WaveManager");
+        _wave = _waveManager.GetComponent<WaveManager>().wave;
+
+        //Debug.Log("speed is " + _agent.speed);
+
+        //To get the NavMeshAgent Component
+        _agent = GetComponent<NavMeshAgent>();
+        speed = Random.Range(3f, 10f + 2*_wave);
+        _agent.speed = speed;
+        maxHealth = health;
+       
+
+        //For Boss Health Bar to be a Global Component
+        if (isBoss)
+        {
+            //Set Boss UI to be True
+            BossHealthBar.SetActive(true);
+
+            healthBar = BossHealthBar.GetComponentInChildren<HealthBar>();
+        }
+        else
+        {
+            healthBar = GetComponentInChildren<HealthBar>();
+        }
+
+        healthBar.UpdateHealthBar(health, maxHealth);
+
+        player = GameObject.FindWithTag("Player");
+        _spawner = GameObject.FindWithTag("Spawner");
+
+        audioSource = GetComponent<AudioSource>();
+        if (UnityEngine.Random.Range(0, 3) == 0)
+        {
+            switch (UnityEngine.Random.Range(0, 3))
+            {
+                case 0:
+                    audioSource.PlayOneShot(growl1, 1);
+                    break;
+                case 1:
+                    audioSource.PlayOneShot(growl2, 1);
+                    break;
+                case 2:
+                    audioSource.PlayOneShot(growl3, 1);
+                    break;
+            }
+        }
+    }
+
+    private void Awake()
+    {
+       
+>>>>>>> main
         
 }
 
