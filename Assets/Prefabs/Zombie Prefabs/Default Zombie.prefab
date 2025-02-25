@@ -166,7 +166,7 @@ MonoBehaviour:
   moan1: {fileID: 8300000, guid: b3ab953229979ed4aacb2951da70ea1e, type: 3}
   moan2: {fileID: 8300000, guid: 58a868ac4f18e2f428ef3f845d8bfaef, type: 3}
   damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
-  coins: {fileID: 0}
+  coins: {fileID: 7822046564471328840, guid: 0b4ced022cbf587419f39ae330e2d8df, type: 3}
 --- !u!195 &972731143308674557
 NavMeshAgent:
   m_ObjectHideFlags: 0

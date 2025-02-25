@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -46,7 +47,7 @@ public class ZombieFollow : MonoBehaviour
     private GameObject _spawner;
 
     //coint system
-    public Coins coins;
+    public GameObject coins;
 
     private void Start()
     {
@@ -150,7 +151,7 @@ public class ZombieFollow : MonoBehaviour
             {
                 Destroy(this.gameObject);
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
-                //coins.coinCounter(Random.Range(3, 8));
+
             }
         }
 
@@ -165,8 +166,7 @@ public class ZombieFollow : MonoBehaviour
     }
 
 
-
-    public void Slow()
+public void Slow()
     {
 
     }

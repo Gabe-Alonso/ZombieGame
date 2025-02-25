@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Coins : MonoBehaviour
@@ -7,7 +8,13 @@ public class Coins : MonoBehaviour
     public int numberOfCoins = 0;
 
     // Update is called once per frame
-    public void updateCoinCounter()
+
+    public void Awake()
+    {
+        numberOfCoins = 0;
+    }
+
+    public void coinCounterUpdate()
     {
         coins.text = "Coins: $" + numberOfCoins.ToString();
     }
@@ -16,6 +23,8 @@ public class Coins : MonoBehaviour
     public void coinCounter(int num)
     {
         numberOfCoins += num;
-        updateCoinCounter();
+        coinCounterUpdate();
+
+
     }
 }

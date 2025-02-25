@@ -628,7 +628,6 @@ GameObject:
   - component: {fileID: 4721247875273195378}
   - component: {fileID: 4721230031924839267}
   - component: {fileID: 5503621056388603848}
-  - component: {fileID: -1895183192537678841}
   m_Layer: 0
   m_Name: w5 Boss
   m_TagString: Zombie
@@ -915,17 +914,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1895183192537678841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208157327258509008}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b03e84afab0459743b89ff1e8ec3d72b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coins: {fileID: 0}
-  numberOfCoins: 0
