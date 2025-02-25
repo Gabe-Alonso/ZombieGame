@@ -45,7 +45,7 @@ public class ZombieFollow : MonoBehaviour
     public GameObject BossHealthBar;
     private GameObject _waveManager;
     public int _wave;
-
+    public bool isDead = false;
 
     private void Start()
     {
@@ -168,16 +168,18 @@ public class ZombieFollow : MonoBehaviour
                 gameObject.GetComponent<Renderer>().material = damagedMaterial;
                 healthBar.UpdateHealthBar(health, maxHealth);
             }
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
 
-            if (health <= 0)
+            if (health <= 0 && !isDead)
             {
-                Destroy(this.gameObject);
+                isDead = true;
+                gameObject.GetComponent<Collider>().enabled = false;
                 if(isBoss)
                 {
                     BossHealthBar.SetActive(false);
                 }
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
+                Destroy(this.gameObject);
                 
             }
         }
