@@ -72,7 +72,8 @@ public class GunScript : MonoBehaviour
                 ammo = totalAmmo;
             } else if (totalAmmo == 0) {
                 Debug.Log("Cant Reload, out of ammo");
-                
+                _ammoCount.text = "Out of Ammo";
+
             } else if (ammo > 0) {
                 totalAmmo -= maxAmmo - ammo;
                 ammo = maxAmmo;
