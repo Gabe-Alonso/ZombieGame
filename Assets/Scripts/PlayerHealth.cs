@@ -92,6 +92,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void addHealth(float addHealth)
+    {
+        health = addHealth + health;
+        if (health >= maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthBar.UpdateHealthBar(health, maxHealth);
+    }
+
     public void GameOver()
     {
         Time.timeScale = 0;

@@ -37,14 +37,22 @@ public class Airdrop : MonoBehaviour
 
             if (_time > captureTime)
             {
+                openAirDrop();
                 Destroy(gameObject);
             }
         }
     }
 
+    //Air Drop HERE
+    void openAirDrop()
+    {
+        //_player.AddCAmmo();
+    }
+
     private void OnDestroy()
     {
-        Destroy(_zone.gameObject);
+        if( _zone )
+            Destroy(_zone.gameObject);
     }
 
     //When spawn in, create an arrow on the Player's UI pointing Towards the air Drop, if the airdrop is On Screen, do not display the arrow
