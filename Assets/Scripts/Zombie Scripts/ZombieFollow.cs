@@ -60,7 +60,7 @@ public class ZombieFollow : MonoBehaviour
 
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
-        speed = Random.Range(3f, 10f + 2*_wave);
+        speed = Random.Range(5f, 10f + 2*_wave);
         _agent.speed = speed;
         maxHealth = health;
        
