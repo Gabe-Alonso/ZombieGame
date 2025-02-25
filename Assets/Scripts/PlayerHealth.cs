@@ -58,7 +58,7 @@ public class PlayerHealth : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //IF collision is from a Zombie
-        if (collision.gameObject.tag == "Zombie")
+        if (collision.gameObject.tag == "Zombie" || collision.gameObject.tag == "Acid")
         {
             if (_damageBool)
             {
@@ -71,6 +71,24 @@ public class PlayerHealth : MonoBehaviour
                 audioSource.PlayOneShot(zombieBite, 1);
             }
            
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Acid")
+        {
+            if (_damageBool)
+            {
+                health--;
+                _damageBool = false;
+                _damageTimer = 0;
+                gameObject.GetComponent<Renderer>().material = damagedMaterial;
+                healthBar.UpdateHealthBar(health, maxHealth);
+
+                audioSource.PlayOneShot(zombieBite, 1);
+            }
+
         }
     }
 

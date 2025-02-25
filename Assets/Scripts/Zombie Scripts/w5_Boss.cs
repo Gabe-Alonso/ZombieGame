@@ -15,6 +15,37 @@ public class w5_Boss : MonoBehaviour
 
     private float _time = 0;
     private float _chargeTime = 0;
+    private bool _enraged = false;
+
+    /* EVENT TO COMMUNICATE WITH OTHER BOSS */
+    public delegate void ChargeBossDead();
+    public static event ChargeBossDead Enrage;
+
+    private void OnDestroy()
+    {
+        if (!_enraged)
+            Enrage();
+    }
+
+    void OnEnable()
+    {
+        w5_Block_Boss.Enrage += startRage;
+    }
+
+    void OnDisable()
+    {
+        w5_Block_Boss.Enrage -= startRage;
+    }
+
+    void startRage()
+    {
+        _agent.speed = speed * 2;
+        _agent.acceleration = acceleration * 2;
+        _enraged = true;
+
+        preChargeTime = .5f;
+        chargeTime = 2f;
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

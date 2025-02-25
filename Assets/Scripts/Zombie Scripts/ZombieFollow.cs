@@ -15,6 +15,8 @@ public class ZombieFollow : MonoBehaviour
     public float timeBetweenHits = 0.5f;
     public bool noDamageCooldown = true;
     public bool isBoss = false;
+    public bool runAway = false;
+
 
 
     private AudioSource audioSource;
@@ -90,16 +92,17 @@ public class ZombieFollow : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-       
-        
-    }
-
     private void Update()
     {
-        //To start the movement of the Agent towards the player
-        _agent.destination = player.transform.position;
+        if (runAway)
+        {
+            _agent.destination = transform.position - player.transform.position;
+        }
+        else
+        {
+            //To start the movement of the Agent towards the player
+            _agent.destination = player.transform.position;
+        }
 
         //Damage Timer, for Time Between Hits
         if (_damageTimer > timeBetweenHits)
@@ -179,9 +182,9 @@ public class ZombieFollow : MonoBehaviour
         }
     }
 
-    public void Slow()
+    public float GetDistanceFromPlayer()
     {
-
+        return Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
     }
 
 }

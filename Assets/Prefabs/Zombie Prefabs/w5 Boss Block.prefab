@@ -233,12 +233,12 @@ GameObject:
   - component: {fileID: 2032503733307613349}
   - component: {fileID: 5367285841360480226}
   - component: {fileID: 2734402600376099134}
-  - component: {fileID: 6734928301659472032}
+  - component: {fileID: 8339964949176111977}
   - component: {fileID: 4721247875273195378}
   - component: {fileID: 4721230031924839267}
   - component: {fileID: 5503621056388603848}
   m_Layer: 0
-  m_Name: w5 Boss
+  m_Name: w5 Boss Block
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +253,7 @@ Transform:
   m_GameObject: {fileID: 8208157327258509008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.8430161, z: 0, w: 0.5378884}
-  m_LocalPosition: {x: -12.91, y: 1.37, z: 3.82}
+  m_LocalPosition: {x: -12.91, y: 1.91, z: 3.82}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -292,7 +292,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9725442b37286bb46999355d562452d6, type: 2}
+  - {fileID: 2100000, guid: c9b16fc2b913b424ebf5220f6379ff7d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -364,7 +364,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &6734928301659472032
+--- !u!114 &8339964949176111977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,14 +373,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8208157327258509008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0335c330ca641a84ca1178647c27e041, type: 3}
+  m_Script: {fileID: 11500000, guid: 5db73cde263e4834db9b2f08cc41bebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7.5
-  acceleration: 10
-  health: 30
-  preChargeTime: 1.5
-  chargeTime: 1.5
+  acidBall: {fileID: 7869582423525216345, guid: f97785ad27ce6374081b89c901256e06, type: 3}
+  speed: 10
+  acceleration: 8
+  health: 50
+  throwTime: 2
+  throwCooldown: 2
+  acidSpeed: 6
 --- !u!114 &4721247875273195378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,13 +398,14 @@ MonoBehaviour:
   health: 10
   timeBetweenHits: 0.5
   noDamageCooldown: 1
-  isBoss: 0
+  isBoss: 1
+  runAway: 0
   growl1: {fileID: 8300000, guid: 4ffaf3132acae5b499dd7e26c3037092, type: 3}
   growl2: {fileID: 8300000, guid: 14ccd5fc0afb120498dea4afd889bf13, type: 3}
   growl3: {fileID: 8300000, guid: d889bc5defae8ce4badf160161e3bfc6, type: 3}
   moan1: {fileID: 8300000, guid: b3ab953229979ed4aacb2951da70ea1e, type: 3}
   moan2: {fileID: 8300000, guid: 58a868ac4f18e2f428ef3f845d8bfaef, type: 3}
-  damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
+  damagedMaterial: {fileID: 2100000, guid: a419ad454a493054385d626d70e853d6, type: 2}
   BossHealthBar: {fileID: 0}
 --- !u!195 &4721230031924839267
 NavMeshAgent:

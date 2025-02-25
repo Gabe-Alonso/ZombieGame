@@ -15,10 +15,12 @@ public class ZombieSpawner : MonoBehaviour
     private int[] zBoundary = new int[2];
     public WaveManager waveManager;
 
-    public GameObject w5Boss;
+    public GameObject w5BossBlock;
+    public GameObject w5BossCharge;
     public GameObject w10Boss;
     public GameObject BossHealthBar;
- 
+    public GameObject TwinHealthBar;
+
 
     private void Awake()
     {
@@ -71,7 +73,7 @@ public class ZombieSpawner : MonoBehaviour
         NavMeshHit hit;
 
         // will need to be changed if we ever have floating NavMesh Obstacle
-        bool isBlocked = NavMesh.Raycast(position, position +Vector3.up * 2f, out hit, NavMesh.AllAreas);
+        bool isBlocked = NavMesh.Raycast(position, position + Vector3.up * 2f, out hit, NavMesh.AllAreas);
         return isBlocked;
     }
 
@@ -107,16 +109,16 @@ public class ZombieSpawner : MonoBehaviour
             // Check if this point is inside a NavMeshObstacle
             if (!IsInsideNavMeshObstacle(spawnPosition))
             {
-                if(Random.Range(0,2) < 1)
+                if(Random.Range(0,2) < -1)
                 {
                     spawnW10Boss(spawnPosition);
+                    zombieCounter(1);
                 }
                 else
                 {
                     spawnW5Boss(spawnPosition);
+                    zombieCounter(2);
                 }
-                numberOfZombies = 1;
-                updateZombieCounter();
                 spawned = true;
 
             }
@@ -125,31 +127,21 @@ public class ZombieSpawner : MonoBehaviour
     }
 
     //To use this, Instatiate a Zombie Boss, then set it equal to this like so
-    /*
-     * var boss = Instantiate(w5_Boss); 
-     * boss = initW5Boss(boss);
-    */
     //This will then Instantiate the boss with all the correct number necessarry.
     void spawnW5Boss(Vector3 spawn)
     {
-        var boss = Instantiate(w5Boss, spawn, Quaternion.identity);
+        TwinHealthBar.SetActive(true);
 
-        boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
-
-        boss.GetComponent<w5_Boss>().speed = 7.5f;
-        boss.GetComponent<w5_Boss>().acceleration = 10f;
-        boss.GetComponent<w5_Boss>().health = 30f;
-        boss.GetComponent<w5_Boss>().preChargeTime = 1.5f;
-        boss.GetComponent<w5_Boss>().chargeTime = 1.5f;
+        var boss = Instantiate(w5BossBlock, spawn, Quaternion.identity);
+        boss.GetComponent<ZombieFollow>().BossHealthBar = TwinHealthBar.transform.GetChild(0).gameObject;
+        
+        var boss2 = Instantiate(w5BossCharge, spawn, Quaternion.identity);
+        boss2.GetComponent<ZombieFollow>().BossHealthBar = TwinHealthBar.transform.GetChild(1).gameObject;
 
     }
 
 
     //To use this, Instatiate a Zombie Boss, then set it equal to this like so
-    /*
-     * var boss = Instantiate(w10_Boss); 
-     * boss = initW10Boss(boss);
-    */
     //This will then Instantiate the boss with all the correct number necessarry.
     void spawnW10Boss(Vector3 spawn)
     {
