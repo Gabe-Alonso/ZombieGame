@@ -42,7 +42,7 @@ public class AirDropManager : MonoBehaviour
         {
             _duration += Time.deltaTime;
 
-            if (_time >= despawnTime)
+            if (_duration >= despawnTime)
             {
                 Destroy(_spawned.gameObject);
                 _duration = 0;
