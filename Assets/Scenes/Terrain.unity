@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 67979634}
   - component: {fileID: 67979633}
   m_Layer: 5
-  m_Name: 'Start Boss '
+  m_Name: Go To Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,7 +1354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &465281438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4241,7 +4241,7 @@ GameObject:
   - component: {fileID: 1533252491}
   - component: {fileID: 1533252490}
   m_Layer: 5
-  m_Name: Boss Button
+  m_Name: Shop Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4293,7 +4293,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 683902987}
         m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
-        m_MethodName: BossStart
+        m_MethodName: goToShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
