@@ -132,6 +132,7 @@ MonoBehaviour:
   shotgunShots: 8
   despawnDist: 10
   _ammoCount: {fileID: 0}
+  muzzleFlash: {fileID: 100008, guid: 7b4c09739930d43458b94e59aa06933a, type: 3}
 --- !u!1001 &3657835821461251803
 PrefabInstance:
   m_ObjectHideFlags: 0

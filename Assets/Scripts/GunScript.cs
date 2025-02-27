@@ -27,6 +27,7 @@ public class GunScript : MonoBehaviour
     public int shotgunShots;
     public float despawnDist;
     public TextMeshProUGUI _ammoCount;
+    public GameObject muzzleFlash;
     
 
     void Start()
@@ -59,6 +60,12 @@ public class GunScript : MonoBehaviour
         
         if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
             shoot();
+            GameObject mf = Instantiate(muzzleFlash, transform.position, Quaternion.identity);
+            mf.transform.SetParent(gameObject.transform);
+            //mf.transform.position += new Vector3(0,0,1);
+            mf.transform.Rotate(0, 90, 0);
+            mf.transform.localScale *= 0.1f;
+
             Debug.Log("Current Clip: " + ammo);
             _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
         }
