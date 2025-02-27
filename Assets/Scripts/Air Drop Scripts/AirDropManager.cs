@@ -1,15 +1,29 @@
 using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class AirDropManager : MonoBehaviour
 {
     public Airdrop airDrop;
-    public float spawnTime = 5;
-
-    private float _time = 0;
-    private Airdrop _spawned;
+    public float spawnTime;
+    public float despawnTime;
 
     //Play Test Spawn Points
-    public Vector3[] spawnArray = { new Vector3(45, 1.25f, -45), new Vector3(37.5f, 1.25f, 20), new Vector3(-42.5f, 1.25f, 42.5f) };
+    public Vector3[] spawnArray = { };
+
+    public bool randomSpawns;
+
+    public float posXSpawn;
+    public float negXSpawn;
+    public float posZSpawn;
+    public float negZSpawn;
+
+    private float _time = 0;
+    private float _duration = 0;
+    private Airdrop _spawned = null;
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -24,12 +38,50 @@ public class AirDropManager : MonoBehaviour
                 _time = 0;
             }
         }
+        else
+        {
+            _duration += Time.deltaTime;
 
+            if (_time >= despawnTime)
+            {
+                Destroy(_spawned.gameObject);
+                _duration = 0;
+            }
+        }
+
+    }
+
+    bool IsInsideNavMeshObstacle(Vector3 position)
+    {
+        NavMeshHit hit;
+
+        // will need to be changed if we ever have floating NavMesh Obstacle
+        bool isBlocked = NavMesh.Raycast(position, position + Vector3.up * 2f, out hit, NavMesh.AllAreas);
+
+        return isBlocked;
     }
 
     public void SpawnAirDrop()
     {
-        _spawned = Instantiate(airDrop, spawnArray[Random.Range(0, 3)], Quaternion.identity);
+        if (randomSpawns)
+        {
+            while (_spawned == null)
+            {
+                Vector3 spawnPosition = new Vector3(Random.Range(negXSpawn, posXSpawn), 2.25f, Random.Range(negZSpawn, posZSpawn));
+                Debug.Log("trying to spawn Airdrop");
 
+                // Check if this point is inside a NavMeshObstacle
+                if (!IsInsideNavMeshObstacle(spawnPosition))
+                {
+                    _spawned = Instantiate(airDrop, spawnPosition, Quaternion.identity);
+
+                }
+            }
+               
+        }
+        else
+        {
+            _spawned = Instantiate(airDrop, spawnArray[Random.Range(0, spawnArray.Length)], Quaternion.identity);
+        }
     }
 }

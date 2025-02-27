@@ -92,7 +92,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void addHealth(float addHealth)
+    public void AddHealth(float addHealth)
     {
         health = addHealth + health;
         if (health >= maxHealth)

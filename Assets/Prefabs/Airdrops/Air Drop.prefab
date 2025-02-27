@@ -621,6 +621,7 @@ GameObject:
   - component: {fileID: 4822191571504314900}
   - component: {fileID: 7345861011519801933}
   - component: {fileID: 883649136735057933}
+  - component: {fileID: 4574138321535900917}
   m_Layer: 0
   m_Name: Air Drop
   m_TagString: Untagged
@@ -750,3 +751,19 @@ MonoBehaviour:
   Icon: {fileID: 2800000, guid: fe33ce1172fda0945b2e9467608fcdb8, type: 3}
   Arrow: {fileID: 2800000, guid: 5ec1fb7419912a248923f81f4d9aa91c, type: 3}
   Color: {r: 1, g: 0.19010922, b: 0, a: 1}
+--- !u!208 &4574138321535900917
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221646594493838227}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

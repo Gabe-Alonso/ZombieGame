@@ -46,9 +46,10 @@ public class Airdrop : MonoBehaviour
     //Air Drop HERE
     void openAirDrop()
     {
-       _player.GetComponent<PlayerMovementScript>().AddAmmo(12, 2, 24);
-    }
 
+        _player.GetComponent<PlayerMovementScript>().AddAmmo(12 * Random.Range(1, 3), 2 * Random.Range(1, 3), 24 * Random.Range(1, 3));
+        _player.GetComponent<PlayerHealth>().AddHealth(Random.Range(1,3));
+    }
     private void OnDestroy()
     {
         if( _zone )
