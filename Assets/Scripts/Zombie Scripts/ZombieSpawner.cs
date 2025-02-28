@@ -21,9 +21,11 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject BossHealthBar;
     public GameObject TwinHealthBar;
 
+    public AudioClip BossIntro;
+    private AudioSource BossAudioSource;
+
     //coin counter
     public TextMeshProUGUI coins;
-    public TextMeshProUGUI coins2;
     public int numberOfCoins = 0;
     private void Awake()
     {
@@ -113,7 +115,6 @@ public class ZombieSpawner : MonoBehaviour
     public void coinCounterUpdate()
     {
         coins.text = "Coins: $" + numberOfCoins.ToString();
-        coins2.text = "Coins: $" + numberOfCoins.ToString();
     }
 
 
@@ -133,6 +134,7 @@ public class ZombieSpawner : MonoBehaviour
     public void spawnBossW5()
     {
         bool spawned = false; 
+       
 
         while (!spawned)
         {
@@ -143,7 +145,7 @@ public class ZombieSpawner : MonoBehaviour
             // Check if this point is inside a NavMeshObstacle
             if (!IsInsideNavMeshObstacle(spawnPosition))
             {
-                if(Random.Range(0,2) < -1)
+                if(Random.Range(0,2) < 1)
                 {
                     spawnW10Boss(spawnPosition);
                     zombieCounter(1);
@@ -168,6 +170,8 @@ public class ZombieSpawner : MonoBehaviour
 
         var boss = Instantiate(w5BossBlock, spawn, Quaternion.identity);
         boss.GetComponent<ZombieFollow>().BossHealthBar = TwinHealthBar.transform.GetChild(0).gameObject;
+        BossAudioSource = boss.GetComponent<AudioSource>();
+        BossAudioSource.PlayOneShot(BossIntro, 1);
         
         var boss2 = Instantiate(w5BossCharge, spawn, Quaternion.identity);
         boss2.GetComponent<ZombieFollow>().BossHealthBar = TwinHealthBar.transform.GetChild(1).gameObject;

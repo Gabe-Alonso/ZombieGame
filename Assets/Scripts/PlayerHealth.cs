@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
 
     private Material _normalMaterial;
+    public GameObject blood;
 
     //To keep track of the time since the enemy was last damaged
     private float _damageTimer = 0;
@@ -62,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
         {
             if (_damageBool)
             {
+                GameObject bloodParticle = Instantiate(blood, gameObject.transform.position, Quaternion.identity);
                 health--;
                 _damageBool = false;
                 _damageTimer = 0;
@@ -90,6 +92,16 @@ public class PlayerHealth : MonoBehaviour
             }
 
         }
+    }
+
+    public void AddHealth(float addHealth)
+    {
+        health = addHealth + health;
+        if (health >= maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     public void GameOver()

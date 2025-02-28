@@ -22,11 +22,12 @@ public class GunScript : MonoBehaviour
     RaycastHit hit;
     public Camera cam;
     Collider planeCollider;
-    public int totalAmmo;
+    public int reserveAmmo;
     public bool isShotgun;
     public int shotgunShots;
     public float despawnDist;
     public TextMeshProUGUI _ammoCount;
+    public GameObject muzzleFlash;
     
 
     void Start()
@@ -43,7 +44,7 @@ public class GunScript : MonoBehaviour
         //maxAmmo = 20;
         ammo = maxAmmo;
         shotgunShots = 5;
-        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
+        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
         
     }
 
@@ -59,40 +60,47 @@ public class GunScript : MonoBehaviour
         
         if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
             shoot();
+            GameObject mf = Instantiate(muzzleFlash, transform.position, Quaternion.identity);
+            mf.transform.SetParent(gameObject.transform);
+            //mf.transform.position += new Vector3(0,0,1);
+            mf.transform.Rotate(0, 90, 0);
+            mf.transform.localScale *= 0.1f;
+
             Debug.Log("Current Clip: " + ammo);
-            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
+            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
         }
-        if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo)){
+        if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo) && (reserveAmmo > 0)){
             Debug.Log("Reloading...");
             _ammoCount.text = "Reloading...";
-            if (totalAmmo <= 0)
-            {
-                _ammoCount.text = "0";
-            }
-            
             isReloading = true;
-            if (maxAmmo > totalAmmo) {
+            if (maxAmmo > reserveAmmo) {
                 
-                ammo = totalAmmo;
-            } else if (totalAmmo == 0) {
+                ammo = reserveAmmo;
+                reserveAmmo = 0;
+            } else if (reserveAmmo == 0) {
                 Debug.Log("Cant Reload, out of ammo");
                 _ammoCount.text = "Out of Ammo";
 
             } else if (ammo > 0) {
-                totalAmmo -= maxAmmo - ammo;
+                reserveAmmo -= maxAmmo - ammo;
                 ammo = maxAmmo;
             } else {
                 ammo = maxAmmo;
-                totalAmmo -= maxAmmo;
+                reserveAmmo -= ammo;
             }
             intervalTimer = 0;
-            Debug.Log("Total Ammo: " + totalAmmo);
+            Debug.Log("Total Ammo: " + reserveAmmo);
             Debug.Log("Current Clip: " + ammo);
         }
         intervalTimer += Time.fixedDeltaTime;
         if (intervalTimer > reloadTime){
             isReloading = false;
-            _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + totalAmmo.ToString();
+            if (reserveAmmo == 0 && ammo == 0){
+                _ammoCount.text = "Out of Ammo";
+            }else{
+                _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
+            }
+            
         }
     }
 

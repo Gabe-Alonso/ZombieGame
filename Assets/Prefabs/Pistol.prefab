@@ -127,11 +127,12 @@ MonoBehaviour:
   bullet: {fileID: 7212640120619087704, guid: a52a12446cc0c4f49ac6da9a3cce2786, type: 3}
   maxAmmo: 12
   cam: {fileID: 0}
-  totalAmmo: 36
+  reserveAmmo: 36
   isShotgun: 0
   shotgunShots: 0
   despawnDist: 20
   _ammoCount: {fileID: 0}
+  muzzleFlash: {fileID: 100006, guid: 4e7bc0a8b112c984fb16cf716888808f, type: 3}
 --- !u!1001 &2335234547353354853
 PrefabInstance:
   m_ObjectHideFlags: 0

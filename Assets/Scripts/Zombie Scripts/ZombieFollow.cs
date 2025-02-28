@@ -17,6 +17,7 @@ public class ZombieFollow : MonoBehaviour
     public bool isBoss = false;
     public bool runAway = false;
     private float speed;
+    public GameObject blood;
 
 
     private AudioSource audioSource;
@@ -249,6 +250,8 @@ public class ZombieFollow : MonoBehaviour
         {
             if (_damageBool || noDamageCooldown)
             {
+                GameObject bloodParticle = Instantiate(blood, gameObject.transform.position, Quaternion.identity);
+                                
                 health--;
                 _damageBool = false;
                 _damageTimer = 0;
@@ -268,8 +271,10 @@ public class ZombieFollow : MonoBehaviour
                     BossHealthBar.SetActive(false);
                 }
                 _spawner.GetComponent<ZombieSpawner>().zombieCounter(-1);
+                                
                 Destroy(this.gameObject);
-                
+                              
+
             }
         }
 

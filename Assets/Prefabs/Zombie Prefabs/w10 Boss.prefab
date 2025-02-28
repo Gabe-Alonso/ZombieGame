@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7107548803979978481}
   - component: {fileID: 843483806823459641}
   - component: {fileID: -6207223235425100333}
+  - component: {fileID: 1355272537732486797}
   m_Layer: 0
   m_Name: w10 Boss
   m_TagString: Zombie
@@ -179,13 +180,18 @@ MonoBehaviour:
   timeBetweenHits: 0.25
   noDamageCooldown: 1
   isBoss: 1
+  runAway: 0
+  blood: {fileID: 466441885162462443, guid: 47a52abda8a512e4a848e9c875b65f02, type: 3}
   growl1: {fileID: 8300000, guid: 4ffaf3132acae5b499dd7e26c3037092, type: 3}
   growl2: {fileID: 8300000, guid: 14ccd5fc0afb120498dea4afd889bf13, type: 3}
   growl3: {fileID: 8300000, guid: d889bc5defae8ce4badf160161e3bfc6, type: 3}
   moan1: {fileID: 8300000, guid: b3ab953229979ed4aacb2951da70ea1e, type: 3}
   moan2: {fileID: 8300000, guid: 58a868ac4f18e2f428ef3f845d8bfaef, type: 3}
+  death: {fileID: 0}
   damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
   BossHealthBar: {fileID: 0}
+  _wave: 0
+  isDead: 0
 --- !u!195 &843483806823459641
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -228,6 +234,103 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 218
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1355272537732486797
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503595193737503694}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

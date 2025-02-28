@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
@@ -25,17 +27,30 @@ public class WaveManager : MonoBehaviour
     public void nextWaveStart()
     {
         canvas.SetActive(false);
-        wave++;
-        Time.timeScale = 1;
-        _spawner.spawnZombies(wave);
+
+        if (wave % 3 == 0)
+        {
+            BossStart();
+        }
+        else
+        {
+            wave++;
+            Time.timeScale = 1;
+            _spawner.spawnZombies(wave);
+        }
     }
 
     public void BossStart()
     {
         canvas.SetActive(false);
         Time.timeScale = 1;
-        wave++;
+        
         _spawner.spawnBossW5();
 
+    }
+
+    public void goToShop()
+    {
+        SceneManager.LoadScene(2);
     }
 }
