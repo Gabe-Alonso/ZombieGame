@@ -1110,6 +1110,7 @@ MonoBehaviour:
   w10Boss: {fileID: 3503595193737503694, guid: 7e72d252787c93445a44b75f4ec331a8, type: 3}
   BossHealthBar: {fileID: 110333}
   TwinHealthBar: {fileID: 1454348975}
+  BossIntro: {fileID: 8300000, guid: 32526ccd27472b34f94025871cb58ddc, type: 3}
   coins: {fileID: 991347795}
   numberOfCoins: 0
 --- !u!4 &319256958
@@ -1556,7 +1557,7 @@ MonoBehaviour:
   damagedMaterial: {fileID: 2100000, guid: 25eadba54a1e7fe47b38f38ddff338e3, type: 2}
   zombieBite: {fileID: 8300000, guid: 4c97edf048ebe88409efc01e624eed1f, type: 3}
   gameOverScreen: {fileID: 1605429859}
-  blood: {fileID: 0}
+  blood: {fileID: 466441885162462443, guid: 47a52abda8a512e4a848e9c875b65f02, type: 3}
 --- !u!114 &626681106
 MonoBehaviour:
   m_ObjectHideFlags: 0
