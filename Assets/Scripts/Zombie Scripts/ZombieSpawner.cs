@@ -26,6 +26,7 @@ public class ZombieSpawner : MonoBehaviour
 
     //coin counter
     public TextMeshProUGUI coins;
+    public TextMeshProUGUI coins2;
     public int numberOfCoins = 0;
     private void Awake()
     {
@@ -115,6 +116,7 @@ public class ZombieSpawner : MonoBehaviour
     public void coinCounterUpdate()
     {
         coins.text = "Coins: $" + numberOfCoins.ToString();
+        coins2.text = "Coins: $" + numberOfCoins.ToString();
     }
 
 
