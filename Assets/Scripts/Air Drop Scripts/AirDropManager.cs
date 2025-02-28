@@ -49,6 +49,13 @@ public class AirDropManager : MonoBehaviour
             }
         }
 
+        if (Time.timeScale == 0 && _spawned)
+        {
+            Destroy(_spawned.gameObject);
+            _time = 0;
+            _duration = 0;
+        }
+
     }
 
     bool IsInsideNavMeshObstacle(Vector3 position)

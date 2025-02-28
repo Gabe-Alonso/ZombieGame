@@ -16,7 +16,7 @@ public class PlayerMovementScript : MonoBehaviour
     InputAction swapAR;
     private AudioSource audioSource;
     private Rigidbody rb;
-    [SerializeField] float speed;
+    public float speed;
     public int health;
     RaycastHit hit;
     Collider planeCollider;
