@@ -36,6 +36,7 @@ public class ZombieFollow : MonoBehaviour
     //To keep track of the time since the enemy was last damaged
     private float _damageTimer = 0;
     private float _time = 0;
+    private float stopTime = 1;
 
     //This is the variable determining if the enemy CAN take damage again
     private bool _damageBool = true;
@@ -156,20 +157,19 @@ public class ZombieFollow : MonoBehaviour
         }
 
 
-        bool quickStop = false;
-        if (GetDistanceFromPlayer() >= 25)
+        
+
+        if (GetDistanceFromPlayer() >= 20)
         {
             _agent.speed = speed * 3;
-            quickStop = true;
             
         }
-        else if (quickStop)
+
+        if (GetDistanceFromPlayer() < 20 && stopTime > 0)
         {
             _agent.velocity = Vector3.zero;
-            quickStop = false;
-        }
-        else
-        {
+            stopTime = stopTime - Time.deltaTime;
+
             _agent.speed = speed;
         }
 

@@ -1778,7 +1778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &362825518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2513,7 +2513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &537529832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2550,7 +2550,7 @@ GameObject:
   - component: {fileID: 566318784}
   - component: {fileID: 566318783}
   m_Layer: 5
-  m_Name: Item 3
+  m_Name: Ammo Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2854,6 +2854,8 @@ MonoBehaviour:
   cam: {fileID: 2064469703}
   speed: 10
   health: 10
+  shotgun: 0
+  assultRifle: 0
   _PName: {fileID: 1287959296}
   _SName: {fileID: 1791087502}
   _ARName: {fileID: 867268773}
@@ -3965,7 +3967,7 @@ GameObject:
   - component: {fileID: 799697478}
   - component: {fileID: 799697480}
   m_Layer: 5
-  m_Name: Item 1
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4978,7 +4980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &907077936
 Transform:
   m_ObjectHideFlags: 0
@@ -10834,7 +10836,7 @@ GameObject:
   - component: {fileID: 1967474130}
   - component: {fileID: 1967474132}
   m_Layer: 5
-  m_Name: Item 2
+  m_Name: Assult Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,6 +21,9 @@ public class PlayerMovementScript : MonoBehaviour
     RaycastHit hit;
     Collider planeCollider;
 
+    public bool shotgun = false;
+    public bool assultRifle = false;
+
     public TextMeshProUGUI _PName;
     public TextMeshProUGUI _SName;
     public TextMeshProUGUI _ARName;
@@ -48,13 +51,13 @@ public class PlayerMovementScript : MonoBehaviour
             _PName.enabled = true;
             KillChildren();
             transform.Find("Pistol").gameObject.SetActive(true);
-        } else if(swapS.IsPressed()){
+        } else if(swapS.IsPressed() && shotgun){
             _ARName.enabled = false;
             _SName.enabled = true;
             _PName.enabled = false;
             KillChildren();
             transform.Find("Shotgun").gameObject.SetActive(true);           
-        } else if(swapAR.IsPressed()){
+        } else if(swapAR.IsPressed() && assultRifle){
             _ARName.enabled = true;
             _SName.enabled = false;
             _PName.enabled = false;
@@ -66,8 +69,10 @@ public class PlayerMovementScript : MonoBehaviour
 
     public void AddAmmo(int pistolAmmo, int shotgunAmmo, int arAmmo){
         transform.Find("Pistol").gameObject.GetComponent<GunScript>().reserveAmmo += pistolAmmo;
-        transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reserveAmmo += shotgunAmmo;
-        transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo += arAmmo;
+        if(shotgun)
+            transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reserveAmmo += shotgunAmmo;
+        if(assultRifle)
+            transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo += arAmmo;
     }
 
     private void KillChildren(){
