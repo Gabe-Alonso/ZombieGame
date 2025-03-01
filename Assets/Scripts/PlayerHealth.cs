@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class PlayerHealth : MonoBehaviour
 {
     public float health;
-    private float maxHealth;
+    public float maxHealth;
     public float timeBetweenHits = 0.5f;
 
     public Material damagedMaterial;
