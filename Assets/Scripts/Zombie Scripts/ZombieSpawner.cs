@@ -25,6 +25,10 @@ public class ZombieSpawner : MonoBehaviour
     public AudioClip BossIntro;
     private AudioSource BossAudioSource;
 
+    public GameObject firstBoss;
+
+    private bool _firstBoss = true;
+
     //coin counter
     public TextMeshProUGUI coins;
     public int numberOfCoins = 0;
@@ -142,8 +146,14 @@ public class ZombieSpawner : MonoBehaviour
 
     public void spawnBoss()
     {
-        bool spawned = false; 
-       
+        bool spawned = false;
+
+        if (_firstBoss)
+        {
+            _firstBoss = false;
+            firstBoss.SetActive(true);
+            Time.timeScale = 0;
+        }
 
         while (!spawned)
         {
@@ -195,6 +205,7 @@ public class ZombieSpawner : MonoBehaviour
         var boss = Instantiate(w10Boss, spawn, Quaternion.identity);
 
         boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
+
         
     }
 }

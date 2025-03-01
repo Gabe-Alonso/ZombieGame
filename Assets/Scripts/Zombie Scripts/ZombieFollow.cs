@@ -159,18 +159,19 @@ public class ZombieFollow : MonoBehaviour
 
         
 
-        if (GetDistanceFromPlayer() >= 20)
+        if (false) {if (GetDistanceFromPlayer() >= 20)
         {
             _agent.speed = speed * 3;
             
         }
 
-        if (GetDistanceFromPlayer() < 20 && stopTime > 0)
-        {
-            _agent.velocity = Vector3.zero;
-            stopTime = stopTime - Time.deltaTime;
+            if (GetDistanceFromPlayer() < 20 && stopTime > 0)
+            {
+                _agent.velocity = Vector3.zero;
+                stopTime = stopTime - Time.deltaTime;
 
-            _agent.speed = speed;
+                _agent.speed = speed;
+            }
         }
 
         //Damage Timer, for Time Between Hits

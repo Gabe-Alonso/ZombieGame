@@ -16,7 +16,8 @@ public class WaveManager : MonoBehaviour
     {
         Time.timeScale = 1;
         wave = 1;
-        _spawner.spawnZombies(wave);
+        _spawner.spawnBoss();
+        //_spawner.spawnZombies(wave);
        // canvas.enabled = false;
 
     }
