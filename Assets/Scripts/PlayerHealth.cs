@@ -35,6 +35,8 @@ public class PlayerHealth : MonoBehaviour
         //To get the NavMeshAgent Component
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBar>();
+
+        UpdateHealth();
     }
 
     // Update is called once per frame
@@ -108,5 +110,10 @@ public class PlayerHealth : MonoBehaviour
     {
         Time.timeScale = 0;
         gameOverScreen.SetActive(true);
+    }
+
+    public void UpdateHealth()
+    {
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 }

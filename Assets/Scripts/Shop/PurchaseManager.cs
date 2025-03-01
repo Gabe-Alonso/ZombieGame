@@ -50,6 +50,7 @@ public class PurchaseManager : MonoBehaviour
             _spawner.coinCounterUpdate();
 
             _playerHealth.maxHealth++;
+            _playerHealth.UpdateHealth();
         }
         else
         {
