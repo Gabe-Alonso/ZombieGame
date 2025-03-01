@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +13,10 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip zombieBite;
 
     public GameObject gameOverScreen;
+    public TextMeshProUGUI _waveDisplay;
+   
+    public GameObject _waveManager;
+    private int _wavesCompleted;
 
 
     private Material _normalMaterial;
@@ -35,8 +40,10 @@ public class PlayerHealth : MonoBehaviour
         //To get the NavMeshAgent Component
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBar>();
+       // _waveManager = GameObject.FindWithTag("WaveManager");
 
         UpdateHealth();
+
     }
 
     // Update is called once per frame
@@ -109,7 +116,11 @@ public class PlayerHealth : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+
+        _wavesCompleted = _waveManager.GetComponent<WaveManager>().wave - 1;
+        _waveDisplay.text = "You Completed " + _wavesCompleted + " waves.";
         gameOverScreen.SetActive(true);
+
     }
 
     public void UpdateHealth()
