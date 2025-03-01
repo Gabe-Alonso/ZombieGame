@@ -143,6 +143,8 @@ public class ZombieFollow : MonoBehaviour
 
     private void Update()
     {
+
+
         if (runAway)
         {
             _agent.destination = transform.position - player.transform.position;
@@ -151,6 +153,24 @@ public class ZombieFollow : MonoBehaviour
         {
             //To start the movement of the Agent towards the player
             _agent.destination = player.transform.position;
+        }
+
+
+        bool quickStop = false;
+        if (GetDistanceFromPlayer() >= 25)
+        {
+            _agent.speed = speed * 3;
+            quickStop = true;
+            
+        }
+        else if (quickStop)
+        {
+            _agent.velocity = Vector3.zero;
+            quickStop = false;
+        }
+        else
+        {
+            _agent.speed = speed;
         }
 
         //Damage Timer, for Time Between Hits
