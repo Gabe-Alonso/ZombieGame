@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] ZombieSpawner _spawner;
     void Start()
     {
+        Time.timeScale = 1;
         wave = 1;
         _spawner.spawnZombies(wave);
        // canvas.enabled = false;
@@ -35,6 +36,7 @@ public class WaveManager : MonoBehaviour
         {
             BossStart();
             _wavetext.text = "Boss";
+            wave++;
         }
         else
         {
@@ -50,12 +52,18 @@ public class WaveManager : MonoBehaviour
         canvas.SetActive(false);
         Time.timeScale = 1;
         
-        _spawner.spawnBossW5();
+        _spawner.spawnBoss();
 
     }
 
     public void goToShop()
     {
         SceneManager.LoadScene(2);
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -54,6 +54,7 @@ public class Airdrop : MonoBehaviour
         _player.GetComponent<PlayerHealth>().AddHealth(Random.Range(1, 3));
 
         _spawner.numberOfCoins += Random.Range(0, 50);
+        _spawner.coinCounterUpdate();
     }
     private void OnDestroy()
     {

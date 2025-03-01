@@ -2,6 +2,7 @@ using TMPro;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class ZombieSpawner : MonoBehaviour
 {
@@ -69,6 +70,14 @@ public class ZombieSpawner : MonoBehaviour
             zBoundary[1] = 160;
         }
 
+        if (SceneManager.GetActiveScene().name == "Old Map Playtest")
+        {
+            xBoundary[0] = -50;
+            xBoundary[1] = 50;
+            zBoundary[0] = -50;
+            zBoundary[1] = 50;
+        }
+
         int i = 0;
         while (i < numberOfZombies)
         {
@@ -131,7 +140,7 @@ public class ZombieSpawner : MonoBehaviour
         _zombieCounter.text = ":" + numberOfZombies.ToString();
     }
 
-    public void spawnBossW5()
+    public void spawnBoss()
     {
         bool spawned = false; 
        
@@ -186,13 +195,6 @@ public class ZombieSpawner : MonoBehaviour
         var boss = Instantiate(w10Boss, spawn, Quaternion.identity);
 
         boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
-
-        boss.GetComponent<w10_Boss>().speed = 3f;
-        boss.GetComponent<w10_Boss>().acceleration = 8f;
-        boss.GetComponent<w10_Boss>().health = 40f;
-        boss.GetComponent<w10_Boss>().throwTime = 5f;
-        boss.GetComponent<w10_Boss>().throwCooldown = 2f;
-        boss.GetComponent<w10_Boss>().barrelSpeed = 15f;
         
     }
 }

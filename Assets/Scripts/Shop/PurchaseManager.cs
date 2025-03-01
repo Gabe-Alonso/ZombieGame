@@ -25,9 +25,7 @@ public class PurchaseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _timer -= Time.deltaTime;
-
-        if (_timer < 0)
+        if (_timer < Time.realtimeSinceStartup && broke.activeSelf)
         {
             broke.SetActive(false);
         }
@@ -37,15 +35,19 @@ public class PurchaseManager : MonoBehaviour
     {
         //Not Enough Money Function
         broke.SetActive(true);
-        _timer = 2.5f;
+        _timer = Time.realtimeSinceStartup + 2.5f;
 
     }
 
-    public void PlayerDamage(int price)
+    public void PlayerHeal(int price)
     {
         if (_spawner.numberOfCoins >= price)
         {
+            _spawner.numberOfCoins -= price;
+            _spawner.coinCounterUpdate();
 
+            _playerHealth.health++;
+            _playerHealth.UpdateHealth();
         }
         else
         {

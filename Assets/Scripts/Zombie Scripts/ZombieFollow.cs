@@ -142,7 +142,7 @@ public class ZombieFollow : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
 

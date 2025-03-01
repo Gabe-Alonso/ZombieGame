@@ -7,6 +7,7 @@ public class AirDropManager : MonoBehaviour
     public Airdrop airDrop;
     public float spawnTime;
     public float despawnTime;
+    public GameObject firstTimePrompt;
 
     //Play Test Spawn Points
     public Vector3[] spawnArray = { };
@@ -22,7 +23,7 @@ public class AirDropManager : MonoBehaviour
     private float _duration = 0;
     private Airdrop _spawned = null;
 
-
+    private bool _first = true;
 
 
     // Update is called once per frame
@@ -90,5 +91,18 @@ public class AirDropManager : MonoBehaviour
         {
             _spawned = Instantiate(airDrop, spawnArray[Random.Range(0, spawnArray.Length)], Quaternion.identity);
         }
+
+
+        if (_first)
+        {
+            _first = false;
+            firstTimePrompt.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    public void Unfreeze()
+    {
+        Time.timeScale = 1;
     }
 }
