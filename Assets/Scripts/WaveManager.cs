@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,7 @@ public class WaveManager : MonoBehaviour
     public GameObject canvas;
     public Button startWaveButton;
     public Button startBossButton;
+    public TextMeshProUGUI _wavetext;
     [SerializeField] ZombieSpawner _spawner;
     void Start()
     {
@@ -27,14 +29,17 @@ public class WaveManager : MonoBehaviour
     public void nextWaveStart()
     {
         canvas.SetActive(false);
+       
 
         if (wave % 3 == 0)
         {
             BossStart();
+            _wavetext.text = "Boss";
         }
         else
         {
             wave++;
+            _wavetext.text = "Wave " + wave;
             Time.timeScale = 1;
             _spawner.spawnZombies(wave);
         }
