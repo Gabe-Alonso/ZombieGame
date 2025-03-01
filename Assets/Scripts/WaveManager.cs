@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
-    public int wave;
+    public int wave = 0;
     public GameObject canvas;
     public Button startWaveButton;
     public Button startBossButton;

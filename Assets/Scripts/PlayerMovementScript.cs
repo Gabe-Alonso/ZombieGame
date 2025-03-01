@@ -73,6 +73,15 @@ public class PlayerMovementScript : MonoBehaviour
             transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reserveAmmo += shotgunAmmo;
         if(assultRifle)
             transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo += arAmmo;
+
+        UpdateAmmo();
+    }
+
+    public void UpdateAmmo()
+    {
+        transform.Find("Pistol").gameObject.GetComponent<GunScript>().UpdateAmmo();
+        transform.Find("Shotgun").gameObject.GetComponent<GunScript>().UpdateAmmo();
+        transform.Find("AR").gameObject.GetComponent<GunScript>().UpdateAmmo();
     }
 
     private void KillChildren(){

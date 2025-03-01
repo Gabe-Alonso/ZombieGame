@@ -104,6 +104,11 @@ public class GunScript : MonoBehaviour
         }
     }
 
+    public void UpdateAmmo()
+    {
+        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
+    }
+
 
     private void shoot(){
         if (isShotgun){
