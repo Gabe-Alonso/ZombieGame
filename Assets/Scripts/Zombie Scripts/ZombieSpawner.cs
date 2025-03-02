@@ -21,6 +21,7 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject w10Boss;
     public GameObject BossHealthBar;
     public GameObject TwinHealthBar;
+    public GameObject ZombieStatue;
 
     public AudioClip BossIntro;
     private AudioSource BossAudioSource;
@@ -35,6 +36,7 @@ public class ZombieSpawner : MonoBehaviour
     private void Awake()
     {
         //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
+        SpawnZombieStatue();
     }
     public void spawnZombies(int wave)
     {
@@ -74,7 +76,7 @@ public class ZombieSpawner : MonoBehaviour
             zBoundary[1] = 160;
         }
 
-        if (SceneManager.GetActiveScene().name == "Old Map Playtest")
+        if (SceneManager.GetActiveScene().name == "Old Map Playtest" || SceneManager.GetActiveScene().name == "Gannons Testing")
         {
             xBoundary[0] = -50;
             xBoundary[1] = 50;
@@ -207,5 +209,27 @@ public class ZombieSpawner : MonoBehaviour
         boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
 
         
+    }
+
+
+    public void SpawnZombieStatue()
+    {
+        bool spawned = false;
+
+        while (!spawned)
+        {
+            // Random spawn position for zombies within x, z bounds (can change later) 
+
+            Vector3 spawnPosition = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+
+            // Check if this point is inside a NavMeshObstacle
+            if (!IsInsideNavMeshObstacle(spawnPosition))
+            {
+                Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
+                spawned = true;
+
+            }
+
+        }
     }
 }

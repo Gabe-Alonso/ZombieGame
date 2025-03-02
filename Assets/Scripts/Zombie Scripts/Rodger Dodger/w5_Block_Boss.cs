@@ -58,6 +58,7 @@ public class w5_Block_Boss : MonoBehaviour
     {
         _zomFollow = GetComponent<ZombieFollow>();
         _zomFollow.isBoss = true;
+        _zomFollow.tracking = false;
 
         _agent = GetComponent<NavMeshAgent>();
 
@@ -75,11 +76,11 @@ public class w5_Block_Boss : MonoBehaviour
 
         if (_zomFollow.GetDistanceFromPlayer() <= 5)
         {
-            _zomFollow.runAway = true;
+            _agent.destination = transform.position - _player.transform.position;
         }
         else
         {
-            _zomFollow.runAway = false;
+            _agent.destination = _player.transform.position;
         }
 
         if (_throwTime >= throwCooldown + .25f) //For the Buffer add .25
