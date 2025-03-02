@@ -36,7 +36,6 @@ public class ZombieSpawner : MonoBehaviour
     private void Awake()
     {
         //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
-        SpawnZombieStatue();
     }
     public void spawnZombies(int wave)
     {

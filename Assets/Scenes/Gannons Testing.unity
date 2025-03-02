@@ -1758,7 +1758,7 @@ MonoBehaviour:
   w10Boss: {fileID: 3503595193737503694, guid: 7e72d252787c93445a44b75f4ec331a8, type: 3}
   BossHealthBar: {fileID: 1780681076}
   TwinHealthBar: {fileID: 1454348975}
-  ZombieStatue: {fileID: 2629183411710353679, guid: 0ccfd1f8207e7224a877ca4d6eb8ee25, type: 3}
+  ZombieStatue: {fileID: 4909750201811678814, guid: 5550663fc26e80b4c9469df13930a2dc, type: 3}
   BossIntro: {fileID: 8300000, guid: 32526ccd27472b34f94025871cb58ddc, type: 3}
   firstBoss: {fileID: 278570320}
   coins: {fileID: 991347795}
