@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 //This code will ONLY work with a NavMeshAgent attached to the Enemy.
 //This code will ONLY work with a NavMesh Surfave in Place.
@@ -11,11 +12,10 @@ public class ZombieFollow : MonoBehaviour
 
     private GameObject player;
     public float health = 3;
-    private float maxHealth;
+    public float maxHealth;
     public float timeBetweenHits = 0.5f;
     public bool noDamageCooldown = true;
     public bool isBoss = false;
-    public bool runAway = false;
     private float speed;
     public GameObject blood;
 
@@ -52,6 +52,7 @@ public class ZombieFollow : MonoBehaviour
     private GameObject _waveManager;
     public int _wave;
     public bool isDead = false;
+    public bool tracking = true;
 
     // distance for audio volume
     private float distanceToPlayer;
@@ -87,10 +88,13 @@ public class ZombieFollow : MonoBehaviour
             healthBar = GetComponentInChildren<HealthBar>();
         }
 
+
+
         healthBar.UpdateHealthBar(health, maxHealth);
 
         player = GameObject.FindWithTag("Player");
         _spawner = GameObject.FindWithTag("Spawner");
+
 
         // calculate distance to play sound at volume 
         distanceToPlayer = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(player.transform.position.x - _agent.transform.position.x), 2) + Mathf.Pow(Mathf.Abs(player.transform.position.z - _agent.transform.position.z), 2));
@@ -145,20 +149,13 @@ public class ZombieFollow : MonoBehaviour
     private void FixedUpdate()
     {
 
-
-        if (runAway)
+        if(tracking)
         {
-            _agent.destination = transform.position - player.transform.position;
-        }
-        else
-        {
-            //To start the movement of the Agent towards the player
             _agent.destination = player.transform.position;
         }
 
-
         
-
+        //If reinstating this, use ACCELERATION, not SPEED
         if (false) {if (GetDistanceFromPlayer() >= 20)
         {
             _agent.speed = speed * 3;
@@ -306,6 +303,11 @@ public class ZombieFollow : MonoBehaviour
             //Access the Player's Health here some how
             //collision.gameObject.health--;
         }
+    }
+
+    public void UpdateHealth()
+    {
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     public float GetDistanceFromPlayer()

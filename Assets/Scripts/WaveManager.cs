@@ -16,8 +16,7 @@ public class WaveManager : MonoBehaviour
     {
         Time.timeScale = 1;
         wave = 1;
-        _spawner.spawnBoss();
-        //_spawner.spawnZombies(wave);
+        _spawner.spawnZombies(wave);
        // canvas.enabled = false;
 
     }
@@ -57,6 +56,7 @@ public class WaveManager : MonoBehaviour
 
     }
 
+    //NO longer neceassarry?
     public void goToShop()
     {
         SceneManager.LoadScene(2);

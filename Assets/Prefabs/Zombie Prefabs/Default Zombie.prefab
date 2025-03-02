@@ -157,10 +157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  maxHealth: 3
   timeBetweenHits: 0.25
   noDamageCooldown: 1
   isBoss: 0
-  runAway: 0
   blood: {fileID: 466441885162462443, guid: 47a52abda8a512e4a848e9c875b65f02, type: 3}
   growl1: {fileID: 8300000, guid: 4ffaf3132acae5b499dd7e26c3037092, type: 3}
   growl2: {fileID: 8300000, guid: 14ccd5fc0afb120498dea4afd889bf13, type: 3}
@@ -172,6 +172,7 @@ MonoBehaviour:
   BossHealthBar: {fileID: 0}
   _wave: 0
   isDead: 0
+  tracking: 1
 --- !u!195 &972731143308674557
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -579,6 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 6068776653881662674}
+  _healthNums: {fileID: 0}
 --- !u!1 &6471498682623875512
 GameObject:
   m_ObjectHideFlags: 0
