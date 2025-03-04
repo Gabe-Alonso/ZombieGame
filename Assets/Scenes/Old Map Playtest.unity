@@ -3378,6 +3378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 2064469703}
+  dashSlider: {fileID: 0}
+  trail: {fileID: 0}
   speed: 10
   health: 10
   shotgun: 1
@@ -3865,6 +3867,8 @@ MonoBehaviour:
   Player: {fileID: 626681104}
   Spawner: {fileID: 319256956}
   broke: {fileID: 1202505408}
+  shotgunIcon: {fileID: 0}
+  ARIcon: {fileID: 0}
 --- !u!1 &691268979
 GameObject:
   m_ObjectHideFlags: 0
