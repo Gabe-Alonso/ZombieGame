@@ -71,6 +71,13 @@ public class AirDropManager : MonoBehaviour
 
     public void SpawnAirDrop()
     {
+        if (_first)
+        {
+            _first = false;
+            firstTimePrompt.SetActive(true);
+            Time.timeScale = 0;
+        }
+
         if (randomSpawns)
         {
             while (_spawned == null)
@@ -93,12 +100,7 @@ public class AirDropManager : MonoBehaviour
         }
 
 
-        if (_first)
-        {
-            _first = false;
-            firstTimePrompt.SetActive(true);
-            Time.timeScale = 0;
-        }
+       
     }
 
     public void Unfreeze()

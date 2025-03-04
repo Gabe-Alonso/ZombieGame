@@ -1,7 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 //This code will ONLY work with a NavMeshAgent attached to the Enemy.
 //This code will ONLY work with a NavMesh Surfave in Place.
