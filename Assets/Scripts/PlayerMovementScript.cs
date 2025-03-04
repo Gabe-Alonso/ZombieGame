@@ -1,9 +1,12 @@
+using System.Collections;
 using System.Threading;
 using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -14,6 +17,19 @@ public class PlayerMovementScript : MonoBehaviour
     InputAction swapP;
     InputAction swapS;
     InputAction swapAR;
+    InputAction sprintAction;
+
+
+    // Variables for dash
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 30f;
+    private float dashingTime = 0.1f;
+    private float dashingCooldown = 10f;
+    public Slider dashSlider;
+    private float sliderTimer;
+    [SerializeField] private TrailRenderer trail;
+
     private AudioSource audioSource;
     private Rigidbody rb;
     public float speed;
@@ -31,6 +47,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         moveAction = InputSystem.actions.FindAction("Move");
+        sprintAction = InputSystem.actions.FindAction("Sprint");
         swapP = InputSystem.actions.FindAction("SelectPistol");
         swapS = InputSystem.actions.FindAction("SelectShotgun");
         swapAR = InputSystem.actions.FindAction("SelectAR");
@@ -40,11 +57,14 @@ public class PlayerMovementScript : MonoBehaviour
         _ARName.enabled = false;
         _SName.enabled = false;
         _PName.enabled = true;
+
+        sliderTimer = dashingCooldown;
     }
     void FixedUpdate()
     {
         RotatePlayer();
         MovePlayer();
+        StartCoroutine(Dash());
         if(swapP.IsPressed()){
             _ARName.enabled = false;
             _SName.enabled = false;
@@ -108,5 +128,34 @@ public class PlayerMovementScript : MonoBehaviour
         transform.position = newPosition;
     }
 
+    private IEnumerator Dash()
+    {
+        if (sprintAction.IsPressed() && canDash)
+        {
+            Debug.Log("Dash function is running");
+            canDash = false;
+            isDashing = true;
+            Vector2 moveInput = moveAction.ReadValue<Vector2>();
+            rb.linearVelocity = new Vector3(moveInput.x, 0, moveInput.y)*dashingPower;
+            trail.emitting = true;
+            yield return new WaitForSeconds(dashingTime);
+            dashSlider.value = 1f;
+            sliderTimer = dashingCooldown;
+            rb.linearVelocity = new Vector3(0, 0, 0);
+            trail.emitting = false;
+            isDashing = false;
+
+            while (sliderTimer > 0)
+            {
+                sliderTimer -= Time.deltaTime;
+                dashSlider.value = sliderTimer / dashingCooldown; // Scale slider between 0 and 1
+                yield return null; // Wait for next frame
+            }
+
+            dashSlider.value = 0f; // Ensure slider is empty at the end
+            canDash = true;
+        }
+
+    }
     
 }
