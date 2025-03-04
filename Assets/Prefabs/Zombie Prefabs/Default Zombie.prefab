@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3394816973174402508}
   - component: {fileID: 972731143308674557}
   - component: {fileID: -5509081324156873133}
+  - component: {fileID: 1589628211551413619}
   m_Layer: 0
   m_Name: Default Zombie
   m_TagString: Zombie
@@ -292,6 +293,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1589628211551413619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591814025790196497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71ecae50a965204f85f2322ae38dd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 2800000, guid: aba5f2884750ceb48930c17e4ce1f64c, type: 3}
+  Arrow: {fileID: 2800000, guid: 5ec1fb7419912a248923f81f4d9aa91c, type: 3}
+  Color: {r: 0.6603774, g: 0, b: 0, a: 1}
 --- !u!1 &1160877174409436321
 GameObject:
   m_ObjectHideFlags: 0
