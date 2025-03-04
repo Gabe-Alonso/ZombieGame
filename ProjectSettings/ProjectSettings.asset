@@ -940,11 +940,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6e0e9497-c54f-4ff6-b583-e856bdb7a824
+  cloudProjectId: 299943f6-3a7a-41d8-8729-544bb2b571b0
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: ZombieGame
-  organizationId: fbardasian
+  organizationId: gabixtreme363
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
