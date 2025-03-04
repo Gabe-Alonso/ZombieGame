@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healingZombie: {fileID: 3944542501051883826, guid: 9c12d60c56c74904db73319497cd58c8, type: 3}
   health: 5
-  spawnTimer: 10
+  spawnTimer: 15
 --- !u!136 &4547496791689556220
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -44,6 +43,12 @@ public class WaveManager : MonoBehaviour
             _wavetext.text = "Wave " + wave;
             Time.timeScale = 1;
             _spawner.spawnZombies(wave);
+        }
+
+        if (false)
+        {
+            for(int i = 0; i <= (wave / 1); i++)
+                _spawner.SpawnZombieStatue();
         }
     }
 

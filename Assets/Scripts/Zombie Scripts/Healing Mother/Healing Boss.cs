@@ -12,6 +12,7 @@ public class HealingBoss : MonoBehaviour
     private float _time;
     private HealthBar healthBar;
     private float maxHealth;
+    public ZombieSpawner spawner;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,6 +76,8 @@ public class HealingBoss : MonoBehaviour
 
                 var spawned = Instantiate(healingZombie, spawnPosition, Quaternion.identity);
                 spawned.GetComponent<HealingZombieMinions>().Mother = this.gameObject;
+
+                spawner.zombieCounter(1);
                 i++;
 
             }
