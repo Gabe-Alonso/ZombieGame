@@ -1,5 +1,6 @@
 using TMPro;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -35,7 +36,7 @@ public class ZombieSpawner : MonoBehaviour
     public int numberOfCoins = 0;
     private void Awake()
     {
-        _zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
+        //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
     }
     public void spawnZombies(int wave)
     {
@@ -215,24 +216,26 @@ public class ZombieSpawner : MonoBehaviour
     {
         bool spawned = false;
 
-        while (num < 0) {
+        while(num > 0)
+        {
             while (!spawned)
             {
                 // Random spawn position for zombies within x, z bounds (can change later) 
-
-                Vector3 spawnPosition = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+               
+                Vector3 spawnPosition = new Vector3(Random.Range(-45, 45), 0, Random.Range(-45, 45));
 
                 // Check if this point is inside a NavMeshObstacle
                 if (!IsInsideNavMeshObstacle(spawnPosition))
                 {
-                    Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
+                    var zStatue = Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
+                    zStatue.GetComponent<HealingBoss>().spawner = this;
+
                     spawned = true;
 
                 }
 
             }
             num--;
-
         }
     }
 }

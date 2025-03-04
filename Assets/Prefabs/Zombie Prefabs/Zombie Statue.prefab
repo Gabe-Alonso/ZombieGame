@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 6013010184673444082}
   - component: {fileID: 5425633063787378295}
   - component: {fileID: 4547496791689556220}
+  - component: {fileID: 949062829722252829}
   m_Layer: 0
   m_Name: Zombie Statue
   m_TagString: Untagged
@@ -293,7 +294,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healingZombie: {fileID: 3944542501051883826, guid: 9c12d60c56c74904db73319497cd58c8, type: 3}
   health: 5
-  spawnTimer: 10
+  spawnTimer: 30
+  spawner: {fileID: 0}
 --- !u!136 &4547496791689556220
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -317,6 +319,21 @@ CapsuleCollider:
   m_Height: 2.857304
   m_Direction: 1
   m_Center: {x: 0, y: 0.92865205, z: 0}
+--- !u!114 &949062829722252829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4909750201811678814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71ecae50a965204f85f2322ae38dd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 2800000, guid: 88426a752344c6443b79f947d24c5cb3, type: 3}
+  Arrow: {fileID: 2800000, guid: 5ec1fb7419912a248923f81f4d9aa91c, type: 3}
+  Color: {r: 0.5471698, g: 0, b: 0, a: 1}
 --- !u!1 &6724711691853504660
 GameObject:
   m_ObjectHideFlags: 0

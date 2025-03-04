@@ -70,10 +70,10 @@ public class HealingZombieMinions : MonoBehaviour
                     _agent.destination = _player.transform.position;
                 }
         }
-        _agent.destination = _player.transform.position;
-        
-
-
+        else
+        {
+            _agent.destination = _player.transform.position;
+        }
     }
 
     public float GetDistanceFromMother()
