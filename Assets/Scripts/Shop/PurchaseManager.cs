@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PurchaseManager : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Spawner;
     public GameObject broke;
+
+    public GameObject shotgunIcon;
+    public GameObject ARIcon;
 
     private PlayerMovementScript _player;
     private PlayerHealth _playerHealth;
@@ -20,6 +25,9 @@ public class PurchaseManager : MonoBehaviour
         _playerHealth = Player.GetComponent<PlayerHealth>();
 
         _spawner = Spawner.GetComponent<ZombieSpawner>();
+        shotgunIcon.SetActive(false);
+        ARIcon.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -95,6 +103,7 @@ public class PurchaseManager : MonoBehaviour
             _spawner.coinCounterUpdate();
 
             _player.shotgun = true;
+            shotgunIcon.SetActive(true);
         }
         else
         {
@@ -110,6 +119,7 @@ public class PurchaseManager : MonoBehaviour
             _spawner.coinCounterUpdate();
 
             _player.assultRifle = true;
+            ARIcon.SetActive(true);
         }
         else
         {
