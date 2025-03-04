@@ -2251,9 +2251,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc09541bdbafb64dbdde946d3597d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombiePrefab: {fileID: 591814025790196497, guid: 81af1cd2191ff0a449c9dd368678fdfd, type: 3}
+  zombiePrefabDefault: {fileID: 591814025790196497, guid: 81af1cd2191ff0a449c9dd368678fdfd, type: 3}
+  zombiePrefabCharge: {fileID: 591814025790196497, guid: 2297463937733bf4a95149729263553d, type: 3}
   _zombieCounter: {fileID: 1908666467}
-  numberOfZombies: 0
+  numberOfDefaultZombies: 0
+  numberOfChargeZombies: 0
+  numberOfTotalZombies: 0
   waveManager: {fileID: 683902987}
   w5BossBlock: {fileID: 8208157327258509008, guid: ed6630a5b23a1954f86c8add1d4f8594, type: 3}
   w5BossCharge: {fileID: 8208157327258509008, guid: f9799d99db2360a429b6df6f4d552fb9, type: 3}

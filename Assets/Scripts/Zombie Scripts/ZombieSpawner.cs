@@ -7,10 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    public GameObject zombiePrefab;
+    public GameObject zombiePrefabDefault;
+    public GameObject zombiePrefabCharge;
     //zombie counter on screen
     public TextMeshProUGUI _zombieCounter;
-    [SerializeField] int numberOfZombies;
+    [SerializeField] int numberOfDefaultZombies;
+    [SerializeField] int numberOfChargeZombies;
+    [SerializeField] int numberOfTotalZombies;
 
     //initial boundary arrays 
     private int[] xBoundary = new int[2];
@@ -41,9 +44,17 @@ public class ZombieSpawner : MonoBehaviour
     public void spawnZombies(int wave)
     {
         // Number of zombies increases by 5 per wave
-        numberOfZombies = wave * 5;
+        numberOfDefaultZombies = wave * 5;
+        //if (wave > 0) 
+        //{ 
+            numberOfChargeZombies = wave + 1;
+        //}
+        //else
+        //{
+            //numberOfChargeZombies = 0;
+        //}      
         updateZombieCounter();
-
+        numberOfTotalZombies = numberOfDefaultZombies + numberOfChargeZombies;
         // Zombie spawn region for wave (will change/expand when we have more waves) 
         if (wave == 1)
         {
@@ -85,7 +96,7 @@ public class ZombieSpawner : MonoBehaviour
         }
 
         int i = 0;
-        while (i < numberOfZombies)
+        while (i < numberOfDefaultZombies)
         {
             // Random spawn position for zombies within x, z bounds (can change later) 
 
@@ -94,11 +105,28 @@ public class ZombieSpawner : MonoBehaviour
              // Check if this point is inside a NavMeshObstacle
              if (!IsInsideNavMeshObstacle(spawnPosition))
              {
-                 Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
+                 Instantiate(zombiePrefabDefault, spawnPosition, Quaternion.identity);
                  i++;
                                       
              }
            
+        }
+
+        int ii = 0;
+        while (ii < numberOfChargeZombies)
+        {
+            // Random spawn position for zombies within x, z bounds (can change later) 
+
+            Vector3 spawnPosition = new Vector3(Random.Range(xBoundary[0], xBoundary[1]), 2.5f, Random.Range(zBoundary[0], zBoundary[1]));
+
+            // Check if this point is inside a NavMeshObstacle
+            if (!IsInsideNavMeshObstacle(spawnPosition))
+            {
+                Instantiate(zombiePrefabCharge, spawnPosition, Quaternion.identity);
+                ii++;
+
+            }
+
         }
     }
 
@@ -113,12 +141,12 @@ public class ZombieSpawner : MonoBehaviour
 
     public void zombieCounter(int num)
     {
-        numberOfZombies += num;
+        numberOfDefaultZombies += num;
         updateZombieCounter();
         coinCounter(Random.Range(3, 8));
 
-        Debug.Log("There are " + numberOfZombies + " zombies left.");
-        if (numberOfZombies == 0)
+        Debug.Log("There are " + numberOfDefaultZombies + " zombies left.");
+        if (numberOfDefaultZombies == 0)
         {
             Time.timeScale = 0;
             waveManager.PostWaveUI();
@@ -143,7 +171,8 @@ public class ZombieSpawner : MonoBehaviour
 
     public void updateZombieCounter()
     {
-        _zombieCounter.text = ":" + numberOfZombies.ToString();
+        //numberOfTotalZombies = numberOfDefaultZombies + numberOfChargeZombies;
+        _zombieCounter.text = ":" + numberOfTotalZombies.ToString();
     }
 
     public void spawnBoss()
