@@ -212,26 +212,30 @@ public class ZombieSpawner : MonoBehaviour
     }
 
 
-    public void SpawnZombieStatue()
+    public void SpawnZombieStatue(int num)
     {
         bool spawned = false;
 
-        while (!spawned)
+        while(num > 0)
         {
-            // Random spawn position for zombies within x, z bounds (can change later) 
-
-            Vector3 spawnPosition = new Vector3(Random.Range(-45, 45), 0, Random.Range(-45, 45));
-
-            // Check if this point is inside a NavMeshObstacle
-            if (!IsInsideNavMeshObstacle(spawnPosition))
+            while (!spawned)
             {
-                var zStatue = Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
-                zStatue.GetComponent<HealingBoss>().spawner = this;
+                // Random spawn position for zombies within x, z bounds (can change later) 
+               
+                Vector3 spawnPosition = new Vector3(Random.Range(-45, 45), 0, Random.Range(-45, 45));
 
-                spawned = true;
+                // Check if this point is inside a NavMeshObstacle
+                if (!IsInsideNavMeshObstacle(spawnPosition))
+                {
+                    var zStatue = Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
+                    zStatue.GetComponent<HealingBoss>().spawner = this;
+
+                    spawned = true;
+
+                }
 
             }
-
+            num--;
         }
     }
 }
