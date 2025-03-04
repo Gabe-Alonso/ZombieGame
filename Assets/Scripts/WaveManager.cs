@@ -12,6 +12,8 @@ public class WaveManager : MonoBehaviour
     public Button startBossButton;
     public TextMeshProUGUI _wavetext;
     [SerializeField] ZombieSpawner _spawner;
+
+    private int statueCount = 0;
     void Start()
     {
         Time.timeScale = 1;
@@ -44,6 +46,14 @@ public class WaveManager : MonoBehaviour
             _wavetext.text = "Wave " + wave;
             Time.timeScale = 1;
             _spawner.spawnZombies(wave);
+        }
+
+        //Every 4 Rounds spawn 1 extra Statue
+        if (wave % 4 == 0) { statueCount++; }
+
+        if (statueCount != 0)
+        {
+            _spawner.SpawnZombieStatue(statueCount);
         }
     }
 

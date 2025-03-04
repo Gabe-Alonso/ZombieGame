@@ -35,8 +35,7 @@ public class ZombieSpawner : MonoBehaviour
     public int numberOfCoins = 0;
     private void Awake()
     {
-        //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
-        SpawnZombieStatue();
+        _zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
     }
     public void spawnZombies(int wave)
     {
@@ -212,23 +211,27 @@ public class ZombieSpawner : MonoBehaviour
     }
 
 
-    public void SpawnZombieStatue()
+    public void SpawnZombieStatue(int num)
     {
         bool spawned = false;
 
-        while (!spawned)
-        {
-            // Random spawn position for zombies within x, z bounds (can change later) 
-
-            Vector3 spawnPosition = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
-
-            // Check if this point is inside a NavMeshObstacle
-            if (!IsInsideNavMeshObstacle(spawnPosition))
+        while (num < 0) {
+            while (!spawned)
             {
-                Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
-                spawned = true;
+                // Random spawn position for zombies within x, z bounds (can change later) 
+
+                Vector3 spawnPosition = new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20));
+
+                // Check if this point is inside a NavMeshObstacle
+                if (!IsInsideNavMeshObstacle(spawnPosition))
+                {
+                    Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
+                    spawned = true;
+
+                }
 
             }
+            num--;
 
         }
     }
