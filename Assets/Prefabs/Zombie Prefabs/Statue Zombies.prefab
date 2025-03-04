@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 1067756282614885757}
   - component: {fileID: 883393685232814039}
   - component: {fileID: 5801119844351828203}
+  - component: {fileID: 5199685198588102283}
   m_Layer: 0
   m_Name: Statue Zombies
   m_TagString: Zombie
@@ -319,7 +320,6 @@ MonoBehaviour:
   timeBetweenHits: 0.25
   noDamageCooldown: 1
   isBoss: 0
-  runAway: 0
   blood: {fileID: 466441885162462443, guid: 47a52abda8a512e4a848e9c875b65f02, type: 3}
   growl1: {fileID: 8300000, guid: 4ffaf3132acae5b499dd7e26c3037092, type: 3}
   growl2: {fileID: 8300000, guid: 14ccd5fc0afb120498dea4afd889bf13, type: 3}
@@ -331,6 +331,7 @@ MonoBehaviour:
   BossHealthBar: {fileID: 0}
   _wave: 0
   isDead: 0
+  tracking: 1
 --- !u!195 &883393685232814039
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -450,6 +451,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5199685198588102283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3944542501051883826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71ecae50a965204f85f2322ae38dd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 2800000, guid: aba5f2884750ceb48930c17e4ce1f64c, type: 3}
+  Arrow: {fileID: 2800000, guid: 5ec1fb7419912a248923f81f4d9aa91c, type: 3}
+  Color: {r: 0.5660378, g: 0.048059724, b: 0.048059724, a: 1}
 --- !u!1 &5684298658987615076
 GameObject:
   m_ObjectHideFlags: 0

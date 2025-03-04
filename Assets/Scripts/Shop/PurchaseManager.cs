@@ -8,6 +8,9 @@ public class PurchaseManager : MonoBehaviour
     public GameObject Spawner;
     public GameObject broke;
 
+    public GameObject _shotgunSoldOut;
+    public GameObject _ARSoldOut;
+
     public GameObject shotgunIcon;
     public GameObject ARIcon;
 
@@ -104,6 +107,7 @@ public class PurchaseManager : MonoBehaviour
 
             _player.shotgun = true;
             shotgunIcon.SetActive(true);
+            _shotgunSoldOut.SetActive(true);
         }
         else
         {
@@ -120,6 +124,8 @@ public class PurchaseManager : MonoBehaviour
 
             _player.assultRifle = true;
             ARIcon.SetActive(true);
+            _ARSoldOut.SetActive(true);
+
         }
         else
         {
