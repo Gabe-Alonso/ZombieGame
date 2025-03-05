@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ZombieSpawner : MonoBehaviour
 {
@@ -31,8 +32,13 @@ public class ZombieSpawner : MonoBehaviour
     private AudioSource BossAudioSource;
 
     public GameObject firstBoss;
+    public GameObject firstStatue;
+
+    private GameObject _player;
 
     private bool _firstBoss = true;
+    private bool _firstStatue = true;
+
 
     //coin counter
     public TextMeshProUGUI coins;
@@ -40,6 +46,7 @@ public class ZombieSpawner : MonoBehaviour
     private void Awake()
     {
         //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
+        _player = GameObject.FindWithTag("Player");
     }
     public void spawnZombies(int wave)
     {
@@ -196,9 +203,10 @@ public class ZombieSpawner : MonoBehaviour
 
         while (!spawned)
         {
-            // Random spawn position for zombies within x, z bounds (can change later) 
+            var spawnRange = 15;
 
-            Vector3 spawnPosition = new Vector3(Random.Range(-20, 20), 2.5f, Random.Range(-20, 20));
+            // Random spawn position for zombies within x, z bounds (can change later) 
+            Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 2.5f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
 
             // Check if this point is inside a NavMeshObstacle
             if (!IsInsideNavMeshObstacle(spawnPosition))
@@ -253,13 +261,22 @@ public class ZombieSpawner : MonoBehaviour
     {
         bool spawned = false;
 
+        var spawnRange = 45f;
+
+        if (_firstStatue)
+        {
+            _firstStatue = false;
+            firstStatue.SetActive(true);
+            Time.timeScale = 0;
+        }
+
         while(num > 0)
         {
             while (!spawned)
             {
                 // Random spawn position for zombies within x, z bounds (can change later) 
                
-                Vector3 spawnPosition = new Vector3(Random.Range(-45, 45), 0, Random.Range(-45, 45));
+                Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 0f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
 
                 // Check if this point is inside a NavMeshObstacle
                 if (!IsInsideNavMeshObstacle(spawnPosition))

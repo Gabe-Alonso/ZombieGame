@@ -9,15 +9,15 @@ public class AirDropManager : MonoBehaviour
     public float despawnTime;
     public GameObject firstTimePrompt;
 
+    public float spawnRange = 50;
+
+
+    private GameObject _player;
+
     //Play Test Spawn Points
     public Vector3[] spawnArray = { };
 
     public bool randomSpawns;
-
-    public float posXSpawn;
-    public float negXSpawn;
-    public float posZSpawn;
-    public float negZSpawn;
 
     private float _time = 0;
     private float _duration = 0;
@@ -25,6 +25,10 @@ public class AirDropManager : MonoBehaviour
 
     private bool _first = true;
 
+    private void Start()
+    {
+        _player = GameObject.FindWithTag("Player");
+    }
 
     // Update is called once per frame
     void Update()
@@ -82,7 +86,7 @@ public class AirDropManager : MonoBehaviour
         {
             while (_spawned == null)
             {
-                Vector3 spawnPosition = new Vector3(Random.Range(negXSpawn, posXSpawn), 2.25f, Random.Range(negZSpawn, posZSpawn));
+                Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 2.25f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
                 Debug.Log("trying to spawn Airdrop");
 
                 // Check if this point is inside a NavMeshObstacle

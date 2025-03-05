@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using System;
+using System.Collections.Generic;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -18,6 +20,11 @@ public class PlayerMovementScript : MonoBehaviour
     InputAction swapS;
     InputAction swapAR;
     InputAction sprintAction;
+    
+    // Haungs Mode Data
+    InputAction haungsAction;
+    bool haungsModeOn;
+    Dictionary<string, object> preHaungsData = new Dictionary<string, object>();
 
 
     // Variables for dash
@@ -43,6 +50,8 @@ public class PlayerMovementScript : MonoBehaviour
     public TextMeshProUGUI _PName;
     public TextMeshProUGUI _SName;
     public TextMeshProUGUI _ARName;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,6 +60,7 @@ public class PlayerMovementScript : MonoBehaviour
         swapP = InputSystem.actions.FindAction("SelectPistol");
         swapS = InputSystem.actions.FindAction("SelectShotgun");
         swapAR = InputSystem.actions.FindAction("SelectAR");
+        haungsAction = InputSystem.actions.FindAction("Haungs");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
         audioSource = GetComponent<AudioSource>();
         health = 3;
@@ -59,6 +69,8 @@ public class PlayerMovementScript : MonoBehaviour
         _PName.enabled = true;
 
         sliderTimer = dashingCooldown;
+        haungsModeOn = false;
+
     }
     void FixedUpdate()
     {
@@ -84,7 +96,66 @@ public class PlayerMovementScript : MonoBehaviour
             KillChildren();
             transform.Find("AR").gameObject.SetActive(true); 
         }
+        
 
+    }
+
+    void Update()
+    {
+        if(haungsAction.WasPressedThisFrame()){
+            haungsModeOn = !haungsModeOn;
+            Debug.Log("Haungs Mode: " + haungsModeOn);
+            haungsToggle();
+        }
+    }
+
+    public void haungsToggle(){
+        if(haungsModeOn){
+            preHaungsData.Add("shotgunStatus", shotgun);
+            preHaungsData.Add("ARStatus", assultRifle);
+            preHaungsData.Add("health", gameObject.GetComponent<PlayerHealth>().health);
+            preHaungsData.Add("pistolData", transform.Find("Pistol").gameObject.GetComponent<GunScript>().reserveAmmo);
+            preHaungsData.Add("pistolReload", transform.Find("Pistol").gameObject.GetComponent<GunScript>().reloadTime);
+            
+            preHaungsData.Add("shotgunData", transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reserveAmmo);
+            preHaungsData.Add("shotgunReload", transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reloadTime);
+        
+            preHaungsData.Add("ARData", transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo);
+            preHaungsData.Add("ARReload", transform.Find("AR").gameObject.GetComponent<GunScript>().reloadTime);
+            preHaungsData.Add("dashCooldown", dashingCooldown);
+
+            shotgun = true;
+            assultRifle = true;
+            gameObject.GetComponent<PlayerHealth>().health = 10000;
+            transform.Find("Pistol").gameObject.GetComponent<GunScript>().reserveAmmo = 10000;
+            transform.Find("Pistol").gameObject.GetComponent<GunScript>().reloadTime = 0;
+            transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reserveAmmo = 10000;
+            transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reloadTime = 0;
+            transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo = 10000;
+            transform.Find("AR").gameObject.GetComponent<GunScript>().reloadTime = 0;
+            dashingCooldown = 0f;
+
+        }else{
+            shotgun = (bool)preHaungsData["shotgunStatus"];
+            assultRifle = (bool)preHaungsData["ARStatus"];
+            gameObject.GetComponent<PlayerHealth>().health = (int)preHaungsData["health"];
+            transform.Find("Pistol").gameObject.GetComponent<GunScript>().reserveAmmo = (int)preHaungsData["pistolData"];
+            transform.Find("Pistol").gameObject.GetComponent<GunScript>().reloadTime = (float)preHaungsData["pistolReload"];
+            transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reserveAmmo = (int)preHaungsData["shotgunData"];
+            transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reloadTime = (float)preHaungsData["shotgunReload"];
+            transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo = (int)preHaungsData["ARData"];
+            transform.Find("AR").gameObject.GetComponent<GunScript>().reloadTime = (float)preHaungsData["ARReload"];
+            dashingCooldown = (float)preHaungsData["dashCooldown"];
+            preHaungsData.Clear();
+
+            _ARName.enabled = false;
+            _SName.enabled = false;
+            _PName.enabled = true;
+            KillChildren();
+            transform.Find("Pistol").gameObject.SetActive(true);
+            
+
+        }
     }
 
     public void AddAmmo(int pistolAmmo, int shotgunAmmo, int arAmmo){
