@@ -2485,7 +2485,7 @@ MonoBehaviour:
   firstBoss: {fileID: 766399495}
   firstStatue: {fileID: 751315778}
   coins: {fileID: 991347795}
-  numberOfCoins: 0
+  numberOfCoins: 300
 --- !u!4 &319256958
 Transform:
   m_ObjectHideFlags: 0

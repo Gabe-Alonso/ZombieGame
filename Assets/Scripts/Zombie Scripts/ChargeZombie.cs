@@ -3,12 +3,12 @@ using UnityEngine.AI;
 
 public class ChargeZombie : MonoBehaviour
 {
-    private float speed = 7f;
-    private float acceleration = 10f;
+    private float speed;
+    private float acceleration;
     private float health = 3f;
 
-    public float preChargeTime;
-    public float chargeTime;
+    private float preChargeTime = 1.2f;
+    private float chargeTime;
 
     NavMeshAgent _agent;
     ZombieFollow _zomFollow;
@@ -27,6 +27,8 @@ public class ChargeZombie : MonoBehaviour
         _zomFollow.health = health;
         _agent.speed = speed;
         _agent.acceleration = acceleration;
+
+        chargeTime = Random.Range(0.5f, 1f);
     }
 
     // Update is called once per frame
