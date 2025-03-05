@@ -51,6 +51,7 @@ public class ZombieFollow : MonoBehaviour
     public int _wave;
     public bool isDead = false;
     public bool tracking = true;
+    private float _speedMax = 10f;
 
     // distance for audio volume
     private float distanceToPlayer;
@@ -68,7 +69,11 @@ public class ZombieFollow : MonoBehaviour
 
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
-        speed = Random.Range(5f, 10f + 2*_wave);
+        if (_wave % 2 == 0)
+        {
+            _speedMax++;
+        }
+        speed = Random.Range(5f, _speedMax);
         _agent.speed = speed;
         maxHealth = health;
        

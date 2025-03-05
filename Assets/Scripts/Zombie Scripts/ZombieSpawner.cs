@@ -43,16 +43,24 @@ public class ZombieSpawner : MonoBehaviour
     }
     public void spawnZombies(int wave)
     {
-        // Number of zombies increases by 5 per wave
-        numberOfDefaultZombies = wave * 5;
-        //if (wave > 0) 
-        //{ 
+        // Number of defaul zombie spawns increase every odd wave
+        if (wave % 2 != 0)
+        {
+            numberOfDefaultZombies = numberOfDefaultZombies + 5;
+        }
+        else
+        {
+            numberOfDefaultZombies = 5;
+        }
+        
+        if (wave > 2) 
+        { 
             numberOfChargeZombies = wave + 1;
-        //}
-        //else
-        //{
-            //numberOfChargeZombies = 0;
-        //}      
+        }
+        else
+        {
+            numberOfChargeZombies = 0;
+        }      
         updateZombieCounter();
         numberOfTotalZombies = numberOfDefaultZombies + numberOfChargeZombies;
         // Zombie spawn region for wave (will change/expand when we have more waves) 
@@ -171,7 +179,7 @@ public class ZombieSpawner : MonoBehaviour
 
     public void updateZombieCounter()
     {
-        //numberOfTotalZombies = numberOfDefaultZombies + numberOfChargeZombies;
+        numberOfTotalZombies = numberOfDefaultZombies + numberOfChargeZombies;
         _zombieCounter.text = ":" + numberOfTotalZombies.ToString();
     }
 
