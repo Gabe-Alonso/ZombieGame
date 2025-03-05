@@ -38,6 +38,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private bool _firstBoss = true;
     private bool _firstStatue = true;
+    public float checkRadius = 10f;
 
 
     //coin counter
@@ -51,13 +52,13 @@ public class ZombieSpawner : MonoBehaviour
     public void spawnZombies(int wave)
     {
         // Number of defaul zombie spawns increase every odd wave
-        if (wave % 2 != 0)
+        if (wave % 2 == 0)
         {
-            numberOfDefaultZombies = (wave + 1) / 2 * 5;
+            numberOfDefaultZombies = (wave + 2) / 2 * 5;
         }
         else
         {
-            numberOfDefaultZombies = (wave) / 2 * 5;
+            numberOfDefaultZombies = (wave + 1) / 2 * 5;
         }
        
         
@@ -119,7 +120,7 @@ public class ZombieSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(xBoundary[0], xBoundary[1]), 2.5f, Random.Range(zBoundary[0], zBoundary[1]));
                     
              // Check if this point is inside a NavMeshObstacle
-             if (!IsInsideNavMeshObstacle(spawnPosition))
+             if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
              {
                  Instantiate(zombiePrefabDefault, spawnPosition, Quaternion.identity);
                  i++;
@@ -136,7 +137,7 @@ public class ZombieSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(xBoundary[0], xBoundary[1]), 2.5f, Random.Range(zBoundary[0], zBoundary[1]));
 
             // Check if this point is inside a NavMeshObstacle
-            if (!IsInsideNavMeshObstacle(spawnPosition))
+            if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
             {
                 Instantiate(zombiePrefabCharge, spawnPosition, Quaternion.identity);
                 ii++;
@@ -153,6 +154,22 @@ public class ZombieSpawner : MonoBehaviour
         // will need to be changed if we ever have floating NavMesh Obstacle
         bool isBlocked = NavMesh.Raycast(position, position + Vector3.up * 2f, out hit, NavMesh.AllAreas);
         return isBlocked;
+        
+    }
+
+   public bool IsOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, checkRadius, NavMesh.AllAreas);
+        if (isOnNavMesh)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.Log("NavMesh Surface Not Found");
+            return true;
+        }
     }
 
     public void zombieCounter(int num)
@@ -210,8 +227,8 @@ public class ZombieSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 2.5f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
 
             // Check if this point is inside a NavMeshObstacle
-            if (!IsInsideNavMeshObstacle(spawnPosition))
-            {
+            if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
+                {
                 if(Random.Range(0,2) < 1)
                 {
                     spawnW10Boss(spawnPosition);
@@ -253,8 +270,10 @@ public class ZombieSpawner : MonoBehaviour
         var boss = Instantiate(w10Boss, spawn, Quaternion.identity);
 
         boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
+        BossAudioSource = boss.GetComponent<AudioSource>();
+        BossAudioSource.PlayOneShot(BossIntro, 1);
 
-        
+
     }
 
 
@@ -280,7 +299,7 @@ public class ZombieSpawner : MonoBehaviour
                 Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 0f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
 
                 // Check if this point is inside a NavMeshObstacle
-                if (!IsInsideNavMeshObstacle(spawnPosition))
+                if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
                 {
                     var zStatue = Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
                     zStatue.GetComponent<HealingBoss>().spawner = this;

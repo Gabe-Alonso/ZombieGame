@@ -69,7 +69,7 @@ public class ZombieFollow : MonoBehaviour
 
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
-        if (_wave % 2 == 0)
+        if (_wave % 2 != 0)
         {
             _speedMax = _speedMax + 2;
         }
