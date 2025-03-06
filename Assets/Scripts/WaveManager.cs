@@ -34,10 +34,12 @@ public class WaveManager : MonoBehaviour
         if (wave % 3 == 0)
         {
             BossStart();
+            
             _wavetext.text = "Boss";
         }
         else
         {
+            
             _wavetext.text = "Wave " + wave;
             Time.timeScale = 1;
             _spawner.spawnZombies(wave);
