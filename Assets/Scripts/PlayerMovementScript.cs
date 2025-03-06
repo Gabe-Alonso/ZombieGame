@@ -138,7 +138,7 @@ public class PlayerMovementScript : MonoBehaviour
         }else{
             shotgun = (bool)preHaungsData["shotgunStatus"];
             assultRifle = (bool)preHaungsData["ARStatus"];
-            gameObject.GetComponent<PlayerHealth>().health = (int)preHaungsData["health"];
+            gameObject.GetComponent<PlayerHealth>().health = (float)preHaungsData["health"];
             transform.Find("Pistol").gameObject.GetComponent<GunScript>().reserveAmmo = (int)preHaungsData["pistolData"];
             transform.Find("Pistol").gameObject.GetComponent<GunScript>().reloadTime = (float)preHaungsData["pistolReload"];
             transform.Find("Shotgun").gameObject.GetComponent<GunScript>().reserveAmmo = (int)preHaungsData["shotgunData"];
