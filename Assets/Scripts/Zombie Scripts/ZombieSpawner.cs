@@ -17,7 +17,7 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField] int numberOfTotalZombies;
 
     //initial boundary arrays 
-    public float spawnRange;
+    public float spawnRange = 55f;
     private float[] xBoundary = new float[2];
     private float[] zBoundary = new float[2];
     public WaveManager waveManager;
