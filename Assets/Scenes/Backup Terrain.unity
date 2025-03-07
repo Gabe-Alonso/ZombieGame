@@ -2486,7 +2486,7 @@ MonoBehaviour:
   firstStatue: {fileID: 751315778}
   checkRadius: 10
   coins: {fileID: 991347795}
-  numberOfCoins: 300
+  numberOfCoins: 0
 --- !u!4 &319256958
 Transform:
   m_ObjectHideFlags: 0
@@ -5663,7 +5663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823550a3dcad3e94a967490921276b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: 1
+  wave: 0
+  zombieWave: 1
   canvas: {fileID: 465281437}
   startWaveButton: {fileID: 152247768}
   startBossButton: {fileID: 1533252490}
@@ -9967,7 +9968,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 57c01b25d79e171449a4c81c1ce3cff0, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: dbe976158919cc34d8d8d6bff4a82f55, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1171253232
 GameObject:

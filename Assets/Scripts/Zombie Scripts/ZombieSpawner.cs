@@ -10,6 +10,7 @@ public class ZombieSpawner : MonoBehaviour
 {
     public GameObject zombiePrefabDefault;
     public GameObject zombiePrefabCharge;
+
     //zombie counter on screen
     public TextMeshProUGUI _zombieCounter;
     [SerializeField] int numberOfDefaultZombies;

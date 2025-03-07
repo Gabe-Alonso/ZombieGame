@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class WaveManager : MonoBehaviour
 {
     public int wave = 1;
+    public int zombieWave = 1;
     public GameObject canvas;
     public Button startWaveButton;
     public Button startBossButton;
@@ -39,10 +40,10 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            
+            zombieWave++;
             _wavetext.text = "Wave " + wave;
             Time.timeScale = 1;
-            _spawner.spawnZombies(wave);
+            _spawner.spawnZombies(zombieWave);
         }
 
         //Every 4th Wave, another Zombie Statue will spawn at the start of the round.

@@ -171,7 +171,7 @@ MonoBehaviour:
   moan2: {fileID: 8300000, guid: 58a868ac4f18e2f428ef3f845d8bfaef, type: 3}
   death: {fileID: 8300000, guid: f4c70d6b8580931468011bd59268de31, type: 3}
   damagedMaterial: {fileID: 2100000, guid: f5283df371fb5874bb728d19a96bd8a9, type: 2}
-  BossHealthBar: {fileID: 0}
+  BossHealthBar: {fileID: 6077950861266318758}
   _wave: 0
   isDead: 0
   tracking: 1
@@ -321,8 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45587ab7cbcb1964fb62b1507647cdbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preChargeTime: 1.5
-  chargeTime: 0.5
 --- !u!1 &1160877174409436321
 GameObject:
   m_ObjectHideFlags: 0

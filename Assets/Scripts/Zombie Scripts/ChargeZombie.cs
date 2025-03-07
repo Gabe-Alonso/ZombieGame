@@ -5,17 +5,20 @@ public class ChargeZombie : MonoBehaviour
 {
     private float speed;
     private float acceleration;
-    private float health = 3f;
+    
 
-    private float preChargeTime = 1.2f;
+    private float preChargeTime = 0.5f;
     private float chargeTime;
 
     NavMeshAgent _agent;
     ZombieFollow _zomFollow;
+    private GameObject player;
 
     private float _time = 0;
     private float _chargeTime = 0;
     private bool _enraged = false;
+
+    private float distanceToPlayer;
 
     void Start()
     {
@@ -23,8 +26,9 @@ public class ChargeZombie : MonoBehaviour
         _zomFollow.isBoss = true;
 
         _agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindWithTag("Player");
 
-        _zomFollow.health = health;
+
         _agent.speed = speed;
         _agent.acceleration = acceleration;
 
@@ -34,17 +38,24 @@ public class ChargeZombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _chargeTime += Time.deltaTime;
+        // calculate distance to play sound at volume 
+        distanceToPlayer = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(player.transform.position.x - _agent.transform.position.x), 2) + Mathf.Pow(Mathf.Abs(player.transform.position.z - _agent.transform.position.z), 2));
 
-        if (_chargeTime >= chargeTime + preChargeTime + .25f && !_enraged) //For the Buffer add .25
+        // normalize distance using max audio distance
+        distanceToPlayer = distanceToPlayer / 300;
+        _chargeTime += Time.deltaTime;
+        if (distanceToPlayer <= 30)
         {
-            _time += Time.deltaTime;
-            Charge();
-        }
-        else if (_enraged && _chargeTime >= .25f)
-        {
-            _time += Time.deltaTime;
-            Charge();
+            if (_chargeTime >= chargeTime + preChargeTime + .25f && !_enraged) //For the Buffer add .25
+            {
+                _time += Time.deltaTime;
+                Charge();
+            }
+            else if (_enraged && _chargeTime >= .25f)
+            {
+                _time += Time.deltaTime;
+                Charge();
+            }
         }
     }
 
