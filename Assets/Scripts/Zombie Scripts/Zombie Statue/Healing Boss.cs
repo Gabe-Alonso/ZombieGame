@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Audio;
+using UnityEngine.UIElements;
 
 public class HealingBoss : MonoBehaviour
 {
@@ -52,6 +53,20 @@ public class HealingBoss : MonoBehaviour
         }
     }
 
+    public bool IsOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, 10f, NavMesh.AllAreas);
+        if (isOnNavMesh)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.Log("NavMesh Surface Not Found");
+            return true;
+        }
+    } 
     bool IsInsideNavMeshObstacle(Vector3 position)
     {
         NavMeshHit hit;
@@ -71,7 +86,7 @@ public class HealingBoss : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), 2.5f, Random.Range(transform.position.z - 5, transform.position.z + 5));
 
             // Check if this point is inside a NavMeshObstacle
-            if (!IsInsideNavMeshObstacle(spawnPosition))
+            if (!IsInsideNavMeshObstacle(spawnPosition) && IsOnNavMesh(spawnPosition))
             {
 
                 var spawned = Instantiate(healingZombie, spawnPosition, Quaternion.identity);

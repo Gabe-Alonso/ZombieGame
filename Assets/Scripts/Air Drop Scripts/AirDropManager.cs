@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
+using UnityEngine.UIElements;
 
 public class AirDropManager : MonoBehaviour
 {
@@ -62,7 +63,21 @@ public class AirDropManager : MonoBehaviour
         }
 
     }
-
+    public bool IsOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        var checkRadius = 10f;
+        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, checkRadius, NavMesh.AllAreas);
+        if (isOnNavMesh)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.Log("NavMesh Surface Not Found");
+            return true;
+        }
+    }
     bool IsInsideNavMeshObstacle(Vector3 position)
     {
         NavMeshHit hit;
@@ -90,7 +105,7 @@ public class AirDropManager : MonoBehaviour
                 Debug.Log("trying to spawn Airdrop");
 
                 // Check if this point is inside a NavMeshObstacle
-                if (!IsInsideNavMeshObstacle(spawnPosition))
+                if (!IsInsideNavMeshObstacle(spawnPosition) && IsOnNavMesh(spawnPosition))
                 {
                     _spawned = Instantiate(airDrop, spawnPosition, Quaternion.identity);
 

@@ -32,7 +32,7 @@ public class WaveManager : MonoBehaviour
         canvas.SetActive(false);
 
         wave++;
-        if (wave % 3 == 0)
+        if (wave % 4 == 0)
         {
             BossStart();
             
@@ -47,7 +47,7 @@ public class WaveManager : MonoBehaviour
         }
 
         //Every 4th Wave, another Zombie Statue will spawn at the start of the round.
-        if (wave % 4 == 0) { zombieStatueCount++; }
+        if (wave % 5 == 0) { zombieStatueCount++; }
 
         //Spawn a ZombieStatue if the count is above 0
         if (zombieStatueCount != 0)

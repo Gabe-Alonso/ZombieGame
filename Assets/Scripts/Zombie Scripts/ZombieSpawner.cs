@@ -18,8 +18,9 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField] int numberOfTotalZombies;
 
     //initial boundary arrays 
-    private int[] xBoundary = new int[2];
-    private int[] zBoundary = new int[2];
+    public float spawnRange = 55f;
+    private float[] xBoundary = new float[2];
+    private float[] zBoundary = new float[2];
     public WaveManager waveManager;
 
     public GameObject w5BossBlock;
@@ -73,52 +74,22 @@ public class ZombieSpawner : MonoBehaviour
         }      
         updateZombieCounter();
         numberOfTotalZombies = numberOfDefaultZombies + numberOfChargeZombies;
+
         // Zombie spawn region for wave (will change/expand when we have more waves) 
-        if (wave == 1)
-        {
-            xBoundary[0] = -20;
-            xBoundary[1] = 20;
-            zBoundary[0] = -20;
-            zBoundary[1] = 20;
-
-        }
-        else if (wave == 2)
-        {
-            xBoundary[0] = -200;
-            xBoundary[1] = -160;
-            zBoundary[0] = 120;
-            zBoundary[1] = 160;
-
-        } 
-        else if(wave == 3)
-        {
-            xBoundary[0] = 250;
-            xBoundary[1] = 310;
-            zBoundary[0] = -320;
-            zBoundary[1] = -270;
-        }
-        else
-        {
-            xBoundary[0] = -200;
-            xBoundary[1] = -160;
-            zBoundary[0] = 120;
-            zBoundary[1] = 160;
-        }
-
-        if (SceneManager.GetActiveScene().name == "Old Map Playtest" || SceneManager.GetActiveScene().name == "Gannons Testing")
-        {
-            xBoundary[0] = -50;
-            xBoundary[1] = 50;
-            zBoundary[0] = -50;
-            zBoundary[1] = 50;
-        }
+            xBoundary[0] = -spawnRange;
+            xBoundary[1] = spawnRange;
+            zBoundary[0] = -spawnRange;
+            zBoundary[1] = spawnRange;
+        
 
         int i = 0;
         while (i < numberOfDefaultZombies)
         {
             // Random spawn position for zombies within x, z bounds (can change later) 
 
-            Vector3 spawnPosition = new Vector3(Random.Range(xBoundary[0], xBoundary[1]), 2.5f, Random.Range(zBoundary[0], zBoundary[1]));
+            Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x + xBoundary[0], _player.transform.position.x + xBoundary[1]), 
+                                                2.5f, 
+                                                Random.Range(_player.transform.position.z + zBoundary[0], _player.transform.position.z + zBoundary[1]));
                     
              // Check if this point is inside a NavMeshObstacle
              if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
@@ -171,7 +142,7 @@ public class ZombieSpawner : MonoBehaviour
             Debug.Log("NavMesh Surface Not Found");
             return true;
         }
-    }
+   }
 
     public void zombieCounter(int num)
     {
@@ -282,7 +253,7 @@ public class ZombieSpawner : MonoBehaviour
     {
         bool spawned = false;
 
-        var spawnRange = 45f;
+        var spawnRange = 75f;
 
         if (_firstStatue)
         {
