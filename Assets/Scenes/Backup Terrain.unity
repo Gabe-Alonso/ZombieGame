@@ -3846,7 +3846,7 @@ GameObject:
   - component: {fileID: 402740230}
   - component: {fileID: 402740229}
   m_Layer: 5
-  m_Name: memu
+  m_Name: return to menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6399,7 +6399,7 @@ MonoBehaviour:
   wave: 0
   zombieWave: 1
   canvas: {fileID: 465281437}
-  canvas2: {fileID: 0}
+  canvas2: {fileID: 546305381}
   startWaveButton: {fileID: 152247768}
   startBossButton: {fileID: 1533252490}
   _wavetext: {fileID: 1142797683}
