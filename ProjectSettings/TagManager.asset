@@ -12,6 +12,8 @@ TagManager:
   - 'Post-Wave Screen '
   - BossBar
   - WaveManager
+  - Acid
+  - ShopCanvas
   layers:
   - Default
   - TransparentFX

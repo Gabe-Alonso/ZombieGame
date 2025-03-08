@@ -155,7 +155,6 @@ public class ZombieSpawner : MonoBehaviour
         Debug.Log("There are " + numberOfDefaultZombies + " zombies left.");
         if (numberOfTotalZombies == 0)
         {
-            Time.timeScale = 0;
             waveManager.PostWaveUI();
             
         }

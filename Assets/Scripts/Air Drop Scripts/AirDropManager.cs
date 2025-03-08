@@ -24,7 +24,10 @@ public class AirDropManager : MonoBehaviour
     private float _duration = 0;
     private Airdrop _spawned = null;
 
+    public inbetweenWaves inbetweenWaves;
+
     private bool _first = true;
+    private int numSpawned = 0;
 
     private void Start()
     {
@@ -34,32 +37,39 @@ public class AirDropManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if (_spawned == null)
+        if (!inbetweenWaves.var)
         {
-            _time += Time.deltaTime;
-            if (_time >= spawnTime)
+            if (numSpawned < 3)
             {
-                SpawnAirDrop();
-                _time = 0;
+                if (_spawned == null)
+                {
+                    _time += Time.deltaTime;
+                    if (_time >= spawnTime)
+                    {
+                        SpawnAirDrop();
+                        _time = 0;
+                    }
+                }
+                else
+                {
+                    _duration += Time.deltaTime;
+
+                    if (_duration >= despawnTime)
+                    {
+                        Destroy(_spawned.gameObject);
+                        _duration = 0;
+                    }
+                }
             }
         }
         else
         {
-            _duration += Time.deltaTime;
-
-            if (_duration >= despawnTime)
-            {
-                Destroy(_spawned.gameObject);
-                _duration = 0;
-            }
+            numSpawned = 0;
         }
 
-        if (Time.timeScale == 0 && _spawned)
+        if(_spawned && inbetweenWaves.var)
         {
             Destroy(_spawned.gameObject);
-            _time = 0;
-            _duration = 0;
         }
 
     }
@@ -101,7 +111,7 @@ public class AirDropManager : MonoBehaviour
         {
             while (_spawned == null)
             {
-                Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 2.25f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
+                Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 1.5f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
                 Debug.Log("trying to spawn Airdrop");
 
                 // Check if this point is inside a NavMeshObstacle
@@ -119,7 +129,7 @@ public class AirDropManager : MonoBehaviour
         }
 
 
-       
+        numSpawned++;
     }
 
     public void Unfreeze()

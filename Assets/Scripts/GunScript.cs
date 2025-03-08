@@ -28,6 +28,8 @@ public class GunScript : MonoBehaviour
     public float despawnDist;
     public TextMeshProUGUI _ammoCount;
     public GameObject muzzleFlash;
+
+    public inbetweenWaves inbetweenWaves;
     
 
     void Start()
@@ -58,7 +60,7 @@ public class GunScript : MonoBehaviour
         if (Physics.Raycast(ray, out hit)){
         }
         
-        if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
+        if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0) && !inbetweenWaves.var){
             shoot();
             GameObject mf = Instantiate(muzzleFlash, transform.position, Quaternion.identity);
             mf.transform.SetParent(gameObject.transform);

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,29 +8,62 @@ public class WaveManager : MonoBehaviour
 {
     public int wave = 1;
     public int zombieWave = 1;
-    public GameObject canvas;
-    public Button startWaveButton;
-    public Button startBossButton;
+    public GameObject waveComplete;
+    public GameObject startNextWave;
+
+    public GameObject shopButton;
+    public GameObject shopPrefab;
+    public Vector3[] shopSpawns;
+    private int _shopIndex = 0;
+
+    public inbetweenWaves inbetweenWaves;
+
+
     public TextMeshProUGUI _wavetext;
     [SerializeField] ZombieSpawner _spawner;
+    private float _time = 0;
+    private bool _roundInactive = false;
+    private PlayerMovementScript _player;
+    private GameObject _currentShop;
 
     private int zombieStatueCount = 0;
     void Start()
     {
         Time.timeScale = 1;
         _spawner.spawnZombies(wave);
+        inbetweenWaves.var = false;
+
+        _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovementScript>();
 
     }
 
-    
+    private void Update()
+    {
+        _time -= Time.deltaTime;
+
+        if (_time < 0)
+        {
+            waveComplete.SetActive(false);
+            if (_roundInactive) { startNextWave.SetActive(true); }
+        }
+    }
+
+
     public void PostWaveUI()
     {
-        canvas.SetActive(true);
+        inbetweenWaves.var = true;
+        waveComplete.SetActive(true);
+        _time = 3f;
+        _roundInactive = true;
     }
 
     public void nextWaveStart()
     {
-        canvas.SetActive(false);
+        inbetweenWaves.var = false;
+        _roundInactive = false;
+        startNextWave.SetActive(false);
+        waveComplete.SetActive(false);
+        SpawnNextShop();
 
         wave++;
         if (wave % 4 == 0)
@@ -58,11 +92,7 @@ public class WaveManager : MonoBehaviour
 
     public void BossStart()
     {
-        canvas.SetActive(false);
-        Time.timeScale = 1;
-        
         _spawner.spawnBoss();
-
     }
 
     //NO longer neceassarry?
@@ -75,5 +105,21 @@ public class WaveManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SpawnNextShop()
+    {
+        if (_currentShop != null)
+        {
+            Destroy(_currentShop);
+        }
+
+        if (_shopIndex >= shopSpawns.Length)
+        {
+            _shopIndex = 0;
+        }
+        _currentShop = Instantiate(shopPrefab, shopSpawns[_shopIndex], Quaternion.Euler(0, 90, 0));
+        _currentShop.transform.Find("shopButtonRange").GetComponent<ShopPopUp>().shopButton = shopButton;
+        _shopIndex++;
     }
 }
