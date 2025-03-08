@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class ChargeZombie : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float acceleration = 8f;
+    [SerializeField] private float speed = 11f;
+    [SerializeField] private float acceleration = 10f;
 
 
     private float preChargeTime = 0.5f;
@@ -31,19 +31,21 @@ public class ChargeZombie : MonoBehaviour
 
         _agent.speed = speed;
         _agent.acceleration = acceleration;
+        _zomFollow.enabled = true;
 
-        chargeTime = Random.Range(0.5f, 1f);
+        chargeTime = Random.Range(0.7f, 1.2f);
     }
 
     // Update is called once per frame
     void Update()
     {
         // calculate distance to play sound at volume 
-        distanceToPlayer = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(player.transform.position.x - _agent.transform.position.x), 2) + Mathf.Pow(Mathf.Abs(player.transform.position.z - _agent.transform.position.z), 2));
+        distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         _chargeTime += Time.deltaTime;
 
-        if (distanceToPlayer <= 30)
+        if (distanceToPlayer <= 20)
         {
+            _zomFollow.enabled = false;
             if (_chargeTime >= chargeTime + preChargeTime + .25f && !_enraged) //For the Buffer add .25
             {
                 _time += Time.deltaTime;
@@ -57,8 +59,9 @@ public class ChargeZombie : MonoBehaviour
         }
         else
         {
+            _zomFollow.enabled = true;
             _agent.speed = speed;
-
+            _agent.acceleration = acceleration;
         }
     }
 
@@ -69,6 +72,7 @@ public class ChargeZombie : MonoBehaviour
             _agent.speed = 0;
             _agent.acceleration = 0f;
             _agent.velocity = Vector3.zero;
+            _agent.destination = player.transform.position;
         }
         else if (_time >= preChargeTime && _time < chargeTime + preChargeTime)
         {

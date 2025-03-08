@@ -9,6 +9,7 @@ public class WaveManager : MonoBehaviour
     public int wave = 1;
     public int zombieWave = 1;
     public GameObject waveComplete;
+    public GameObject canvas2;
     public GameObject startNextWave;
 
     public GameObject shopButton;
@@ -51,6 +52,16 @@ public class WaveManager : MonoBehaviour
 
     public void PostWaveUI()
     {
+        if (wave == 10)
+        {
+            canvas2.SetActive(true);
+        }
+        else
+        {
+            canvas.SetActive(true);
+   
+        }
+    {
         inbetweenWaves.var = true;
         waveComplete.SetActive(true);
         _time = 3f;
@@ -64,6 +75,7 @@ public class WaveManager : MonoBehaviour
         startNextWave.SetActive(false);
         waveComplete.SetActive(false);
         SpawnNextShop();
+        canvas2.SetActive(false);
 
         wave++;
         if (wave % 4 == 0)
