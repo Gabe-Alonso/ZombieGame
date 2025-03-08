@@ -56,12 +56,7 @@ public class WaveManager : MonoBehaviour
         {
             canvas2.SetActive(true);
         }
-        else
-        {
-            canvas.SetActive(true);
-   
-        }
-    {
+
         inbetweenWaves.var = true;
         waveComplete.SetActive(true);
         _time = 3f;
@@ -130,7 +125,7 @@ public class WaveManager : MonoBehaviour
         {
             _shopIndex = 0;
         }
-        _currentShop = Instantiate(shopPrefab, shopSpawns[_shopIndex], Quaternion.Euler(0, 90, 0));
+        _currentShop = Instantiate(shopPrefab, shopSpawns[_shopIndex], Quaternion.Euler(0, -90, 0));
         _currentShop.transform.Find("shopButtonRange").GetComponent<ShopPopUp>().shopButton = shopButton;
         _shopIndex++;
     }

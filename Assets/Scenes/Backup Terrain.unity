@@ -6402,11 +6402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wave: 1
   zombieWave: 1
-  canvas: {fileID: 465281437}
-  canvas2: {fileID: 546305381}
-  startWaveButton: {fileID: 152247768}
-  startBossButton: {fileID: 1533252490}
   waveComplete: {fileID: 964609479}
+  canvas2: {fileID: 546305381}
   startNextWave: {fileID: 152247764}
   shopButton: {fileID: 1533252489}
   shopPrefab: {fileID: 6135286894876777192, guid: e08a85cb3587faa498564b42f44f14b7, type: 3}
@@ -6434,7 +6431,6 @@ Transform:
   - {fileID: 465281438}
   - {fileID: 546305382}
   - {fileID: 1835632310}
-  - {fileID: 659502526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &683902989
