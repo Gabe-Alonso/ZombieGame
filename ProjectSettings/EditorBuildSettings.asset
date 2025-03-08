@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PLAYTEST_START.unity
-    guid: 09e6870bb251edf44baf068d9eb3d29c
-  - enabled: 1
-    path: Assets/Scenes/Old Map Playtest.unity
-    guid: 76bac5c50c21efa47ae5e9a7aa5f8c21
+    path: Assets/Scenes/Menu.unity
+    guid: 8cd366ea921d67340aecefc62b3e6ccd
   - enabled: 1
     path: Assets/Scenes/Backup Terrain.unity
     guid: d23d31c6f62e5874fa90bb40b3000bbc
