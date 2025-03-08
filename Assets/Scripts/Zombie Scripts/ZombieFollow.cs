@@ -48,7 +48,7 @@ public class ZombieFollow : MonoBehaviour
     private GameObject _spawner;
     public GameObject BossHealthBar;
     private GameObject _waveManager;
-    public int _wave;
+    private int _wave;
     public bool isDead = false;
     public bool tracking = true;
     private float _speedMax = 10f;
