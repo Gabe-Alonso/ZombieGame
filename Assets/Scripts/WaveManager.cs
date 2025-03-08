@@ -8,7 +8,6 @@ public class WaveManager : MonoBehaviour
     public int wave = 1;
     public int zombieWave = 1;
     public GameObject canvas;
-    public GameObject canvas2;
     public Button startWaveButton;
     public Button startBossButton;
     public TextMeshProUGUI _wavetext;
@@ -25,20 +24,12 @@ public class WaveManager : MonoBehaviour
     
     public void PostWaveUI()
     {
-        if (wave == 10)
-        {
-            canvas2.SetActive(true);
-        }
-        else
-        {
-            canvas.SetActive(true);
-        }
+        canvas.SetActive(true);
     }
 
     public void nextWaveStart()
     {
         canvas.SetActive(false);
-        canvas2.SetActive(false);
 
         wave++;
         if (wave % 4 == 0)
