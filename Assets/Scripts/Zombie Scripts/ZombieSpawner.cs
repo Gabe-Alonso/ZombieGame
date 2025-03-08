@@ -40,7 +40,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private bool _firstBoss = true;
     private bool _firstStatue = true;
-    public float checkRadius = 10f;
+    public float checkRadius = 5f;
 
 
     //coin counter
@@ -76,10 +76,12 @@ public class ZombieSpawner : MonoBehaviour
         numberOfTotalZombies = numberOfDefaultZombies + numberOfChargeZombies;
 
         // Zombie spawn region for wave (will change/expand when we have more waves) 
-            xBoundary[0] = -spawnRange;
-            xBoundary[1] = spawnRange;
-            zBoundary[0] = -spawnRange;
-            zBoundary[1] = spawnRange;
+         xBoundary[0] = -spawnRange;
+         xBoundary[1] = spawnRange;
+         zBoundary[0] = -spawnRange;
+         zBoundary[1] = spawnRange;
+
+        
         
 
         int i = 0;
@@ -140,7 +142,7 @@ public class ZombieSpawner : MonoBehaviour
         else
         {
             Debug.Log("NavMesh Surface Not Found");
-            return true;
+            return false;
         }
    }
 

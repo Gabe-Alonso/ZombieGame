@@ -3,9 +3,9 @@ using UnityEngine.AI;
 
 public class ChargeZombie : MonoBehaviour
 {
-    private float speed;
-    private float acceleration;
-    
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float acceleration = 8f;
+
 
     private float preChargeTime = 0.5f;
     private float chargeTime;
@@ -40,10 +40,8 @@ public class ChargeZombie : MonoBehaviour
     {
         // calculate distance to play sound at volume 
         distanceToPlayer = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(player.transform.position.x - _agent.transform.position.x), 2) + Mathf.Pow(Mathf.Abs(player.transform.position.z - _agent.transform.position.z), 2));
-
-        // normalize distance using max audio distance
-        distanceToPlayer = distanceToPlayer / 300;
         _chargeTime += Time.deltaTime;
+
         if (distanceToPlayer <= 30)
         {
             if (_chargeTime >= chargeTime + preChargeTime + .25f && !_enraged) //For the Buffer add .25
@@ -56,6 +54,11 @@ public class ChargeZombie : MonoBehaviour
                 _time += Time.deltaTime;
                 Charge();
             }
+        }
+        else
+        {
+            _agent.speed = speed;
+
         }
     }
 
