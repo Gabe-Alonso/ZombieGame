@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d2afc98bccbe640b07d453b8385bcc, type: 3}
   m_Name: inbetweenWaves
   m_EditorClassIdentifier: 
-  var: 1
+  var: 0
