@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
-    public int wave = 1;
+    public int wave = 0;
     public int zombieWave = 1;
     public GameObject waveComplete;
     public GameObject canvas2;

@@ -36,6 +36,8 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject firstBoss;
     public GameObject firstStatue;
 
+    public GameObject movementCanvas;
+
     private GameObject _player;
 
     private bool _firstBoss = true;
@@ -54,7 +56,12 @@ public class ZombieSpawner : MonoBehaviour
     public void spawnZombies(int wave)
     {
         // Number of defaul zombie spawns increase every odd wave
-        if (wave % 2 == 0)
+        if (wave == 0)
+        {
+            numberOfDefaultZombies = 2;
+            wave0();
+        }
+        else if (wave % 2 == 0)
         {
             numberOfDefaultZombies = (wave + 2) / 2 * 5;
         }
@@ -284,5 +291,11 @@ public class ZombieSpawner : MonoBehaviour
             }
             num--;
         }
+    }
+
+    public void wave0()
+    {
+        movementCanvas.SetActive(true);
+        Time.timeScale = 0;
     }
 }
