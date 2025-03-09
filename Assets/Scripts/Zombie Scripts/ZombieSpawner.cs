@@ -51,6 +51,10 @@ public class ZombieSpawner : MonoBehaviour
     public TextMeshProUGUI coins;
     public int numberOfCoins = 0;
 
+    private bool _first = true;
+    private bool _second = true;
+
+
     
 
     private void Awake()
@@ -60,7 +64,8 @@ public class ZombieSpawner : MonoBehaviour
     }
     public void spawnZombies(int wave)
     {
-        // Number of defaul zombie spawns increase every odd wave
+
+        // Number of default zombie spawns increase every odd wave
         if (wave == 0)
         {
             numberOfDefaultZombies = 2;
@@ -222,7 +227,22 @@ public class ZombieSpawner : MonoBehaviour
             // Check if this point is inside a NavMeshObstacle
             if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
                 {
-                if(Random.Range(0,2) < 1)
+                //Guarentee the "easier" boss spawns First, then the other, then after wave 10 its randomized
+                if(_first)
+                {
+                    spawnW10Boss(spawnPosition);
+                    zombieCounter(1);
+                    _first = false;
+
+                }
+                else if (_second)
+                {
+                    spawnW5Boss(spawnPosition);
+                    zombieCounter(2);
+                    _second = false;
+
+                }
+                else if(Random.Range(0,2) < 1)
                 {
                     spawnW10Boss(spawnPosition);
                     zombieCounter(1);

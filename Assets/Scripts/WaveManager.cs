@@ -90,16 +90,18 @@ public class WaveManager : MonoBehaviour
             _wavetext.text = "Wave " + wave;
             
             _spawner.spawnZombies(zombieWave);
+            
+            //Spawn a ZombieStatue if the count is above 0
+            if (zombieStatueCount != 0)
+            {
+                _spawner.SpawnZombieStatue(zombieStatueCount);
+            }
         }
 
-        //Every 4th Wave, another Zombie Statue will spawn at the start of the round.
+        //Every 5th Wave, another Zombie Statue will spawn at the start of the round.
         if (wave % 5 == 0) { zombieStatueCount++; }
 
-        //Spawn a ZombieStatue if the count is above 0
-        if (zombieStatueCount != 0)
-        {
-            _spawner.SpawnZombieStatue(zombieStatueCount);
-        }
+        
     }
 
     public void BossStart()
