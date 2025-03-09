@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WaveManager : MonoBehaviour
 {
     public int wave = 0;
-    public int zombieWave = 1;
+    public int zombieWave = 0;
     public GameObject waveComplete;
     public GameObject canvas2;
     public GameObject startNextWave;
@@ -16,6 +16,8 @@ public class WaveManager : MonoBehaviour
     public GameObject shopPrefab;
     public Vector3[] shopSpawns;
     private int _shopIndex = 0;
+    public GameObject shopCanvas;
+
 
     public inbetweenWaves inbetweenWaves;
 
@@ -31,7 +33,8 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        _spawner.spawnZombies(wave);
+        Debug.Log("zombieWave varible is" + zombieWave.ToString());
+        _spawner.spawnZombies(zombieWave);
         inbetweenWaves.var = false;
 
         _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovementScript>();
@@ -61,6 +64,7 @@ public class WaveManager : MonoBehaviour
         waveComplete.SetActive(true);
         _time = 3f;
         _roundInactive = true;
+        
     }
 
     public void nextWaveStart()
@@ -69,6 +73,7 @@ public class WaveManager : MonoBehaviour
         _roundInactive = false;
         startNextWave.SetActive(false);
         waveComplete.SetActive(false);
+        
         SpawnNextShop();
         canvas2.SetActive(false);
 
@@ -83,7 +88,7 @@ public class WaveManager : MonoBehaviour
         {
             zombieWave++;
             _wavetext.text = "Wave " + wave;
-            Time.timeScale = 1;
+            
             _spawner.spawnZombies(zombieWave);
         }
 
@@ -116,9 +121,17 @@ public class WaveManager : MonoBehaviour
 
     public void SpawnNextShop()
     {
+
         if (_currentShop != null)
         {
             Destroy(_currentShop);
+        }
+
+        if (wave == 0)
+        {
+            Time.timeScale = 0;
+            shopCanvas.SetActive(true);
+
         }
 
         if (_shopIndex >= shopSpawns.Length)

@@ -37,6 +37,8 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject firstStatue;
 
     public GameObject movementCanvas;
+    public GameObject uiTutorial;
+   
 
     private GameObject _player;
 
@@ -48,6 +50,9 @@ public class ZombieSpawner : MonoBehaviour
     //coin counter
     public TextMeshProUGUI coins;
     public int numberOfCoins = 0;
+
+    
+
     private void Awake()
     {
         //_zombieCounter = GetComponentInChildren<TextMeshProUGUI>();
@@ -104,6 +109,7 @@ public class ZombieSpawner : MonoBehaviour
              if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
              {
                  Instantiate(zombiePrefabDefault, spawnPosition, Quaternion.identity);
+                 
                  i++;
                                       
              }
@@ -160,6 +166,13 @@ public class ZombieSpawner : MonoBehaviour
         coinCounter(Random.Range(3, 8));
 
         Debug.Log("There are " + numberOfDefaultZombies + " zombies left.");
+        if (numberOfTotalZombies == 1 &  waveManager.wave == 0)
+        {
+            uiTutorial.SetActive(true);
+            Time.timeScale = 0;
+        }
+
+
         if (numberOfTotalZombies == 0)
         {
             waveManager.PostWaveUI();
