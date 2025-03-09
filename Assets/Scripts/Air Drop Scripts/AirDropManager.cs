@@ -80,12 +80,12 @@ public class AirDropManager : MonoBehaviour
         bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, checkRadius, NavMesh.AllAreas);
         if (isOnNavMesh)
         {
-            return true;
+           return true;
         }
         else
         {
             Debug.Log("NavMesh Surface Not Found");
-            return true;
+            return false;
         }
     }
     bool IsInsideNavMeshObstacle(Vector3 position)

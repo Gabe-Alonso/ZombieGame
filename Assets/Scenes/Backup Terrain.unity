@@ -3084,6 +3084,7 @@ MonoBehaviour:
   firstBoss: {fileID: 766399495}
   firstStatue: {fileID: 751315778}
   movementCanvas: {fileID: 204110115}
+  uiTutorial: {fileID: 0}
   checkRadius: 10
   coins: {fileID: 991347795}
   numberOfCoins: 0
@@ -6996,7 +6997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wave: 0
-  zombieWave: 1
+  zombieWave: 0
   waveComplete: {fileID: 964609479}
   canvas2: {fileID: 546305381}
   startNextWave: {fileID: 152247764}
@@ -7007,6 +7008,7 @@ MonoBehaviour:
   - {x: -185, y: 2.5, z: -45}
   - {x: -188, y: 2.5, z: 103}
   - {x: -236, y: 2.5, z: 281}
+  shopCanvas: {fileID: 0}
   inbetweenWaves: {fileID: 11400000, guid: b71f461b0864c054cb5177375015e693, type: 2}
   _wavetext: {fileID: 1142797683}
   _spawner: {fileID: 319256957}
