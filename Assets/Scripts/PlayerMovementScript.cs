@@ -20,6 +20,7 @@ public class PlayerMovementScript : MonoBehaviour
     InputAction swapS;
     InputAction swapAR;
     InputAction sprintAction;
+    InputAction meleeAction;
     
     // Haungs Mode Data
     InputAction haungsAction;
@@ -50,6 +51,7 @@ public class PlayerMovementScript : MonoBehaviour
     public TextMeshProUGUI _PName;
     public TextMeshProUGUI _SName;
     public TextMeshProUGUI _ARName;
+    public GameObject meleeBox;
 
 
     void Start()
@@ -61,6 +63,7 @@ public class PlayerMovementScript : MonoBehaviour
         swapS = InputSystem.actions.FindAction("SelectShotgun");
         swapAR = InputSystem.actions.FindAction("SelectAR");
         haungsAction = InputSystem.actions.FindAction("Haungs");
+        meleeAction = InputSystem.actions.FindAction("Melee");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
         audioSource = GetComponent<AudioSource>();
         health = 3;
@@ -107,6 +110,16 @@ public class PlayerMovementScript : MonoBehaviour
             Debug.Log("Haungs Mode: " + haungsModeOn);
             haungsToggle();
         }
+        if(meleeAction.WasPressedThisFrame()){
+            Melee();
+        }
+    }
+
+    public void Melee(){
+        Debug.Log("melee");
+        transform.Find("Melee").gameObject.SetActive(true);
+        transform.Find("Melee").gameObject.GetComponent<MeleeScript>().Activate();
+        
     }
 
     public void haungsToggle(){
