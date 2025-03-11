@@ -3531,6 +3531,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 974158979}
     - target: {fileID: 821441842640656814, guid: 726e6e06a73ba6244a81067b1fbc0427, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3da0ca691e0deaa4cbf0d6c4e981deb8, type: 3}
+    - target: {fileID: 821441842640656814, guid: 726e6e06a73ba6244a81067b1fbc0427, type: 3}
       propertyPath: reserveAmmo
       value: 96
       objectReference: {fileID: 0}
@@ -18546,9 +18550,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 974158979}
     - target: {fileID: 6201183102457499386, guid: 9f200359ec342b244af2f249f8803dbe, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3da0ca691e0deaa4cbf0d6c4e981deb8, type: 3}
+    - target: {fileID: 6201183102457499386, guid: 9f200359ec342b244af2f249f8803dbe, type: 3}
       propertyPath: inbetweenWaves
       value: 
       objectReference: {fileID: 11400000, guid: b71f461b0864c054cb5177375015e693, type: 2}
+    - target: {fileID: 6697263874432403801, guid: 9f200359ec342b244af2f249f8803dbe, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6798861477855471131, guid: 9f200359ec342b244af2f249f8803dbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.2
@@ -19556,6 +19568,10 @@ PrefabInstance:
       propertyPath: _ammoCount
       value: 
       objectReference: {fileID: 974158979}
+    - target: {fileID: 5662314784985389284, guid: 01e88ab309dd67249b9eebff17e89ec9, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3da0ca691e0deaa4cbf0d6c4e981deb8, type: 3}
     - target: {fileID: 5662314784985389284, guid: 01e88ab309dd67249b9eebff17e89ec9, type: 3}
       propertyPath: inbetweenWaves
       value: 

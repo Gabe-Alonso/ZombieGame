@@ -44,7 +44,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private bool _firstBoss = true;
     private bool _firstStatue = true;
-    public float checkRadius = 5f;
+    public float checkRadius = 3f;
 
 
     //coin counter
