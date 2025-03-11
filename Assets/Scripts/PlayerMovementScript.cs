@@ -38,6 +38,15 @@ public class PlayerMovementScript : MonoBehaviour
     private float sliderTimer;
     [SerializeField] private TrailRenderer trail;
 
+// Variables for melee
+    private bool canMelee = true;
+    private bool isMeleeing;
+    private float meleeTime = 0.1f;
+    private float meleeCooldown = .5f;
+    public Slider meleeSlider;
+    private float sliderTimerM;
+
+
     private AudioSource audioSource;
     private Rigidbody rb;
     public float speed;
@@ -72,6 +81,7 @@ public class PlayerMovementScript : MonoBehaviour
         _PName.enabled = true;
 
         sliderTimer = dashingCooldown;
+        sliderTimerM = meleeCooldown;
         haungsModeOn = false;
 
     }
@@ -80,6 +90,8 @@ public class PlayerMovementScript : MonoBehaviour
         RotatePlayer();
         MovePlayer();
         StartCoroutine(Dash());
+        StartCoroutine(Melee());
+
         if(swapP.IsPressed()){
             _ARName.enabled = false;
             _SName.enabled = false;
@@ -99,8 +111,6 @@ public class PlayerMovementScript : MonoBehaviour
             KillChildren();
             transform.Find("AR").gameObject.SetActive(true); 
         }
-        
-
     }
 
     void Update()
@@ -110,16 +120,63 @@ public class PlayerMovementScript : MonoBehaviour
             Debug.Log("Haungs Mode: " + haungsModeOn);
             haungsToggle();
         }
-        if(meleeAction.WasPressedThisFrame()){
-            Melee();
-        }
+        
     }
 
-    public void Melee(){
-        Debug.Log("melee");
-        transform.Find("Melee").gameObject.SetActive(true);
-        transform.Find("Melee").gameObject.GetComponent<MeleeScript>().Activate();
-        
+    public IEnumerator Melee(){
+        if(meleeAction.IsPressed() && canMelee){
+            Debug.Log("melee");
+            canMelee = false;
+            isMeleeing = true;
+            transform.Find("Melee").gameObject.SetActive(true);
+            transform.Find("Melee").gameObject.GetComponent<MeleeScript>().Activate();
+            yield return new WaitForSeconds(meleeTime);
+            meleeSlider.value = 1f;
+            sliderTimerM = meleeCooldown;
+            
+            isMeleeing = false;
+
+            while (sliderTimerM > 0)
+            {
+                sliderTimerM -= Time.deltaTime;
+                meleeSlider.value = sliderTimerM / meleeCooldown; // Scale slider between 0 and 1
+                yield return null; // Wait for next frame
+            }
+
+            meleeSlider.value = 0f; // Ensure slider is empty at the end
+            canMelee = true;
+
+        }     
+    }
+
+    private IEnumerator Dash()
+    {
+        if (sprintAction.IsPressed() && canDash)
+        {
+            Debug.Log("Dash function is running");
+            canDash = false;
+            isDashing = true;
+            Vector2 moveInput = moveAction.ReadValue<Vector2>();
+            rb.linearVelocity = new Vector3(moveInput.x, 0, moveInput.y)*dashingPower;
+            trail.emitting = true;
+            yield return new WaitForSeconds(dashingTime);
+            dashSlider.value = 1f;
+            sliderTimer = dashingCooldown;
+            rb.linearVelocity = new Vector3(0, 0, 0);
+            trail.emitting = false;
+            isDashing = false;
+
+            while (sliderTimer > 0)
+            {
+                sliderTimer -= Time.deltaTime;
+                dashSlider.value = sliderTimer / dashingCooldown; // Scale slider between 0 and 1
+                yield return null; // Wait for next frame
+            }
+
+            dashSlider.value = 0f; // Ensure slider is empty at the end
+            canDash = true;
+        }
+
     }
 
     public void haungsToggle(){
@@ -212,34 +269,6 @@ public class PlayerMovementScript : MonoBehaviour
         transform.position = newPosition;
     }
 
-    private IEnumerator Dash()
-    {
-        if (sprintAction.IsPressed() && canDash)
-        {
-            Debug.Log("Dash function is running");
-            canDash = false;
-            isDashing = true;
-            Vector2 moveInput = moveAction.ReadValue<Vector2>();
-            rb.linearVelocity = new Vector3(moveInput.x, 0, moveInput.y)*dashingPower;
-            trail.emitting = true;
-            yield return new WaitForSeconds(dashingTime);
-            dashSlider.value = 1f;
-            sliderTimer = dashingCooldown;
-            rb.linearVelocity = new Vector3(0, 0, 0);
-            trail.emitting = false;
-            isDashing = false;
-
-            while (sliderTimer > 0)
-            {
-                sliderTimer -= Time.deltaTime;
-                dashSlider.value = sliderTimer / dashingCooldown; // Scale slider between 0 and 1
-                yield return null; // Wait for next frame
-            }
-
-            dashSlider.value = 0f; // Ensure slider is empty at the end
-            canDash = true;
-        }
-
-    }
+    
     
 }
