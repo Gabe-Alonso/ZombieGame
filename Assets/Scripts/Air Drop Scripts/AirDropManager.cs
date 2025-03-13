@@ -23,21 +23,25 @@ public class AirDropManager : MonoBehaviour
     private float _time = 0;
     private float _duration = 0;
     private Airdrop _spawned = null;
+    private bool _first = true;
 
     public inbetweenWaves inbetweenWaves;
 
-    private bool _first = true;
+    private int _wave;
     private int numSpawned = 0;
 
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");
+        _wave = this.gameObject.GetComponent<WaveManager>().wave;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!inbetweenWaves.var)
+        _wave = this.gameObject.GetComponent<WaveManager>().wave;
+
+        if (!inbetweenWaves.var && _wave >= 1)
         {
             if (numSpawned < 3)
             {

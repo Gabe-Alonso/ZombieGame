@@ -55,6 +55,12 @@ public class WaveManager : MonoBehaviour
 
     public void PostWaveUI()
     {
+        //For Delayed Shop Spawning
+        if (wave == 1)
+        {
+            SpawnNextShop();
+        }
+
         if (wave == 10)
         {
             canvas2.SetActive(true);
@@ -69,15 +75,21 @@ public class WaveManager : MonoBehaviour
 
     public void nextWaveStart()
     {
+        wave++;
+
         inbetweenWaves.var = false;
         _roundInactive = false;
         startNextWave.SetActive(false);
         waveComplete.SetActive(false);
         
-        SpawnNextShop();
+        //For Delayed Shop Spawning
+        if( wave > 1)
+        {
+            SpawnNextShop();
+        }
+
         canvas2.SetActive(false);
 
-        wave++;
         if (wave % 4 == 0)
         {
             BossStart();
@@ -129,7 +141,7 @@ public class WaveManager : MonoBehaviour
             Destroy(_currentShop);
         }
 
-        if (wave == 0)
+        if (wave == 1)
         {
             Time.timeScale = 0;
             shopCanvas.SetActive(true);

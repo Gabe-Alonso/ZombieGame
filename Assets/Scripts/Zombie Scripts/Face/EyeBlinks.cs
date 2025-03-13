@@ -19,7 +19,7 @@ public class EyeBlinks : MonoBehaviour
 
         if(_time > 1f)
         {
-            if(Random.Range(0,100) == 0)
+            if(Random.Range(0,50) == 0)
             {
                 eyeLidsL.SetActive(true);
                 eyeLidsR.SetActive(true);

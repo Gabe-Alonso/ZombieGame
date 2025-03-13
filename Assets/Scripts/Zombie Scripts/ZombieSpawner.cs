@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ZombieSpawner : MonoBehaviour
@@ -26,6 +28,7 @@ public class ZombieSpawner : MonoBehaviour
     public GameObject w5BossBlock;
     public GameObject w5BossCharge;
     public GameObject w10Boss;
+    public GameObject w10Cutscene;
     public GameObject BossHealthBar;
     public GameObject TwinHealthBar;
     public GameObject ZombieStatue;
@@ -68,6 +71,7 @@ public class ZombieSpawner : MonoBehaviour
         // Number of default zombie spawns increase every odd wave
         if (wave == 0)
         {
+            spawnBoss();
             numberOfDefaultZombies = 2;
             wave0();
         }
@@ -210,13 +214,6 @@ public class ZombieSpawner : MonoBehaviour
     {
         bool spawned = false;
 
-        if (_firstBoss)
-        {
-            _firstBoss = false;
-            firstBoss.SetActive(true);
-            Time.timeScale = 0;
-        }
-
         while (!spawned)
         {
             var spawnRange = 15;
@@ -257,12 +254,32 @@ public class ZombieSpawner : MonoBehaviour
             }
 
         }
+
+        if (_firstBoss)
+        {
+            _firstBoss = false;
+            firstBoss.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 
     //To use this, Instatiate a Zombie Boss, then set it equal to this like so
     //This will then Instantiate the boss with all the correct number necessarry.
     void spawnW5Boss(Vector3 spawn)
     {
+        //Turn OFF Player
+        _player.gameObject.SetActive(false);
+        //Turn OFF Zombie Count UI
+        //Turn ON Cutscene
+        w10Cutscene.SetActive(true);
+        //Wait 8 Secdonds (or until cutscene done)
+        WaitFor(8f);
+        //Turn ON Player
+        _player.gameObject.SetActive(true);
+        //Turn ON Zombie Count UI
+        //Turn OFF Cutscene
+        w10Cutscene.SetActive(false);
+
         TwinHealthBar.SetActive(true);
 
         var boss = Instantiate(w5BossBlock, spawn, Quaternion.identity);
@@ -330,5 +347,11 @@ public class ZombieSpawner : MonoBehaviour
     {
         movementCanvas.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public static IEnumerable<YieldInstruction> WaitFor(float time)
+    {
+        yield return new WaitForSeconds(time);
+
     }
 }
