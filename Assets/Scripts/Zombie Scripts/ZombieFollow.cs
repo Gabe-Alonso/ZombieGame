@@ -277,7 +277,8 @@ public class ZombieFollow : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        takeDamage();
+        if (other.gameObject.tag == "Bullet")
+            takeDamage();
     }
 
     void takeDamage(){

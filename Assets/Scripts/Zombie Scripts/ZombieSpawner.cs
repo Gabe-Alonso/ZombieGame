@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.AI.Navigation;
@@ -27,6 +28,7 @@ public class ZombieSpawner : MonoBehaviour
 
     public GameObject w5BossBlock;
     public GameObject w5BossCharge;
+    public GameObject w5Cutscene;
     public GameObject w10Boss;
     public GameObject w10Cutscene;
     public GameObject BossHealthBar;
@@ -151,7 +153,6 @@ public class ZombieSpawner : MonoBehaviour
         // will need to be changed if we ever have floating NavMesh Obstacle
         bool isBlocked = NavMesh.Raycast(position, position + Vector3.up * 2f, out hit, NavMesh.AllAreas);
         return isBlocked;
-        
     }
 
    public bool IsOnNavMesh(Vector3 position)
@@ -233,26 +234,26 @@ public class ZombieSpawner : MonoBehaviour
                 //Guarentee the "easier" boss spawns First, then the other, then after wave 10 its randomized
                 if(_first)
                 {
-                    spawnW10Boss(spawnPosition);
+                    StartCoroutine(spawnW10Boss(spawnPosition));
                     zombieCounter(1);
                     _first = false;
 
                 }
                 else if (_second)
                 {
-                    spawnW5Boss(spawnPosition);
+                    StartCoroutine(spawnW5Boss(spawnPosition));
                     zombieCounter(2);
                     _second = false;
 
                 }
                 else if(Random.Range(0,2) < 1)
                 {
-                    spawnW10Boss(spawnPosition);
+                    StartCoroutine(spawnW10Boss(spawnPosition));
                     zombieCounter(1);
                 }
                 else
                 {
-                    spawnW5Boss(spawnPosition);
+                    StartCoroutine(spawnW5Boss(spawnPosition));
                     zombieCounter(2);
                 }
                 spawned = true;
@@ -261,30 +262,41 @@ public class ZombieSpawner : MonoBehaviour
 
         }
 
+        
+    }
+
+    //To use this, Instatiate a Zombie Boss, then set it equal to this like so
+    //This will then Instantiate the boss with all the correct number necessarry.
+    IEnumerator spawnW5Boss(Vector3 spawn)
+    {
+        //Turn OFF Player
+        _player.gameObject.SetActive(false);
+        //Turn OFF Zombie Count UI
+        var can = transform.Find("Canvas").gameObject;
+        can.SetActive(false);
+        //Turn ON Cutscene
+        w5Cutscene.SetActive(true);
+
+        Debug.Log("Before Wait");
+        //Wait 8 Secdonds (or until cutscene done)
+        yield return new WaitForSeconds(10f);
+        Debug.Log("After Wait");
+
+
+
         if (_firstBoss)
         {
             _firstBoss = false;
             firstBoss.SetActive(true);
             Time.timeScale = 0;
         }
-    }
 
-    //To use this, Instatiate a Zombie Boss, then set it equal to this like so
-    //This will then Instantiate the boss with all the correct number necessarry.
-    void spawnW5Boss(Vector3 spawn)
-    {
-        //Turn OFF Player
-        _player.gameObject.SetActive(false);
-        //Turn OFF Zombie Count UI
-        //Turn ON Cutscene
-        w10Cutscene.SetActive(true);
-        //Wait 8 Secdonds (or until cutscene done)
-        WaitFor(8f);
         //Turn ON Player
         _player.gameObject.SetActive(true);
         //Turn ON Zombie Count UI
+        can.SetActive(true);
         //Turn OFF Cutscene
-        w10Cutscene.SetActive(false);
+        w5Cutscene.SetActive(false);
 
         TwinHealthBar.SetActive(true);
 
@@ -301,8 +313,35 @@ public class ZombieSpawner : MonoBehaviour
 
     //To use this, Instatiate a Zombie Boss, then set it equal to this like so
     //This will then Instantiate the boss with all the correct number necessarry.
-    void spawnW10Boss(Vector3 spawn)
+    IEnumerator spawnW10Boss(Vector3 spawn)
     {
+        //Turn OFF Player
+        _player.gameObject.SetActive(false);
+        //Turn OFF Zombie Count UI
+        var can = transform.Find("Canvas").gameObject;
+        can.SetActive(false);
+        //Turn ON Cutscene
+        w10Cutscene.SetActive(true);
+
+        Debug.Log("Before Wait");
+        //Wait 8 Secdonds (or until cutscene done)
+        yield return new WaitForSeconds(8f);
+        Debug.Log("After Wait");
+
+        if (_firstBoss)
+        {
+            _firstBoss = false;
+            firstBoss.SetActive(true);
+            Time.timeScale = 0;
+        }
+
+        //Turn ON Player
+        _player.gameObject.SetActive(true);
+        //Turn ON Zombie Count UI
+        can.SetActive(true);
+        //Turn OFF Cutscene
+        w10Cutscene.SetActive(false);
+
         var boss = Instantiate(w10Boss, spawn, Quaternion.identity);
 
         boss.GetComponent<ZombieFollow>().BossHealthBar = BossHealthBar;
@@ -355,8 +394,10 @@ public class ZombieSpawner : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public static IEnumerable<YieldInstruction> WaitFor(float time)
+    IEnumerator WaitFor(float time)
     {
+
+        Debug.Log("In Wait");
         yield return new WaitForSeconds(time);
 
     }
