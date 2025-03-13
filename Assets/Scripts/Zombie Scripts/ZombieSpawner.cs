@@ -73,7 +73,6 @@ public class ZombieSpawner : MonoBehaviour
         // Number of default zombie spawns increase every odd wave
         if (wave == 0)
         {
-            spawnBoss();
             numberOfDefaultZombies = 2;
             wave0();
         }
