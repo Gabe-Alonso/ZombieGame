@@ -33,13 +33,13 @@ public class AirDropManager : MonoBehaviour
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");
-        _wave = this.gameObject.GetComponent<WaveManager>().wave;
+        _wave = this.gameObject.GetComponent<ZombieSpawner>().waveManager.wave;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _wave = this.gameObject.GetComponent<WaveManager>().wave;
+        _wave = this.gameObject.GetComponent<ZombieSpawner>().waveManager.wave;
 
         if (!inbetweenWaves.var && _wave >= 1)
         {
