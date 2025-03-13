@@ -43,7 +43,8 @@ public class ZombieSpawner : MonoBehaviour
 
     public GameObject movementCanvas;
     public GameObject uiTutorial;
-   
+
+    public GameObject chargeZombieExplain;
 
     private GameObject _player;
 
@@ -88,6 +89,8 @@ public class ZombieSpawner : MonoBehaviour
         
         if (wave > 5) 
         { 
+            chargeZombieExplain.SetActive(true);
+            Time.timeScale = 0;
             numberOfChargeZombies = wave - 4;
         }
         else
