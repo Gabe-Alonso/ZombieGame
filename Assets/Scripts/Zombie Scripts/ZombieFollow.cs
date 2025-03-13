@@ -269,16 +269,10 @@ public class ZombieFollow : MonoBehaviour
         //IF collision is from a BULLET
         if (collision.gameObject.tag == "Bullet")
         {
+            Debug.Log("DAMAGED");
             takeDamage();
         }
 
-
-        //IF Collision is from the PLAYER
-        if (collision.gameObject.tag == "Player")
-        {
-            //Access the Player's Health here some how
-            //collision.gameObject.health--;
-        }
     }
 
     void OnTriggerEnter(Collider other)

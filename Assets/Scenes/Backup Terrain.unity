@@ -7037,6 +7037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1425529544}
+  grenade: {fileID: 1117520124455344866, guid: 335f34ad236bca345ad87570341c67ba, type: 3}
   dashSlider: {fileID: 784046984}
   trail: {fileID: 626681113}
   meleeSlider: {fileID: 1397260759}
@@ -7048,6 +7049,7 @@ MonoBehaviour:
   _SName: {fileID: 1791087502}
   _ARName: {fileID: 867268773}
   meleeBox: {fileID: 4153145864701069162, guid: 0804e91b8ff88ed469a80ac2e4f3687b, type: 3}
+  grenadeCount: 0
 --- !u!114 &626681107
 MonoBehaviour:
   m_ObjectHideFlags: 0
