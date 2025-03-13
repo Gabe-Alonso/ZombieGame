@@ -9,14 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 8cd366ea921d67340aecefc62b3e6ccd
   - enabled: 1
-    path: Assets/Scenes/Playtesting.unity
-    guid: 8108afa94d71b6f4f8f6a56c8cae167b
-  - enabled: 0
-    path: Assets/Scenes/Start.unity
-    guid: 852d553098ad30a49b4b213cf4ec3225
-  - enabled: 0
-    path: Assets/Scenes/DemoScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Backup Terrain.unity
+    guid: d23d31c6f62e5874fa90bb40b3000bbc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

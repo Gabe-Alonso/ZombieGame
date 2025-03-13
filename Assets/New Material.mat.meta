@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/New Material.mat.meta
 guid: ad65a9b15c8253e4c935d3ce3d22e389
+========
+guid: fb01a8a5968e62a4f97db1bbfd730a93
+>>>>>>>> main:Assets/Scenes/Backup Terrain/NavMesh-Ground 1.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

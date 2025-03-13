@@ -10,6 +10,7 @@ public class Airdrop : MonoBehaviour
     private float _time;
     private GameObject _player;
     private Zone _zone;
+    private ZombieSpawner _spawner;
 
 
     private HealthBar timerBar;
@@ -22,6 +23,8 @@ public class Airdrop : MonoBehaviour
 
         _zone = Instantiate(zone, new Vector3(transform.position.x, .1f, transform.position.z), Quaternion.identity);
         _zone.transform.localScale = new Vector3(captureRadius*2, _zone.transform.localScale.y, captureRadius*2);
+
+        _spawner = GameObject.FindWithTag("Spawner").GetComponent<ZombieSpawner>();
 
         timerBar = GetComponentInChildren<HealthBar>();
         timerBar.UpdateHealthBar(captureTime, captureTime);
@@ -48,7 +51,10 @@ public class Airdrop : MonoBehaviour
     {
 
         _player.GetComponent<PlayerMovementScript>().AddAmmo(12 * Random.Range(1, 3), 2 * Random.Range(1, 3), 24 * Random.Range(1, 3));
-        _player.GetComponent<PlayerHealth>().AddHealth(Random.Range(1,3));
+        _player.GetComponent<PlayerHealth>().AddHealth(Random.Range(1, 3));
+
+        _spawner.numberOfCoins += Random.Range(0, 50);
+        _spawner.coinCounterUpdate();
     }
     private void OnDestroy()
     {

@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerHealth : MonoBehaviour
 {
     public float health;
-    private float maxHealth;
+    public float maxHealth;
     public float timeBetweenHits = 0.5f;
 
     public Material damagedMaterial;
@@ -12,9 +13,14 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip zombieBite;
 
     public GameObject gameOverScreen;
+    public TextMeshProUGUI _waveDisplay;
+   
+    public GameObject _waveManager;
+    private int _wavesCompleted;
 
 
     private Material _normalMaterial;
+    public GameObject blood;
 
     //To keep track of the time since the enemy was last damaged
     private float _damageTimer = 0;
@@ -34,6 +40,10 @@ public class PlayerHealth : MonoBehaviour
         //To get the NavMeshAgent Component
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBar>();
+       // _waveManager = GameObject.FindWithTag("WaveManager");
+
+        UpdateHealth();
+
     }
 
     // Update is called once per frame
@@ -62,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
         {
             if (_damageBool)
             {
+                GameObject bloodParticle = Instantiate(blood, gameObject.transform.position, Quaternion.identity);
                 health--;
                 _damageBool = false;
                 _damageTimer = 0;
@@ -105,6 +116,15 @@ public class PlayerHealth : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+
+        _wavesCompleted = _waveManager.GetComponent<WaveManager>().wave - 1;
+        _waveDisplay.text = "You made it until wave " + _waveManager.GetComponent<WaveManager>().wave + ".";
         gameOverScreen.SetActive(true);
+
+    }
+
+    public void UpdateHealth()
+    {
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 }

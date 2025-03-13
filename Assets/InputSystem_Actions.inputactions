@@ -81,7 +81,7 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -126,6 +126,24 @@
                     "name": "SelectAR",
                     "type": "Button",
                     "id": "b60b7f37-365d-435f-a243-481bbc51d1cd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Haungs",
+                    "type": "Button",
+                    "id": "7f3df2f5-d9d5-4017-a239-5c372ca115c2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Melee",
+                    "type": "Button",
+                    "id": "c8d38fa6-a986-45ee-a06c-27cad227efcc",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -570,6 +588,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SelectAR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f57a3309-9f28-4e07-8c54-185c1055a6b3",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Haungs",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c62241a-785a-410d-8638-c30ddcc7c01f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

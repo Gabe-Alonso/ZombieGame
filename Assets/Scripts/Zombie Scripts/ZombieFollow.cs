@@ -11,12 +11,12 @@ public class ZombieFollow : MonoBehaviour
 
     private GameObject player;
     public float health = 3;
-    private float maxHealth;
+    public float maxHealth;
     public float timeBetweenHits = 0.5f;
     public bool noDamageCooldown = true;
     public bool isBoss = false;
-    public bool runAway = false;
     private float speed;
+    public GameObject blood;
 
 
     private AudioSource audioSource;
@@ -48,8 +48,10 @@ public class ZombieFollow : MonoBehaviour
     private GameObject _spawner;
     public GameObject BossHealthBar;
     private GameObject _waveManager;
-    public int _wave;
+    private int _wave;
     public bool isDead = false;
+    public bool tracking = true;
+    private float _speedMax = 10f;
 
     // distance for audio volume
     private float distanceToPlayer;
@@ -67,7 +69,11 @@ public class ZombieFollow : MonoBehaviour
 
         //To get the NavMeshAgent Component
         _agent = GetComponent<NavMeshAgent>();
-        speed = Random.Range(5f, 10f + 2*_wave);
+        if (_wave % 2 != 0)
+        {
+            _speedMax = _speedMax + 2;
+        }
+        speed = Random.Range(5f, _speedMax);
         _agent.speed = speed;
         maxHealth = health;
        
@@ -85,10 +91,13 @@ public class ZombieFollow : MonoBehaviour
             healthBar = GetComponentInChildren<HealthBar>();
         }
 
+
+
         healthBar.UpdateHealthBar(health, maxHealth);
 
         player = GameObject.FindWithTag("Player");
         _spawner = GameObject.FindWithTag("Spawner");
+
 
         // calculate distance to play sound at volume 
         distanceToPlayer = Mathf.Sqrt(Mathf.Pow(Mathf.Abs(player.transform.position.x - _agent.transform.position.x), 2) + Mathf.Pow(Mathf.Abs(player.transform.position.z - _agent.transform.position.z), 2));
@@ -140,17 +149,30 @@ public class ZombieFollow : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (runAway)
+
+        if(tracking)
         {
-            _agent.destination = transform.position - player.transform.position;
-        }
-        else
-        {
-            //To start the movement of the Agent towards the player
             _agent.destination = player.transform.position;
         }
+
+        
+        //If reinstating this, use ACCELERATION, not SPEED
+        /*if (GetDistanceFromPlayer() >= 20)
+        {
+            _agent.speed = speed * 3;
+            
+        }
+
+        if (GetDistanceFromPlayer() < 20 && stopTime > 0)
+        {
+            _agent.velocity = Vector3.zero;
+            stopTime = stopTime - Time.deltaTime;
+
+            _agent.speed = speed;
+        }
+        */
 
         //Damage Timer, for Time Between Hits
         if (_damageTimer > timeBetweenHits)
@@ -247,8 +269,28 @@ public class ZombieFollow : MonoBehaviour
         //IF collision is from a BULLET
         if (collision.gameObject.tag == "Bullet")
         {
-            if (_damageBool || noDamageCooldown)
+            takeDamage();
+        }
+
+
+        //IF Collision is from the PLAYER
+        if (collision.gameObject.tag == "Player")
+        {
+            //Access the Player's Health here some how
+            //collision.gameObject.health--;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        takeDamage();
+    }
+
+    void takeDamage(){
+        if (_damageBool || noDamageCooldown)
             {
+                GameObject bloodParticle = Instantiate(blood, gameObject.transform.position, Quaternion.identity);
+                                
                 health--;
                 _damageBool = false;
                 _damageTimer = 0;
@@ -273,15 +315,11 @@ public class ZombieFollow : MonoBehaviour
                               
 
             }
-        }
+    }
 
-
-        //IF Collision is from the PLAYER
-        if (collision.gameObject.tag == "Player")
-        {
-            //Access the Player's Health here some how
-            //collision.gameObject.health--;
-        }
+    public void UpdateHealth()
+    {
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     public float GetDistanceFromPlayer()

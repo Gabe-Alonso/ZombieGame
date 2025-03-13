@@ -27,6 +27,11 @@ public class GunScript : MonoBehaviour
     public int shotgunShots;
     public float despawnDist;
     public TextMeshProUGUI _ammoCount;
+    public GameObject muzzleFlash;
+
+    public inbetweenWaves inbetweenWaves;
+
+    private AudioSource _audio;
     
 
     void Start()
@@ -44,6 +49,7 @@ public class GunScript : MonoBehaviour
         ammo = maxAmmo;
         shotgunShots = 5;
         _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
+        _audio = GetComponent<AudioSource>();
         
     }
 
@@ -57,14 +63,23 @@ public class GunScript : MonoBehaviour
         if (Physics.Raycast(ray, out hit)){
         }
         
-        if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0)){
+        if((shootAction.IsPressed()) && (!isReloading) && (intervalTimer > bulletInterval) && (ammo > 0) && !inbetweenWaves.var){
             shoot();
+            GameObject mf = Instantiate(muzzleFlash, transform.position, Quaternion.identity);
+            _audio.Play();
+            mf.transform.SetParent(gameObject.transform);
+            //mf.transform.position += new Vector3(0,0,1);
+            mf.transform.Rotate(0, 90, 0);
+            mf.transform.localScale *= 0.1f;
+
             Debug.Log("Current Clip: " + ammo);
             _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
         }
         if (((ammo == 0) || reloadAction.IsPressed()) && (!isReloading) && (ammo < maxAmmo) && (reserveAmmo > 0)){
             Debug.Log("Reloading...");
             _ammoCount.text = "Reloading...";
+            
+            
             isReloading = true;
             if (maxAmmo > reserveAmmo) {
                 
@@ -97,6 +112,11 @@ public class GunScript : MonoBehaviour
         }
     }
 
+    public void UpdateAmmo()
+    {
+        _ammoCount.text = ":" + ammo.ToString() + "/" + maxAmmo.ToString() + "/" + reserveAmmo.ToString();
+    }
+
 
     private void shoot(){
         if (isShotgun){
@@ -111,6 +131,7 @@ public class GunScript : MonoBehaviour
             newBullet.GetComponent<BulletScript>().despawnDist = despawnDist;
             newBullet.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
             
+
         }
         
         intervalTimer = 0;
