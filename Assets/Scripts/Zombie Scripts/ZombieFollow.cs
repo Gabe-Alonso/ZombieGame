@@ -269,7 +269,25 @@ public class ZombieFollow : MonoBehaviour
         //IF collision is from a BULLET
         if (collision.gameObject.tag == "Bullet")
         {
-            if (_damageBool || noDamageCooldown)
+            takeDamage();
+        }
+
+
+        //IF Collision is from the PLAYER
+        if (collision.gameObject.tag == "Player")
+        {
+            //Access the Player's Health here some how
+            //collision.gameObject.health--;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        takeDamage();
+    }
+
+    void takeDamage(){
+        if (_damageBool || noDamageCooldown)
             {
                 GameObject bloodParticle = Instantiate(blood, gameObject.transform.position, Quaternion.identity);
                                 
@@ -297,15 +315,6 @@ public class ZombieFollow : MonoBehaviour
                               
 
             }
-        }
-
-
-        //IF Collision is from the PLAYER
-        if (collision.gameObject.tag == "Player")
-        {
-            //Access the Player's Health here some how
-            //collision.gameObject.health--;
-        }
     }
 
     public void UpdateHealth()

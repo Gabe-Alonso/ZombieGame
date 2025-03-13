@@ -35,6 +35,8 @@ public class ZombieSpawner : MonoBehaviour
 
     public AudioClip BossIntro;
     private AudioSource BossAudioSource;
+    public AudioSource zombieAudioSource;
+    
 
     public GameObject firstBoss;
     public GameObject firstStatue;
@@ -47,7 +49,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private bool _firstBoss = true;
     private bool _firstStatue = true;
-    public float checkRadius = 5f;
+    public float checkRadius = 3f;
 
 
     //coin counter
@@ -173,6 +175,11 @@ public class ZombieSpawner : MonoBehaviour
         numberOfDefaultZombies += num;
         updateZombieCounter();
         coinCounter(Random.Range(3, 8));
+
+        if (num == -1)
+        {
+            zombieAudioSource.Play();
+        }
 
         Debug.Log("There are " + numberOfDefaultZombies + " zombies left.");
         if (numberOfTotalZombies == 1 &  waveManager.wave == 0)
