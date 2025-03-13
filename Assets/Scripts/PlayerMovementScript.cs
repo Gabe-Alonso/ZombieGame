@@ -20,7 +20,6 @@ public class PlayerMovementScript : MonoBehaviour
     InputAction swapS;
     InputAction swapAR;
     InputAction sprintAction;
-    InputAction meleeAction;
     
     // Haungs Mode Data
     InputAction haungsAction;
@@ -38,15 +37,6 @@ public class PlayerMovementScript : MonoBehaviour
     private float sliderTimer;
     [SerializeField] private TrailRenderer trail;
 
-// Variables for melee
-    private bool canMelee = true;
-    private bool isMeleeing;
-    private float meleeTime = 0.1f;
-    private float meleeCooldown = .5f;
-    public Slider meleeSlider;
-    private float sliderTimerM;
-
-
     private AudioSource audioSource;
     private Rigidbody rb;
     public float speed;
@@ -60,7 +50,6 @@ public class PlayerMovementScript : MonoBehaviour
     public TextMeshProUGUI _PName;
     public TextMeshProUGUI _SName;
     public TextMeshProUGUI _ARName;
-    public GameObject meleeBox;
 
 
     void Start()
@@ -72,7 +61,6 @@ public class PlayerMovementScript : MonoBehaviour
         swapS = InputSystem.actions.FindAction("SelectShotgun");
         swapAR = InputSystem.actions.FindAction("SelectAR");
         haungsAction = InputSystem.actions.FindAction("Haungs");
-        meleeAction = InputSystem.actions.FindAction("Melee");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
         audioSource = GetComponent<AudioSource>();
         health = 3;
@@ -81,7 +69,6 @@ public class PlayerMovementScript : MonoBehaviour
         _PName.enabled = true;
 
         sliderTimer = dashingCooldown;
-        sliderTimerM = meleeCooldown;
         haungsModeOn = false;
 
     }
@@ -90,8 +77,6 @@ public class PlayerMovementScript : MonoBehaviour
         RotatePlayer();
         MovePlayer();
         StartCoroutine(Dash());
-        StartCoroutine(Melee());
-
         if(swapP.IsPressed()){
             _ARName.enabled = false;
             _SName.enabled = false;
@@ -111,6 +96,8 @@ public class PlayerMovementScript : MonoBehaviour
             KillChildren();
             transform.Find("AR").gameObject.SetActive(true); 
         }
+        
+
     }
 
     void Update()
@@ -120,63 +107,6 @@ public class PlayerMovementScript : MonoBehaviour
             Debug.Log("Haungs Mode: " + haungsModeOn);
             haungsToggle();
         }
-        
-    }
-
-    public IEnumerator Melee(){
-        if(meleeAction.IsPressed() && canMelee){
-            Debug.Log("melee");
-            canMelee = false;
-            isMeleeing = true;
-            transform.Find("Melee").gameObject.SetActive(true);
-            transform.Find("Melee").gameObject.GetComponent<MeleeScript>().Activate();
-            yield return new WaitForSeconds(meleeTime);
-            meleeSlider.value = 1f;
-            sliderTimerM = meleeCooldown;
-            
-            isMeleeing = false;
-
-            while (sliderTimerM > 0)
-            {
-                sliderTimerM -= Time.deltaTime;
-                meleeSlider.value = sliderTimerM / meleeCooldown; // Scale slider between 0 and 1
-                yield return null; // Wait for next frame
-            }
-
-            meleeSlider.value = 0f; // Ensure slider is empty at the end
-            canMelee = true;
-
-        }     
-    }
-
-    private IEnumerator Dash()
-    {
-        if (sprintAction.IsPressed() && canDash)
-        {
-            Debug.Log("Dash function is running");
-            canDash = false;
-            isDashing = true;
-            Vector2 moveInput = moveAction.ReadValue<Vector2>();
-            rb.linearVelocity = new Vector3(moveInput.x, 0, moveInput.y)*dashingPower;
-            trail.emitting = true;
-            yield return new WaitForSeconds(dashingTime);
-            dashSlider.value = 1f;
-            sliderTimer = dashingCooldown;
-            rb.linearVelocity = new Vector3(0, 0, 0);
-            trail.emitting = false;
-            isDashing = false;
-
-            while (sliderTimer > 0)
-            {
-                sliderTimer -= Time.deltaTime;
-                dashSlider.value = sliderTimer / dashingCooldown; // Scale slider between 0 and 1
-                yield return null; // Wait for next frame
-            }
-
-            dashSlider.value = 0f; // Ensure slider is empty at the end
-            canDash = true;
-        }
-
     }
 
     public void haungsToggle(){
@@ -269,6 +199,34 @@ public class PlayerMovementScript : MonoBehaviour
         transform.position = newPosition;
     }
 
-    
+    private IEnumerator Dash()
+    {
+        if (sprintAction.IsPressed() && canDash)
+        {
+            Debug.Log("Dash function is running");
+            canDash = false;
+            isDashing = true;
+            Vector2 moveInput = moveAction.ReadValue<Vector2>();
+            rb.linearVelocity = new Vector3(moveInput.x, 0, moveInput.y)*dashingPower;
+            trail.emitting = true;
+            yield return new WaitForSeconds(dashingTime);
+            dashSlider.value = 1f;
+            sliderTimer = dashingCooldown;
+            rb.linearVelocity = new Vector3(0, 0, 0);
+            trail.emitting = false;
+            isDashing = false;
+
+            while (sliderTimer > 0)
+            {
+                sliderTimer -= Time.deltaTime;
+                dashSlider.value = sliderTimer / dashingCooldown; // Scale slider between 0 and 1
+                yield return null; // Wait for next frame
+            }
+
+            dashSlider.value = 0f; // Ensure slider is empty at the end
+            canDash = true;
+        }
+
+    }
     
 }
