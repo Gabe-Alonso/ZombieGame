@@ -118,7 +118,7 @@ public class PlayerHealth : MonoBehaviour
         Time.timeScale = 0;
 
         _wavesCompleted = _waveManager.GetComponent<WaveManager>().wave - 1;
-        _waveDisplay.text = "You Completed " + _wavesCompleted + " waves.";
+        _waveDisplay.text = "You made it until wave " + _waveManager.GetComponent<WaveManager>().wave + ".";
         gameOverScreen.SetActive(true);
 
     }

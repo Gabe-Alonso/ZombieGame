@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Daniels Terrain Assets/Prefabs.meta
+guid: edca57ea97f5a45118e54bf41403aefd
+folderAsset: yes
+========
 guid: 76bac5c50c21efa47ae5e9a7aa5f8c21
+>>>>>>>> main:Assets/Scenes/Old Map Playtest.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
