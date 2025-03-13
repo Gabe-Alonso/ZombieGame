@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Daniels Terrain Assets/House and Bridge.meta
+guid: 895c1bf14bb924b74ab5488392192410
+folderAsset: yes
+========
 guid: d23d31c6f62e5874fa90bb40b3000bbc
+>>>>>>>> main:Assets/Scenes/Backup Terrain.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
