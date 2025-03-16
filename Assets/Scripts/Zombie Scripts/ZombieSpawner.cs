@@ -279,7 +279,7 @@ public class ZombieSpawner : MonoBehaviour
 
         Debug.Log("Before Wait");
         //Wait 8 Secdonds (or until cutscene done)
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(11f);
         Debug.Log("After Wait");
 
 

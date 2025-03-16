@@ -29,6 +29,8 @@ public class WaveManager : MonoBehaviour
     private PlayerMovementScript _player;
     private GameObject _currentShop;
 
+    public MusicManager AudioManager;
+
     private int zombieStatueCount = 0;
     void Start()
     {
@@ -55,6 +57,9 @@ public class WaveManager : MonoBehaviour
 
     public void PostWaveUI()
     {
+        //Reset to Default Music POST_Boss Wave
+        AudioManager.PlayDefaultMusic();
+
         //For Delayed Shop Spawning
         if (wave == 1)
         {
@@ -92,6 +97,7 @@ public class WaveManager : MonoBehaviour
 
         if (wave % 4 == 0)
         {
+            AudioManager.PlayBossMusic();
             BossStart();
             
             _wavetext.text = "Boss";

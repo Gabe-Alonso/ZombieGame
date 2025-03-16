@@ -8290,6 +8290,7 @@ MonoBehaviour:
   inbetweenWaves: {fileID: 11400000, guid: b71f461b0864c054cb5177375015e693, type: 2}
   _wavetext: {fileID: 1142797683}
   _spawner: {fileID: 319256957}
+  AudioManager: {fileID: 746230016}
 --- !u!4 &683902988
 Transform:
   m_ObjectHideFlags: 0
@@ -8306,6 +8307,7 @@ Transform:
   - {fileID: 465281438}
   - {fileID: 546305382}
   - {fileID: 1835632310}
+  - {fileID: 746230015}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &683902989
@@ -9000,6 +9002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746230015}
+  - component: {fileID: 746230016}
   - component: {fileID: 746230014}
   m_Layer: 0
   m_Name: Music Source
@@ -9113,13 +9116,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746230013}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 270.59842, y: 2.4978642, z: -3.9220355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 683902988}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &746230016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746230013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ec49e6af68b2849881f0e7f050214f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMusic: {fileID: 0}
+  bossMusic: {fileID: 8300000, guid: 85ee8a9c4923fb544bf5bc86c0564542, type: 3}
 --- !u!1 &751315778
 GameObject:
   m_ObjectHideFlags: 0
@@ -25633,7 +25650,6 @@ SceneRoots:
   - {fileID: 183216200}
   - {fileID: 1780681080}
   - {fileID: 1454348979}
-  - {fileID: 746230015}
   - {fileID: 907077936}
   - {fileID: 427499558}
   - {fileID: 1230077285}

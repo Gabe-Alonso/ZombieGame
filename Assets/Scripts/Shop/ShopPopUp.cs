@@ -14,6 +14,14 @@ public class ShopPopUp : MonoBehaviour
         _postWaveCanvas = GameObject.FindWithTag("Post-Wave Screen ");
     }
 
+    private void Update()
+    {
+        if(_player == null)
+        {
+            _player = GameObject.FindWithTag("Player");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == _player)
