@@ -25323,11 +25323,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7605689080682056142, guid: 4b1dd20b704fd4d4581164da6e337bf7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8293679883638805568, guid: 4b1dd20b704fd4d4581164da6e337bf7, type: 3}
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 813c9c1c189fd3341b08d43b06cf0fe4, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8939583051853675161, guid: 4b1dd20b704fd4d4581164da6e337bf7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
