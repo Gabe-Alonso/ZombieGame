@@ -22,6 +22,8 @@ public class PlayerMovementScript : MonoBehaviour
     InputAction sprintAction;
     InputAction meleeAction;
     
+    InputAction grenadeAction;
+    public GameObject grenade;
     // Haungs Mode Data
     InputAction haungsAction;
     bool haungsModeOn;
@@ -62,6 +64,8 @@ public class PlayerMovementScript : MonoBehaviour
     public TextMeshProUGUI _ARName;
     public GameObject meleeBox;
 
+    public int grenadeCount;
+
 
     void Start()
     {
@@ -73,6 +77,8 @@ public class PlayerMovementScript : MonoBehaviour
         swapAR = InputSystem.actions.FindAction("SelectAR");
         haungsAction = InputSystem.actions.FindAction("Haungs");
         meleeAction = InputSystem.actions.FindAction("Melee");
+        
+        grenadeAction = InputSystem.actions.FindAction("Grenade");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
         audioSource = GetComponent<AudioSource>();
         health = 3;
@@ -83,6 +89,8 @@ public class PlayerMovementScript : MonoBehaviour
         sliderTimer = dashingCooldown;
         sliderTimerM = meleeCooldown;
         haungsModeOn = false;
+
+        grenadeCount = 0;
 
     }
     void FixedUpdate()
@@ -111,6 +119,8 @@ public class PlayerMovementScript : MonoBehaviour
             KillChildren();
             transform.Find("AR").gameObject.SetActive(true); 
         }
+
+        
     }
 
     void Update()
@@ -120,7 +130,20 @@ public class PlayerMovementScript : MonoBehaviour
             Debug.Log("Haungs Mode: " + haungsModeOn);
             haungsToggle();
         }
-        
+        if(grenadeAction.WasPressedThisFrame()){
+
+            Vector3 spawnOffset = transform.forward * 0.5f; // Spawns 0.5 units in front of the player
+            GameObject newGrenade = Instantiate(grenade, transform.position + spawnOffset, Quaternion.identity);
+            newGrenade.transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+
+            // Ensure the grenade has a Rigidbody
+            Rigidbody grenadeRb = newGrenade.GetComponent<Rigidbody>();
+            if (grenadeRb != null)
+            {
+                // Apply force in the direction the grenade is facing
+                grenadeRb.AddForce(newGrenade.transform.forward * 10, ForceMode.Impulse);
+            }
+        }
     }
 
     public IEnumerator Melee(){
@@ -193,6 +216,9 @@ public class PlayerMovementScript : MonoBehaviour
             preHaungsData.Add("ARData", transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo);
             preHaungsData.Add("ARReload", transform.Find("AR").gameObject.GetComponent<GunScript>().reloadTime);
             preHaungsData.Add("dashCooldown", dashingCooldown);
+            preHaungsData.Add("meleeCooldown", meleeCooldown);
+
+            preHaungsData.Add("grenadeCount", grenadeCount);
 
             shotgun = true;
             assultRifle = true;
@@ -204,6 +230,8 @@ public class PlayerMovementScript : MonoBehaviour
             transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo = 10000;
             transform.Find("AR").gameObject.GetComponent<GunScript>().reloadTime = 0;
             dashingCooldown = 0f;
+            meleeCooldown = 0f;
+            grenadeCount = 100;
 
         }else{
             shotgun = (bool)preHaungsData["shotgunStatus"];
@@ -216,6 +244,8 @@ public class PlayerMovementScript : MonoBehaviour
             transform.Find("AR").gameObject.GetComponent<GunScript>().reserveAmmo = (int)preHaungsData["ARData"];
             transform.Find("AR").gameObject.GetComponent<GunScript>().reloadTime = (float)preHaungsData["ARReload"];
             dashingCooldown = (float)preHaungsData["dashCooldown"];
+            meleeCooldown = (float)preHaungsData["meleeCooldown"];
+            grenadeCount = (int)preHaungsData["grenadeCount"];
             preHaungsData.Clear();
 
             _ARName.enabled = false;
@@ -223,8 +253,6 @@ public class PlayerMovementScript : MonoBehaviour
             _PName.enabled = true;
             KillChildren();
             transform.Find("Pistol").gameObject.SetActive(true);
-            
-
         }
     }
 
