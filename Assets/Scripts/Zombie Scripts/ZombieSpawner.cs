@@ -358,8 +358,8 @@ public class ZombieSpawner : MonoBehaviour
     public void SpawnZombieStatue(int num)
     {
         bool spawned = false;
-
         var spawnRange = 75f;
+        numberOfTotalZombies++;
 
         if (_firstStatue)
         {

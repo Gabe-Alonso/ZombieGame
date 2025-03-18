@@ -18,6 +18,8 @@ public class HealingBoss : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //To Account for the Spawner
+        spawner.zombieCounter(1);
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBar>();
 
@@ -99,6 +101,11 @@ public class HealingBoss : MonoBehaviour
 
         }
     }
-    
+
+    private void OnDestroy()
+    {
+        spawner.zombieCounter(-1);
+    }
+
 
 }
