@@ -8974,8 +8974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823550a3dcad3e94a967490921276b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: 7
-  zombieWave: 6
+  wave: 0
+  zombieWave: 0
   waveComplete: {fileID: 964609479}
   canvas2: {fileID: 546305381}
   startNextWave: {fileID: 152247764}
