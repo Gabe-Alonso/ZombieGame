@@ -102,6 +102,21 @@ public class AirDropManager : MonoBehaviour
         return isBlocked;
     }
 
+    bool PlayerCanReach(Vector3 position)
+    {
+        NavMeshPath path = new NavMeshPath();
+        NavMeshHit hit;
+        NavMesh.FindClosestEdge(position, out hit, NavMesh.AllAreas);
+        if (hit.distance < 7)
+        {
+            return false;
+        }
+
+        // Check if the agent can calculate a path to the target
+        return !(NavMesh.CalculatePath(position, _player.transform.position, NavMesh.AllAreas, path));
+
+    }
+
     public void SpawnAirDrop()
     {
         if (_first)
@@ -119,7 +134,7 @@ public class AirDropManager : MonoBehaviour
                 Debug.Log("trying to spawn Airdrop");
 
                 // Check if this point is inside a NavMeshObstacle
-                if (!IsInsideNavMeshObstacle(spawnPosition) && IsOnNavMesh(spawnPosition))
+                if (!IsInsideNavMeshObstacle(spawnPosition) && IsOnNavMesh(spawnPosition) && PlayerCanReach(spawnPosition))
                 {
                     _spawned = Instantiate(airDrop, spawnPosition, Quaternion.identity);
 

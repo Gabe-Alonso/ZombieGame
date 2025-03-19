@@ -8910,10 +8910,16 @@ MonoBehaviour:
   shopButton: {fileID: 1533252489}
   shopPrefab: {fileID: 6135286894876777192, guid: e08a85cb3587faa498564b42f44f14b7, type: 3}
   shopSpawns:
-  - {x: -15, y: 2.5, z: 0}
-  - {x: -185, y: 2.5, z: -45}
-  - {x: -188, y: 2.5, z: 103}
-  - {x: -236, y: 2.5, z: 281}
+  - {x: 22.5, y: 2.5, z: 38}
+  - {x: 200, y: 2.5, z: 138}
+  - {x: -169, y: 2.5, z: 320}
+  - {x: -300, y: 2.5, z: 116}
+  - {x: -200, y: 2.5, z: -82}
+  - {x: -283, y: 2.5, z: -162}
+  - {x: -274, y: 2.5, z: -322}
+  - {x: -52, y: 2.5, z: -341}
+  - {x: 158, y: 2.5, z: -287}
+  - {x: 401, y: 2.5, z: -346}
   shopCanvas: {fileID: 7816345}
   inbetweenWaves: {fileID: 11400000, guid: b71f461b0864c054cb5177375015e693, type: 2}
   _wavetext: {fileID: 1142797683}
@@ -20667,7 +20673,7 @@ Transform:
   m_GameObject: {fileID: 1622479555}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -157.54639, y: 2.2257483, z: -74.583565}
+  m_LocalPosition: {x: -179, y: 2.2257483, z: -98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23073,7 +23079,7 @@ Transform:
   m_GameObject: {fileID: 1790477178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -77.9, y: 0, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25271,6 +25277,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 183875221794518394, guid: 4b1dd20b704fd4d4581164da6e337bf7, type: 3}
+      propertyPath: m_Carve
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3690482291415024838, guid: 4b1dd20b704fd4d4581164da6e337bf7, type: 3}
       propertyPath: m_Name
       value: Ground

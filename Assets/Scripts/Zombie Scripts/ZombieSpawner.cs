@@ -121,13 +121,17 @@ public class ZombieSpawner : MonoBehaviour
                                                 Random.Range(_player.transform.position.z + zBoundary[0], _player.transform.position.z + zBoundary[1]));
                     
              // Check if this point is inside a NavMeshObstacle
-             if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
+             if (PlayerCanReach(spawnPosition) && IsOnNavMesh(spawnPosition))
              {
                  Instantiate(zombiePrefabDefault, spawnPosition, Quaternion.identity);
                  
                  i++;
                                       
              }
+             else
+            {
+                Debug.Log("Spawn Did Not Pass the Checks");
+            }
            
         }
 
@@ -139,7 +143,7 @@ public class ZombieSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(xBoundary[0], xBoundary[1]), 2.5f, Random.Range(zBoundary[0], zBoundary[1]));
 
             // Check if this point is inside a NavMeshObstacle
-            if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
+            if (PlayerCanReach(spawnPosition) && IsOnNavMesh(spawnPosition))
             {
                 Instantiate(zombiePrefabCharge, spawnPosition, Quaternion.identity);
                 ii++;
@@ -149,13 +153,19 @@ public class ZombieSpawner : MonoBehaviour
         }
     }
 
-    bool IsInsideNavMeshObstacle(Vector3 position)
+    bool PlayerCanReach(Vector3 position)
     {
+        NavMeshPath path = new NavMeshPath();
         NavMeshHit hit;
+        NavMesh.FindClosestEdge(position, out hit, NavMesh.AllAreas);
+        if(hit.distance < 7)
+        {
+            return false;
+        }
 
-        // will need to be changed if we ever have floating NavMesh Obstacle
-        bool isBlocked = NavMesh.Raycast(position, position + Vector3.up * 2f, out hit, NavMesh.AllAreas);
-        return isBlocked;
+        // Check if the agent can calculate a path to the target
+        return !(NavMesh.CalculatePath(position, _player.transform.position, NavMesh.AllAreas, path));
+       
     }
 
    public bool IsOnNavMesh(Vector3 position)
@@ -185,7 +195,7 @@ public class ZombieSpawner : MonoBehaviour
         }
 
         Debug.Log("There are " + numberOfDefaultZombies + " zombies left.");
-        if (numberOfTotalZombies == 1 &  waveManager.wave == 0)
+        if (numberOfTotalZombies == 1 && waveManager.wave == 0)
         {
             uiTutorial.SetActive(true);
             Time.timeScale = 0;
@@ -232,7 +242,7 @@ public class ZombieSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 2.5f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
 
             // Check if this point is inside a NavMeshObstacle
-            if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
+            if (PlayerCanReach(spawnPosition) && IsOnNavMesh(spawnPosition))
                 {
                 //Guarentee the "easier" boss spawns First, then the other, then after wave 10 its randomized
                 if(_first)
@@ -377,7 +387,7 @@ public class ZombieSpawner : MonoBehaviour
                 Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 0f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
 
                 // Check if this point is inside a NavMeshObstacle
-                if (!IsInsideNavMeshObstacle(spawnPosition) & IsOnNavMesh(spawnPosition))
+                if (PlayerCanReach(spawnPosition) && IsOnNavMesh(spawnPosition))
                 {
                     var zStatue = Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
                     zStatue.GetComponent<HealingBoss>().spawner = this;
