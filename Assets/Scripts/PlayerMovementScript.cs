@@ -24,6 +24,8 @@ public class PlayerMovementScript : MonoBehaviour
     
     InputAction grenadeAction;
     public GameObject grenade;
+    public GameObject waveManager;
+    public int _wave;
     // Haungs Mode Data
     InputAction haungsAction;
     bool haungsModeOn;
@@ -77,6 +79,7 @@ public class PlayerMovementScript : MonoBehaviour
         swapAR = InputSystem.actions.FindAction("SelectAR");
         haungsAction = InputSystem.actions.FindAction("Haungs");
         meleeAction = InputSystem.actions.FindAction("Melee");
+        _wave = waveManager.GetComponent<WaveManager>().wave;
         
         grenadeAction = InputSystem.actions.FindAction("Grenade");
         planeCollider = GameObject.Find("Ground").GetComponent<Collider>();
@@ -130,7 +133,7 @@ public class PlayerMovementScript : MonoBehaviour
             Debug.Log("Haungs Mode: " + haungsModeOn);
             haungsToggle();
         }
-        if(grenadeAction.WasPressedThisFrame()){
+        if(grenadeAction.WasPressedThisFrame() && grenadeCount != 0){
 
             Vector3 spawnOffset = transform.forward * 0.5f; // Spawns 0.5 units in front of the player
             GameObject newGrenade = Instantiate(grenade, transform.position + spawnOffset, Quaternion.identity);
@@ -142,6 +145,7 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 // Apply force in the direction the grenade is facing
                 grenadeRb.AddForce(newGrenade.transform.forward * 10, ForceMode.Impulse);
+                grenadeCount--;
             }
         }
     }
