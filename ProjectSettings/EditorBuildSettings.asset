@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 8cd366ea921d67340aecefc62b3e6ccd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Backup Terrain.unity
-    guid: d23d31c6f62e5874fa90bb40b3000bbc
+    guid: 895c1bf14bb924b74ab5488392192410
+  - enabled: 1
+    path: Assets/Scenes/NewNewMap.unity
+    guid: 92cd1a6412017a6498b3c8885ff48554
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
