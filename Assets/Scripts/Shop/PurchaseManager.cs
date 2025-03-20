@@ -13,6 +13,8 @@ public class PurchaseManager : MonoBehaviour
 
     public GameObject shotgunIcon;
     public GameObject ARIcon;
+    public GameObject GrenadeIcon;
+
 
     private PlayerMovementScript _player;
     private PlayerHealth _playerHealth;
@@ -141,6 +143,22 @@ public class PurchaseManager : MonoBehaviour
             _spawner.coinCounterUpdate();
 
             _player.AddAmmo(12,2,24);
+        }
+        else
+        {
+            InsufficientFunds();
+        }
+    }
+
+    public void Grenade(int price)
+    {
+        if (_spawner.numberOfCoins >= price)
+        {
+            _spawner.numberOfCoins -= price;
+            _spawner.coinCounterUpdate();
+
+            _player.grenadeCount += 2;
+            GrenadeIcon.SetActive(true);
         }
         else
         {

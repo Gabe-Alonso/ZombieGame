@@ -130,7 +130,7 @@ public class PlayerMovementScript : MonoBehaviour
             Debug.Log("Haungs Mode: " + haungsModeOn);
             haungsToggle();
         }
-        if(grenadeAction.WasPressedThisFrame()){
+        if(grenadeAction.WasPressedThisFrame() && grenadeCount > 0){
 
             Vector3 spawnOffset = transform.forward * 0.5f; // Spawns 0.5 units in front of the player
             GameObject newGrenade = Instantiate(grenade, transform.position + spawnOffset, Quaternion.identity);
