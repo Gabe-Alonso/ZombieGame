@@ -386,7 +386,7 @@ public class ZombieSpawner : MonoBehaviour
                 Vector3 spawnPosition = new Vector3(Random.Range(_player.transform.position.x - spawnRange, _player.transform.position.x + spawnRange), 0f, Random.Range(_player.transform.position.z - spawnRange, _player.transform.position.z + spawnRange));
 
                 // Check if this point is inside a NavMeshObstacle
-                if (PlayerCanReach(spawnPosition) && IsOnNavMesh(spawnPosition))
+                if (!PlayerCanReach(spawnPosition) && IsOnNavMesh(spawnPosition))
                 {
                     var zStatue = Instantiate(ZombieStatue, spawnPosition, Quaternion.identity);
                     zStatue.GetComponent<HealingBoss>().spawner = this;

@@ -134,7 +134,7 @@ public class AirDropManager : MonoBehaviour
                 Debug.Log("trying to spawn Airdrop");
 
                 // Check if this point is inside a NavMeshObstacle
-                if (!IsInsideNavMeshObstacle(spawnPosition) && IsOnNavMesh(spawnPosition) && PlayerCanReach(spawnPosition))
+                if (IsOnNavMesh(spawnPosition) && !PlayerCanReach(spawnPosition))
                 {
                     _spawned = Instantiate(airDrop, spawnPosition, Quaternion.identity);
 
