@@ -4115,7 +4115,7 @@ MonoBehaviour:
   chargeZombieExplain: {fileID: 637826778}
   checkRadius: 10
   coins: {fileID: 991347795}
-  numberOfCoins: 800
+  numberOfCoins: 0
 --- !u!4 &319256958
 Transform:
   m_ObjectHideFlags: 0
